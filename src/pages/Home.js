@@ -66,7 +66,7 @@ function Home() {
                       >
                         <ul className="navigation clearfix">
                           <li className="dropdown">
-                            <a href="#">Home</a>
+                          <Link to="/">Home</Link>
                             <ul>
                               <li>
                                 <a href="index.html">Home 01 (AI Products)</a>
@@ -110,10 +110,11 @@ function Home() {
                                 <a href="career-details.html">Career Details</a>
                               </li>
                               <li>
-                                <a href="login.html">Login</a>
+                              <Link to="/login">Login</Link>
                               </li>
                               <li>
-                                <a href="create-account.html">Create Account</a>
+                                <Link to="/signup">Create Account</Link>
+
                               </li>
                               <li>
                                 <a href="reset-password.html">Reset Password</a>
@@ -135,7 +136,7 @@ function Home() {
                             </ul>
                           </li>
                           <li>
-                            <a href="contact.html">Contact</a>
+                          <Link to="/contact">Contact</Link>
                           </li>
                         </ul>
                       </div>
@@ -145,10 +146,10 @@ function Home() {
                   <div className="outer-box d-flex align-items-center">
                     <ul className="main-header__login-sing-up">
                       <li>
-                        <a href="login.html">Login</a>
+                      <Link to="/login">Login</Link>
                       </li>
                       <li>
-                        <a href="create-account.html">Sign Up</a>
+                      <Link to="/signup">Signup</Link>
                       </li>
                     </ul>
 
@@ -2215,11 +2216,12 @@ function Home() {
                       </div>
                       <div className="footer-widget__company-list-box">
                         <ul className="footer-widget__company-list">
-                          <li>
-                            <a href="login.html">Sign in</a>
+                        <li>
+                            <Link to="/login">Sign in</Link>
+
                           </li>
                           <li>
-                            <a href="create-account.html">Register</a>
+                            <Link to="/signup">Register</Link>
                           </li>
                           <li>
                             <a href="about.html">Pricing</a>

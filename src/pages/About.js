@@ -96,7 +96,7 @@ function About() {
                             </ul>
                           </li>
                           <li>
-                            <a href="about.html">About</a>
+                          <Link to="/about">About</Link>
                           </li>
                           <li className="dropdown">
                             <a href="#">Pages</a>
@@ -111,7 +111,7 @@ function About() {
                                 <a href="login.html">Login</a>
                               </li>
                               <li>
-                                <a href="create-account.html">Create Account</a>
+                                <Link to="/signup">Create Account</Link>
                               </li>
                               <li>
                                 <a href="reset-password.html">Reset Password</a>
@@ -133,7 +133,7 @@ function About() {
                             </ul>
                           </li>
                           <li>
-                            <a href="contact.html">Contact</a>
+                          <Link to="/contact">Contact</Link>
                           </li>
                         </ul>
                       </div>
@@ -146,7 +146,7 @@ function About() {
                         <a href="login.html">Login</a>
                       </li>
                       <li>
-                        <a href="create-account.html">Sign Up</a>
+                      <Link to="/signup">Signup</Link>
                       </li>
                     </ul>
 
@@ -1234,10 +1234,11 @@ function About() {
                       <div className="footer-widget__company-list-box">
                         <ul className="footer-widget__company-list">
                           <li>
-                            <a href="login.html">Sign in</a>
+                            <Link to="/login">Sign in</Link>
+
                           </li>
                           <li>
-                            <a href="create-account.html">Register</a>
+                            <Link to="/signup">Register</Link>
                           </li>
                           <li>
                             <a href="about.html">Pricing</a>
