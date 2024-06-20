@@ -102,16 +102,16 @@ function Login() {
                             <a href="#">Pages</a>
                             <ul>
                               <li>
-                                <a href="career.html">Career</a>
+                                <Link to="/Career">Career</Link>
                               </li>
                               <li>
-                                <a href="career-details.html">Career Details</a>
+                                <Link to="/Carrerdetails">Career Details</Link>
                               </li>
                               <li>
                                 <Link to="/login">Login</Link>{" "}
                               </li>
                               <li>
-                              <Link to="/signup">Create Account</Link>
+                                <Link to="/signup">Create Account</Link>
                               </li>
                               <li>
                                 <a href="reset-password.html">Reset Password</a>
@@ -125,16 +125,15 @@ function Login() {
                             <a href="#">Blog</a>
                             <ul>
                               <li>
-                                <a href="blog.html">Blog</a>
+                                <Link to="/Blog">Blog</Link>
                               </li>
                               <li>
-                                <a href="blog-details.html">Blog Detail</a>
+                                <Link to="/Blogdetail">Blog Detail</Link>
                               </li>
                             </ul>
                           </li>
                           <li>
-                          <Link to="/contact">Contact</Link>
-
+                            <Link to="/contact">Contact</Link>
                           </li>
                         </ul>
                       </div>
@@ -148,7 +147,6 @@ function Login() {
                       </li>
                       <li>
                         <Link to="/signup">Sign Up</Link>
-
                       </li>
                     </ul>
 

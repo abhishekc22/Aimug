@@ -1,24 +1,24 @@
-import '../App.css'; // Adjust the path based on its location relative to the src directory
+import "../App.css"; // Adjust the path based on its location relative to the src directory
 import React from "react";
-import '../css/bootstrap.css'; 
-import '../css/responsive.css';
-import '../css/10-jarallax.css';
-import '../css/03-owl.css';
-import '../css/06-custom-animate.css';
-import '../css/07-dark-body.css';
-import '../css/color-switcher-design.css';
-import '../css/15-magnific-popup.css';
-import '../css/14-jquery-ui.css';
-import '../css/13-odometer-theme-default.css';
-import '../css/05-rtl.css';
-import '../css/11-preloader.css';
-import '../css/12-swiper.min.css';
-import '../css/13-odometer-theme-default.css';
-import '../css/08-font-awesome.css';
-import '../css/01-global.css';
-import '../css/style.css';
-import '../css/04-animate.css';
-import { Link } from 'react-router-dom';
+import "../css/bootstrap.css";
+import "../css/responsive.css";
+import "../css/10-jarallax.css";
+import "../css/03-owl.css";
+import "../css/06-custom-animate.css";
+import "../css/07-dark-body.css";
+import "../css/color-switcher-design.css";
+import "../css/15-magnific-popup.css";
+import "../css/14-jquery-ui.css";
+import "../css/13-odometer-theme-default.css";
+import "../css/05-rtl.css";
+import "../css/11-preloader.css";
+import "../css/12-swiper.min.css";
+import "../css/13-odometer-theme-default.css";
+import "../css/08-font-awesome.css";
+import "../css/01-global.css";
+import "../css/style.css";
+import "../css/04-animate.css";
+import { Link } from "react-router-dom";
 
 function About() {
   return (
@@ -64,7 +64,7 @@ function About() {
                       >
                         <ul className="navigation clearfix">
                           <li className="dropdown">
-                          <Link to="/">Home</Link>
+                            <Link to="/">Home</Link>
                             <ul>
                               <li>
                                 <a href="index.html">Home 01 (AI Products)</a>
@@ -96,16 +96,16 @@ function About() {
                             </ul>
                           </li>
                           <li>
-                          <Link to="/about">About</Link>
+                            <Link to="/about">About</Link>
                           </li>
                           <li className="dropdown">
                             <a href="#">Pages</a>
                             <ul>
                               <li>
-                                <a href="career.html">Career</a>
+                                <Link to="/Career">Career</Link>
                               </li>
                               <li>
-                                <a href="career-details.html">Career Details</a>
+                                <Link to="/Carrerdetails">Career Details</Link>
                               </li>
                               <li>
                                 <a href="login.html">Login</a>
@@ -125,15 +125,15 @@ function About() {
                             <a href="#">Blog</a>
                             <ul>
                               <li>
-                                <a href="blog.html">Blog</a>
+                                <Link to="/Blog">Blog</Link>
                               </li>
                               <li>
-                                <a href="blog-details.html">Blog Detail</a>
+                                <Link to="/Blogdetail">Blog Detail</Link>
                               </li>
                             </ul>
                           </li>
                           <li>
-                          <Link to="/contact">Contact</Link>
+                            <Link to="/contact">Contact</Link>
                           </li>
                         </ul>
                       </div>
@@ -146,7 +146,7 @@ function About() {
                         <a href="login.html">Login</a>
                       </li>
                       <li>
-                      <Link to="/signup">Signup</Link>
+                        <Link to="/signup">Signup</Link>
                       </li>
                     </ul>
 
@@ -1235,7 +1235,6 @@ function About() {
                         <ul className="footer-widget__company-list">
                           <li>
                             <Link to="/login">Sign in</Link>
-
                           </li>
                           <li>
                             <Link to="/signup">Register</Link>

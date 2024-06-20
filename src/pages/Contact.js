@@ -102,10 +102,10 @@ function Contact() {
                             <a href="#">Pages</a>
                             <ul>
                               <li>
-                                <a href="career.html">Career</a>
+                                <Link to="/Career">Career</Link>
                               </li>
                               <li>
-                                <a href="career-details.html">Career Details</a>
+                                <Link to="/Carrerdetails">Career Details</Link>
                               </li>
                               <li>
                                 <Link to="/login">Login</Link>
@@ -125,10 +125,10 @@ function Contact() {
                             <a href="#">Blog</a>
                             <ul>
                               <li>
-                                <a href="blog.html">Blog</a>
+                                <Link to="/Blog">Blog</Link>
                               </li>
                               <li>
-                                <a href="blog-details.html">Blog Detail</a>
+                                <Link to="/Blogdetail">Blog Detail</Link>
                               </li>
                             </ul>
                           </li>
