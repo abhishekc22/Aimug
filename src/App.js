@@ -9,6 +9,7 @@ import Career from './pages/Career';
 import Carrerdetails from './pages/Carrerdetails';
 import Blog from './pages/Blog';
 import Blogdetail from './pages/Blogdetail';
+import Home1 from './pages/Home1';
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
         <Route path="/Carrerdetails" element={<Carrerdetails/>} />
         <Route path="/Blog" element={<Blog/>} />
         <Route path="/Blogdetail" element={<Blogdetail/>} />
+        <Route path="/home1" element={<Home1/>} />
+
       </Routes>
     </Router>
       

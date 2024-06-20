@@ -68,7 +68,7 @@ function Signup() {
                               <Link to="/">Home</Link>
                               <ul>
                                 <li>
-                                  <a href="index.html">Home 01 (AI Products)</a>
+                                <Link to="/home1">Home 01 (AI Products)</Link>
                                 </li>
                                 <li>
                                   <a href="index-2.html">
