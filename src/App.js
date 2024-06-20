@@ -10,6 +10,8 @@ import Carrerdetails from './pages/Carrerdetails';
 import Blog from './pages/Blog';
 import Blogdetail from './pages/Blogdetail';
 import Home1 from './pages/Home1';
+import Home2 from './pages/Home2';
+import Resetpassword from './pages/Resetpassword';
 
 
 function App() {
@@ -27,6 +29,10 @@ function App() {
         <Route path="/Blog" element={<Blog/>} />
         <Route path="/Blogdetail" element={<Blogdetail/>} />
         <Route path="/home1" element={<Home1/>} />
+        <Route path="/home2" element={<Home2/>} />
+        <Route path="/resetpassword" element={<Resetpassword/>} />
+
+
 
       </Routes>
     </Router>

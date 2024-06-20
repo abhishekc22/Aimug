@@ -1,4 +1,4 @@
-import "../App.css"; // Adjust the path based on its location relative to the src directory
+import "../App.css";
 import React from "react";
 import "../css/bootstrap.css";
 import "../css/responsive.css";
@@ -20,31 +20,31 @@ import "../css/style.css";
 import "../css/04-animate.css";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Resetpassword() {
   return (
-    <>
-      <div body class="body-bg-color">
-        <div class="page-wrapper">
-          <div class="preloader"></div>
+    <div>
+      <div body className="body-bg-color">
+        <div className="page-wrapper">
+          <div className="preloader"></div>
 
-          <div class="cursor"></div>
-          <div class="cursor-follower"></div>
+          <div className="cursor"></div>
+          <div className="cursor-follower"></div>
 
-          <header class="main-header main-header-one">
-            <div class="header-lower">
-              <div class="main-menu__wrapper">
-                <div class="inner-container d-flex align-items-center justify-content-between">
-                  <div class="main-header-one__logo-box">
+          <header className="main-header main-header-one">
+            <div className="header-lower">
+              <div className="main-menu__wrapper">
+                <div className="inner-container d-flex align-items-center justify-content-between">
+                  <div className="main-header-one__logo-box">
                     <a href="index.html">
                       <img src="images/resource/logo-1.png" alt="" />
                     </a>
                   </div>
 
-                  <div class="nav-outer">
-                    <nav class="main-menu show navbar-expand-md">
-                      <div class="navbar-header">
+                  <div className="nav-outer">
+                    <nav className="main-menu show navbar-expand-md">
+                      <div className="navbar-header">
                         <button
-                          class="navbar-toggler"
+                          className="navbar-toggler"
                           type="button"
                           data-toggle="collapse"
                           data-target="#navbarSupportedContent"
@@ -52,108 +52,107 @@ function Login() {
                           aria-expanded="false"
                           aria-label="Toggle navigation"
                         >
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
-                          <span class="icon-bar"></span>
+                          <span className="icon-bar"></span>
+                          <span className="icon-bar"></span>
+                          <span className="icon-bar"></span>
                         </button>
                       </div>
 
                       <div
-                        class="navbar-collapse collapse clearfix"
+                        className="navbar-collapse collapse clearfix"
                         id="navbarSupportedContent"
                       >
-                        <ul class="navigation clearfix">
-                          <li class="dropdown">
-                            <Link to="/">Home</Link>
-                            <ul>
+                        <ul className="navigation clearfix">
+                          <li className="dropdown">
+                          <Link to="/">Home</Link>
+                          <ul>
                               <li>
                               <Link to="/home1">Home 01 (AI Products)</Link>
                               </li>
                               <li>
-                              <Link to="/home2">
+                                <Link to="/home2">
                                   Home 02 (Content Writing)
                                 </Link>
                               </li>
-                              
                             </ul>
                           </li>
                           <li>
-                            <Link to="/about">About</Link>
+                          <Link to="/about">About</Link>
                           </li>
-                          <li class="dropdown">
+                          <li className="dropdown">
                             <a href="#">Pages</a>
                             <ul>
                               <li>
-                                <Link to="/Career">Career</Link>
+                              <Link to="/Career">Career</Link>
                               </li>
                               <li>
-                                <Link to="/Carrerdetails">Career Details</Link>
+                              <Link to="/Carrerdetails">Career Details</Link>
                               </li>
                               <li>
-                                <Link to="/login">Login</Link>{" "}
+                              <Link to="/login">Login</Link>
                               </li>
                               <li>
-                                <Link to="/signup">Create Account</Link>
+                              <Link to="/signup">Create Account</Link>
                               </li>
                               <li>
-                              <Link to="/resetpassword">Reset Password</Link>
+                                <Link to="/resetpassword">Reset Password</Link>
                               </li>
                             </ul>
                           </li>
-                          <li class="dropdown">
+                          <li className="dropdown">
                             <a href="#">Blog</a>
                             <ul>
                               <li>
-                                <Link to="/Blog">Blog</Link>
+                              <Link to="/Blog">Blog</Link>
                               </li>
                               <li>
-                                <Link to="/Blogdetail">Blog Detail</Link>
+                              <Link to="/Blogdetail">Blog Detail</Link>
                               </li>
                             </ul>
                           </li>
                           <li>
-                            <Link to="/contact">Contact</Link>
+                          <Link to="/contact">Contact</Link>
                           </li>
                         </ul>
                       </div>
                     </nav>
                   </div>
 
-                  <div class="outer-box d-flex align-items-center">
-                    <ul class="main-header__login-sing-up">
+                  <div className="outer-box d-flex align-items-center">
+                    <ul className="main-header__login-sing-up">
                       <li>
-                        <Link to="/login">Login</Link>{" "}
+                      <Link to="/login">Login</Link>
                       </li>
                       <li>
-                        <Link to="/signup">Sign Up</Link>
+                      <Link to="/signup">Signup</Link>
                       </li>
                     </ul>
 
-                    <div class="mobile-nav-toggler">
-                      <span class="icon-menu"></span>
+                    <div className="mobile-nav-toggler">
+                      <span className="icon-menu"></span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="mobile-menu">
-              <div class="menu-backdrop"></div>
-              <div class="close-btn">
-                <span class="icon far fa-times fa-fw"></span>
+            <div className="mobile-menu">
+              <div className="menu-backdrop"></div>
+              <div className="close-btn">
+                <span className="icon far fa-times fa-fw"></span>
               </div>
-              <nav class="menu-box">
-                <div class="nav-logo">
+              <nav className="menu-box">
+                <div className="nav-logo">
                   <a href="index.html">
                     <img src="images/logo-2.png" alt="" title="" />
                   </a>
                 </div>
-                <div class="search-box">
+                <div className="search-box">
                   <form
                     method="post"
                     action="https://marveltheme.com/tf/html/aimug/contact.html"
                   >
-                    <div class="form-group">
+                    <div className="form-group">
                       <input
                         type="search"
                         name="search-field"
@@ -162,184 +161,159 @@ function Login() {
                         required
                       />
                       <button type="submit">
-                        <span class="icon far fa-search fa-fw"></span>
+                        <span className="icon far fa-search fa-fw"></span>
                       </button>
                     </div>
                   </form>
                 </div>
-                <div class="menu-outer"></div>
+                <div className="menu-outer"></div>
               </nav>
             </div>
           </header>
 
-          <section class="login-page full-height">
+          <section className="reset-password-page full-height">
             <div
               className="login-page__shape-1"
               style={{
                 backgroundImage: "url(images/shapes/login-page-shape-1.png)",
               }}
             ></div>
-            <div class="login-page__shape-2"></div>
-            <div class="container">
-              <div class="login-page__inner">
-                <div class="login-page__close-icon">
+
+            <div className="login-page__shape-2"></div>
+            <div className="container">
+              <div className="reset-password-page__inner">
+                <div className="reset-password-page__close-icon">
                   <a href="#">
-                    <span class="icon-close"></span>
+                    <span className="icon-close"></span>
                   </a>
                 </div>
-                <div class="login-page__top">
-                  <div class="login-page__logo">
+                <div className="reset-password-page__top">
+                  <div className="reset-password-page__logo">
                     <a href="index.html">
                       <img src="images/resource/login-page-logo.png" alt="" />
                     </a>
                   </div>
-                  <div class="login-page__sign-option-box">
-                    <a href="#" class="login-page__sign-option">
-                      {" "}
-                      <img src="images/icons/google-icon.png" alt="" />
-                      Continue With Google
-                    </a>
-                    <a href="#" class="login-page__sign-option">
-                      {" "}
-                      <img src="images/icons/apple-icon.png" alt="" />
-                      Continue With Apple
-                    </a>
-                    <a href="#" class="sign-in-email">
-                      Or sign in with your email
-                    </a>
-                  </div>
                 </div>
-                <form action="#" class="register-one__form">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="register-one__form__email">
+                <div className="reset-password-option">
+                  <a href="#">
+                    <span className="icon-prev"></span>Reset Password
+                  </a>
+                </div>
+                <form action="#" className="register-one__form">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <div className="register-one__form__email">
                         <input
                           type="email"
                           name="email"
-                          placeholder="marveltheme@gmail.com|"
+                          placeholder="Enter Your Email"
                         />
-                        <i class="icon-envelope"></i>
+                        <i className="icon-envelope"></i>
                       </div>
                     </div>
-                    <div class="col-md-12">
-                      <div class="register-one__form__password">
-                        <input
-                          type="password"
-                          name="password"
-                          placeholder="Password"
-                        />
-                        <i class="icon-lock"></i>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="register-one__form__forgot">
-                        <a href="#">Forgot Password?</a>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <button type="submit" class="thm-btn register-one__btn">
-                        Sign In with FlowAI
+                    <div className="col-md-12">
+                      <button
+                        type="submit"
+                        className="thm-btn register-one__btn"
+                      >
+                        Reset Password
                       </button>
                     </div>
                   </div>
                 </form>
-                <p class="register-one__tagline">
-                  Don’t have an account?{" "}
-                  <a href="login.html">Sign Up for Free</a>
-                </p>
               </div>
             </div>
           </section>
 
-          <div class="color-palate">
-            <div class="color-trigger">
-              <i class="fas fa-cog fa-fw"></i>
+          <div className="color-palate">
+            <div className="color-trigger">
+              <i className="fas fa-cog fa-fw"></i>
             </div>
-            <div class="color-palate-inner">
-              <div class="color-palate-head">
+            <div className="color-palate-inner">
+              <div className="color-palate-head">
                 <h6>Choose Options</h6>
               </div>
-              <div class="various-color clearfix">
+              <div className="various-color clearfix">
                 <h6>Multiple Colors</h6>
                 <br />
-                <div class="colors-list">
+                <div className="colors-list">
                   <span
-                    class="palate default-color active"
+                    className="palate default-color active"
                     data-theme-file="css/color-themes/default-color.css"
                   ></span>
                   <span
-                    class="palate blue-color"
+                    className="palate blue-color"
                     data-theme-file="css/color-themes/blue-color.css"
                   ></span>
                   <span
-                    class="palate brown-color"
+                    className="palate brown-color"
                     data-theme-file="css/color-themes/brown-color.css"
                   ></span>
                   <span
-                    class="palate green-color"
+                    className="palate green-color"
                     data-theme-file="css/color-themes/green-color.css"
                   ></span>
                   <span
-                    class="palate orange-color"
+                    className="palate orange-color"
                     data-theme-file="css/color-themes/orange-color.css"
                   ></span>
                   <span
-                    class="palate purple-color"
+                    className="palate purple-color"
                     data-theme-file="css/color-themes/purple-color.css"
                   ></span>
                   <span
-                    class="palate teal-color"
+                    className="palate teal-color"
                     data-theme-file="css/color-themes/teal-color.css"
                   ></span>
                   <span
-                    class="palate yellow-color"
+                    className="palate yellow-color"
                     data-theme-file="css/color-themes/yellow-color.css"
                   ></span>
                 </div>
               </div>
               <h6>RTL Version</h6>
-              <ul class="rtl-version option-box">
-                <li class="rtl">RTL Version</li>
+              <ul className="rtl-version option-box">
+                <li className="rtl">RTL Version</li>
                 <li>LTR Version</li>
               </ul>
               <h6>Boxed Version</h6>
-              <ul class="box-version option-box">
-                <li class="box">Boxed</li>
+              <ul className="box-version option-box">
+                <li className="box">Boxed</li>
                 <li>Full width</li>
               </ul>
               <h6>Want Sticky Header</h6>
-              <ul class="header-version option-box">
-                <li class="box">No</li>
+              <ul className="header-version option-box">
+                <li className="box">No</li>
                 <li>Yes</li>
               </ul>
               <h6>Dark Verion</h6>
-              <ul class="dark-version option-box">
-                <li class="box">Yes</li>
+              <ul className="dark-version option-box">
+                <li className="box">Yes</li>
                 <li>No</li>
               </ul>
-              <div class="purchase-box">
+              <div className="purchase-box">
                 You will find much more options for colors and styling in admin
                 panel. This color picker is used only for demonstation purposes.
-                <a href="#" class="theme-btn btn-style-two">
-                  <span class="btn-wrap">
-                    <span class="text-one">buy now</span>
-                    <span class="text-two">buy now</span>
+                <a href="#" className="theme-btn btn-style-two">
+                  <span className="btn-wrap">
+                    <span className="text-one">buy now</span>
+                    <span className="text-two">buy now</span>
                   </span>
                 </a>
               </div>
             </div>
           </div>
 
-          <div class="search-popup">
-            <div class="color-layer"></div>
-            <button class="close-search">
-              <span class="far fa-times fa-fw"></span>
+          <div className="search-popup">
+            <div className="color-layer"></div>
+            <button className="close-search">
+              <span className="far fa-times fa-fw"></span>
             </button>
             <form
               method="post"
               action="https://marveltheme.com/tf/html/aimug/blog.html"
             >
-              <div class="form-group">
+              <div className="form-group">
                 <input
                   type="search"
                   name="search-field"
@@ -348,15 +322,19 @@ function Login() {
                   required=""
                 />
                 <button type="submit">
-                  <i class="far fa-search fa-fw"></i>
+                  <i className="far fa-search fa-fw"></i>
                 </button>
               </div>
             </form>
           </div>
         </div>
+
+        <div className="scroll-to-top scroll-to-target" data-target="html">
+          <span className="fas fa-arrow-up fa-fw"></span>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export default Login;
+export default Resetpassword;

@@ -1,26 +1,24 @@
-import '../App.css'; // Adjust the path based on its location relative to the src directory
+import "../App.css"; // Adjust the path based on its location relative to the src directory
 import React from "react";
-import '../css/bootstrap.css'; 
-import '../css/responsive.css';
-import '../css/10-jarallax.css';
-import '../css/03-owl.css';
-import '../css/06-custom-animate.css';
-import '../css/07-dark-body.css';
-import '../css/color-switcher-design.css';
-import '../css/15-magnific-popup.css';
-import '../css/14-jquery-ui.css';
-import '../css/13-odometer-theme-default.css';
-import '../css/05-rtl.css';
-import '../css/11-preloader.css';
-import '../css/12-swiper.min.css';
-import '../css/13-odometer-theme-default.css';
-import '../css/08-font-awesome.css';
-import '../css/01-global.css';
-import '../css/style.css';
-import '../css/04-animate.css';
-import { Link } from 'react-router-dom';
-
-
+import "../css/bootstrap.css";
+import "../css/responsive.css";
+import "../css/10-jarallax.css";
+import "../css/03-owl.css";
+import "../css/06-custom-animate.css";
+import "../css/07-dark-body.css";
+import "../css/color-switcher-design.css";
+import "../css/15-magnific-popup.css";
+import "../css/14-jquery-ui.css";
+import "../css/13-odometer-theme-default.css";
+import "../css/05-rtl.css";
+import "../css/11-preloader.css";
+import "../css/12-swiper.min.css";
+import "../css/13-odometer-theme-default.css";
+import "../css/08-font-awesome.css";
+import "../css/01-global.css";
+import "../css/style.css";
+import "../css/04-animate.css";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -66,39 +64,20 @@ function Home() {
                       >
                         <ul className="navigation clearfix">
                           <li className="dropdown">
-                          <Link to="/">Home</Link>
+                            <Link to="/">Home</Link>
                             <ul>
                               <li>
-                              <Link to="/home1">Home 01 (AI Products)</Link>
+                                <Link to="/home1">Home 01 (AI Products)</Link>
                               </li>
                               <li>
-                                <a href="index-2.html">
+                                <Link to="/home2">
                                   Home 02 (Content Writing)
-                                </a>
-                              </li>
-                              <li>
-                                <a href="index-3.html">Home 03 (AI Image)</a>
-                              </li>
-                              <li className="dropdown">
-                                <a href="#">Header Styles</a>
-                                <ul>
-                                  <li>
-                                    <a href="index.html">Header Style One</a>
-                                  </li>
-                                  <li>
-                                    <a href="index-2.html">Header Style Two</a>
-                                  </li>
-                                  <li>
-                                    <a href="index-3.html">
-                                      Header Style Three
-                                    </a>
-                                  </li>
-                                </ul>
+                                </Link>
                               </li>
                             </ul>
                           </li>
                           <li>
-                          <Link to="/about">About</Link>
+                            <Link to="/about">About</Link>
                           </li>
                           <li className="dropdown">
                             <a href="#">Pages</a>
@@ -110,17 +89,14 @@ function Home() {
                                 <Link to="/Carrerdetails">Career Details</Link>
                               </li>
                               <li>
-                              <Link to="/login">Login</Link>
+                                <Link to="/login">Login</Link>
                               </li>
                               <li>
                                 <Link to="/signup">Create Account</Link>
+                              </li>
+                              <li>
+                                <Link to="/resetpassword">Reset Password</Link>
 
-                              </li>
-                              <li>
-                                <a href="reset-password.html">Reset Password</a>
-                              </li>
-                              <li>
-                                <a href="404.html">404 Error</a>
                               </li>
                             </ul>
                           </li>
@@ -132,12 +108,11 @@ function Home() {
                               </li>
                               <li>
                                 <Link to="/Blogdetail">Blog Detail</Link>
-
                               </li>
                             </ul>
                           </li>
                           <li>
-                          <Link to="/contact">Contact</Link>
+                            <Link to="/contact">Contact</Link>
                           </li>
                         </ul>
                       </div>
@@ -147,10 +122,10 @@ function Home() {
                   <div className="outer-box d-flex align-items-center">
                     <ul className="main-header__login-sing-up">
                       <li>
-                      <Link to="/login">Login</Link>
+                        <Link to="/login">Login</Link>
                       </li>
                       <li>
-                      <Link to="/signup">Signup</Link>
+                        <Link to="/signup">Signup</Link>
                       </li>
                     </ul>
 
@@ -2217,9 +2192,8 @@ function Home() {
                       </div>
                       <div className="footer-widget__company-list-box">
                         <ul className="footer-widget__company-list">
-                        <li>
+                          <li>
                             <Link to="/login">Sign in</Link>
-
                           </li>
                           <li>
                             <Link to="/signup">Register</Link>
@@ -2433,7 +2407,7 @@ function Home() {
         </div>
       </body>
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

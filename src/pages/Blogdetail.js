@@ -67,29 +67,11 @@ function Blogdetail() {
                               <Link to="/home1">Home 01 (AI Products)</Link>
                               </li>
                               <li>
-                                <a href="index-2.html">
+                              <Link to="/home2">
                                   Home 02 (Content Writing)
-                                </a>
+                                </Link>
                               </li>
-                              <li>
-                                <a href="index-3.html">Home 03 (AI Image)</a>
-                              </li>
-                              <li className="dropdown">
-                                <a href="#">Header Styles</a>
-                                <ul>
-                                  <li>
-                                    <a href="index.html">Header Style One</a>
-                                  </li>
-                                  <li>
-                                    <a href="index-2.html">Header Style Two</a>
-                                  </li>
-                                  <li>
-                                    <a href="index-3.html">
-                                      Header Style Three
-                                    </a>
-                                  </li>
-                                </ul>
-                              </li>
+                            
                             </ul>
                           </li>
                           <li>
@@ -111,10 +93,7 @@ function Blogdetail() {
                                 <Link to="/signup">Create Account</Link>
                               </li>
                               <li>
-                                <a href="reset-password.html">Reset Password</a>
-                              </li>
-                              <li>
-                                <a href="404.html">404 Error</a>
+                              <Link to="/resetpassword">Reset Password</Link>
                               </li>
                             </ul>
                           </li>
