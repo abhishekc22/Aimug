@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function Login() {
+function Adminlogin() {
   const basurl = "http://127.0.0.1:8000";
 
   const axioinstamce = axios.create({
@@ -46,12 +46,11 @@ function Login() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axioinstamce.post("login/", formdata);
+      const res = await axioinstamce.post("superuser/", formdata);
 
       if (res.status === 200) {
         console.log("success");
         console.log(res.data, "565566666666666666666666666666666");
-       
       }
     } catch (error) {
       console.log("error");
@@ -242,7 +241,11 @@ function Login() {
                     </a>
                   </div>
                 </div>
-                <form action="#"  onSubmit={handlesubmit}  class="register-one__form">
+                <form
+                  action="#"
+                  onSubmit={handlesubmit}
+                  class="register-one__form"
+                >
                   <div class="row">
                     <div class="col-md-12">
                       <div class="register-one__form__email">
@@ -398,4 +401,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Adminlogin;

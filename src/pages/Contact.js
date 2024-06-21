@@ -121,9 +121,6 @@ function Contact() {
                   <div class="outer-box d-flex align-items-center">
                     <ul class="main-header__login-sing-up">
                       <li>
-                        <Link to="/login">Login</Link>
-                      </li>
-                      <li>
                         <Link to="/signup">Sign up</Link>
                       </li>
                     </ul>
@@ -549,7 +546,7 @@ function Contact() {
                       </div>
                       <div class="footer-widget__company-list-box">
                         <ul class="footer-widget__company-list">
-                          <li>
+                        <li>
                             <Link to="/login">Sign in</Link>
                           </li>
                           <li>
@@ -557,6 +554,9 @@ function Contact() {
                           </li>
                           <li>
                             <a href="about.html">Pricing</a>
+                          </li>
+                          <li>
+                            <Link to="/Adminlogin">Admindashboard</Link>
                           </li>
                           <li>
                             <a href="about.html">Privacy Policy</a>

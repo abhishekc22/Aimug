@@ -121,9 +121,6 @@ function Resetpassword() {
                   <div className="outer-box d-flex align-items-center">
                     <ul className="main-header__login-sing-up">
                       <li>
-                      <Link to="/login">Login</Link>
-                      </li>
-                      <li>
                       <Link to="/signup">Signup</Link>
                       </li>
                     </ul>

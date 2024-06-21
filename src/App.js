@@ -12,6 +12,7 @@ import Blogdetail from './pages/Blogdetail';
 import Home1 from './pages/Home1';
 import Home2 from './pages/Home2';
 import Resetpassword from './pages/Resetpassword';
+import Adminlogin from './pages/Adminlogin';
 
 
 function App() {
@@ -31,9 +32,7 @@ function App() {
         <Route path="/home1" element={<Home1/>} />
         <Route path="/home2" element={<Home2/>} />
         <Route path="/resetpassword" element={<Resetpassword/>} />
-
-
-
+        <Route path="/Adminlogin" element={<Adminlogin/>} />
       </Routes>
     </Router>
       

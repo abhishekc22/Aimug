@@ -91,7 +91,8 @@ function About() {
                                 <Link to="/Carrerdetails">Career Details</Link>
                               </li>
                               <li>
-                                <a href="login.html">Login</a>
+                                <Link to="/login">Login</Link>
+
                               </li>
                               <li>
                                 <Link to="/signup">Create Account</Link>
@@ -124,7 +125,8 @@ function About() {
                   <div className="outer-box d-flex align-items-center">
                     <ul className="main-header__login-sing-up">
                       <li>
-                        <a href="login.html">Login</a>
+                    
+
                       </li>
                       <li>
                         <Link to="/signup">Signup</Link>
@@ -1222,6 +1224,9 @@ function About() {
                           </li>
                           <li>
                             <a href="about.html">Pricing</a>
+                          </li>
+                          <li>
+                            <Link to="/Adminlogin">Admindashboard</Link>
                           </li>
                           <li>
                             <a href="about.html">Privacy Policy</a>

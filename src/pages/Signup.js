@@ -19,8 +19,73 @@ import "../css/01-global.css";
 import "../css/style.css";
 import "../css/04-animate.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useFormik } from "formik";
+import { useNavigate } from 'react-router-dom';
+
 
 function Signup() {
+  const baseurl = "http://127.0.0.1:8000/";
+
+  const axioinstance = axios.create({
+    baseURL: baseurl,
+  });
+
+  const navigate= useNavigate()
+
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.username) {
+      errors.username = "Required";
+    }
+
+    if (!values.email) {
+      errors.email = "Required";
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+      errors.email = "Invalid email address";
+    }
+
+    if (!values.password) {
+      errors.password = "Required";
+    } else if (values.password.length < 6) {
+      errors.password = "Password must be at least 6 characters long";
+    }
+
+    if (!values.confirmPassword) {
+      errors.confirmPassword = "Required";
+    } else if (values.confirmPassword !== values.password) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+
+    return errors;
+  };
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      },
+      validate,
+      onSubmit: async (values) => {
+        console.log(values, "56666666666666666");
+        try {
+          const res = await axioinstance.post("signup/", values);
+          console.log(values, ">>>>>>>>>>>>>>>");
+          if (res.status === 201) {
+            navigate('/login')
+            console.log("sucesss???????????????????");
+          }
+        } catch (error) {
+          console.log("error");
+        }
+      },
+    });
+
   return (
     <div>
       <>
@@ -126,9 +191,6 @@ function Signup() {
                     <div class="outer-box d-flex align-items-center">
                       <ul class="main-header__login-sing-up">
                         <li>
-                          <Link to="/login">Login</Link>
-                        </li>
-                        <li>
                           <Link to="/signup">Signup</Link>
                         </li>
                       </ul>
@@ -213,26 +275,88 @@ function Signup() {
                       </a>
                     </div>
                   </div>
-                  <form action="#" class="register-one__form">
+                  <form
+                    action="#"
+                    onSubmit={handleSubmit}
+                    class="register-one__form"
+                  >
                     <div class="row">
-                      <div class="col-md-12">
-                        <div class="register-one__form__email">
+                      <div className="col-md-12">
+                        <div className="register-one__form__email">
                           <input
                             type="email"
                             name="email"
-                            placeholder="marveltheme@gmail.com|"
+                            placeholder="Email"
+                            autoComplete="email"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.email}
+                            className="form-control"
                           />
-                          <i class="icon-envelope"></i>
+                          <i className="icon-envelope"></i>
+                          {errors.email && touched.email && (
+                            <div className="text-red-500">{errors.email}</div>
+                          )}
                         </div>
                       </div>
-                      <div class="col-md-12">
-                        <div class="register-one__form__password">
+                      <div className="col-md-12">
+                        <div className="register-one__form__email">
+                          <input
+                            type="text"
+                            name="username"
+                            placeholder="Username"
+                            autoComplete="username"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.username}
+                            className="form-control"
+                          />
+                          {errors.username && touched.username && (
+                            <div className="text-red-500">
+                              {errors.username}
+                              <i className="fas fa-user"></i>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="register-one__form__password">
                           <input
                             type="password"
                             name="password"
                             placeholder="Password"
+                            autoComplete="current-password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.password}
+                            className="form-control"
                           />
-                          <i class="icon-lock"></i>
+                          <i className="icon-lock"></i>
+                          {errors.password && touched.password && (
+                            <div className="text-red-500">
+                              {errors.password}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className="col-md-12">
+                        <div className="register-one__form__password">
+                        <i className="icon-lock"></i>
+                          <input
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="Password"
+                            autoComplete="current-password"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            value={values.confirmPassword}
+                            className="form-control" 
+                          />
+                          {errors.confirmPassword && touched.confirmPassword && (
+                            <div className="text-red-500">
+                              {errors.confirmPassword}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div class="col-md-12">
@@ -248,8 +372,7 @@ function Signup() {
                     </div>
                   </form>
                   <p class="register-one__tagline">
-                    Don’t have an account?{" "}
-                    <a href="login.html">Sign Up for Free</a>
+                    <Link to="/login"> i have alredy Account</Link>
                   </p>
                 </div>
               </div>

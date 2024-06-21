@@ -121,9 +121,6 @@ function Home2() {
                   <div className="outer-box d-flex align-items-center">
                     <ul className="main-header__login-sing-up">
                       <li>
-                      <Link to="/login">Login</Link>
-                      </li>
-                      <li>
                       <Link to="/signup">Signup</Link>
                       </li>
                     </ul>
@@ -1598,14 +1595,17 @@ function Home2() {
                       </div>
                       <div className="footer-widget__company-list-box">
                         <ul className="footer-widget__company-list">
-                          <li>
-                            <a href="login.html">Sign in</a>
+                        <li>
+                            <Link to="/login">Sign in</Link>
                           </li>
                           <li>
-                            <a href="create-account.html">Register</a>
+                            <Link to="/signup">Register</Link>
                           </li>
                           <li>
                             <a href="about.html">Pricing</a>
+                          </li>
+                          <li>
+                            <Link to="/Adminlogin">Admindashboard</Link>
                           </li>
                           <li>
                             <a href="about.html">Privacy Policy</a>
