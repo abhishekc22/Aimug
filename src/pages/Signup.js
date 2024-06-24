@@ -77,7 +77,8 @@ function Signup() {
           const res = await axioinstance.post("signup/", values);
           console.log(values, ">>>>>>>>>>>>>>>");
           if (res.status === 201) {
-            navigate('/login')
+            const userid=res?.data?.userid;
+            navigate("/otp",{state:{'userid':userid}});
             console.log("sucesss???????????????????");
           }
         } catch (error) {

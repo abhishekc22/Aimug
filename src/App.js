@@ -13,7 +13,8 @@ import Home1 from './pages/Home1';
 import Home2 from './pages/Home2';
 import Resetpassword from './pages/Resetpassword';
 import Adminlogin from './pages/Adminlogin';
-
+import Otp from './pages/Otp';
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
         <Route path="/home2" element={<Home2/>} />
         <Route path="/resetpassword" element={<Resetpassword/>} />
         <Route path="/Adminlogin" element={<Adminlogin/>} />
+        <Route path="/otp" element={<Otp/>} />
+        <Route path="/Dashboard" element={<Dashboard/>} />
+
+
       </Routes>
     </Router>
       

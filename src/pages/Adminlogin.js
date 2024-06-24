@@ -50,6 +50,7 @@ function Adminlogin() {
 
       if (res.status === 200) {
         console.log("success");
+        navigate('/Dashboard')
         console.log(res.data, "565566666666666666666666666666666");
       }
     } catch (error) {
