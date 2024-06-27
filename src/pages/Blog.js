@@ -85,9 +85,7 @@ function Blog() {
                               <li>
                                 <Link to="/Career">Career</Link>
                               </li>
-                              <li>
-                                <Link to="/Carrerdetails">Career Details</Link>
-                              </li>
+                              
                               <li>
                                 <Link to="/login">Login</Link>
                               </li>

@@ -25,6 +25,8 @@ import axios from "axios";
 function Login() {
   const basurl = "http://127.0.0.1:8000";
 
+  
+
   const axioinstamce = axios.create({
     baseURL: basurl,
   });
@@ -51,6 +53,7 @@ function Login() {
       if (res.status === 200) {
         console.log("success");
         console.log(res.data, "565566666666666666666666666666666");
+        localStorage.setItem('loginStatus', 'loggedIn');
        
       }
     } catch (error) {
@@ -122,9 +125,7 @@ function Login() {
                               <li>
                                 <Link to="/Career">Career</Link>
                               </li>
-                              <li>
-                                <Link to="/Carrerdetails">Career Details</Link>
-                              </li>
+                              
                               <li>
                                 <Link to="/login">Login</Link>{" "}
                               </li>

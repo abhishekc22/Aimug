@@ -17,6 +17,9 @@ import Otp from "./pages/Otp";
 import Dashboard from "./pages/AdminDAshboard/Dashboard";
 import Admin_careeelist from "./pages/AdminDAshboard/Admin_careeelist";
 import Modal from "./pages/AdminDAshboard/Modal";
+import Protectrouter from "./pages/Protectrouter";
+import Editcarrer from "./Editcarrer";
+
 
 function App() {
   return (
@@ -28,8 +31,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/Career" element={<Career />} />
-          <Route path="/Carrerdetails" element={<Carrerdetails />} />
+          <Route path="/Career" element={<Protectrouter element={<Career />} />} />
+          <Route path="/Carrerdetails/:id" element={<Protectrouter element={<Carrerdetails />} />} />
           <Route path="/Blog" element={<Blog />} />
           <Route path="/Blogdetail" element={<Blogdetail />} />
           <Route path="/home1" element={<Home1 />} />
@@ -40,8 +43,7 @@ function App() {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/carrirer_list" element={<Admin_careeelist />} />
           <Route path="/Add_job" element={<Modal />} />
-
-
+          <Route path="/edit-job/:id" element={<Editcarrer />} />
         </Routes>
       </Router>
     </div>

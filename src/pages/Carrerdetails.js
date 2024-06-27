@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import "../css/bootstrap.css";
 import "../css/responsive.css";
@@ -19,7 +19,40 @@ import "../css/01-global.css";
 import "../css/style.css";
 import "../css/04-animate.css";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 function Carrerdetails() {
+  const { id } = useParams();
+  const [jobDetails, setJobDetails] = useState(null);
+  console.log(id, "566666666666666666666");
+
+  const baseurl = "http://127.0.0.1:8000/";
+
+  const axioinstance = axios.create({
+    baseURL: baseurl,
+  });
+
+  useEffect(() => {
+    axioinstance
+      .get(`jobupdate/${id}`)
+      .then((response) => {
+        setJobDetails(response.data);
+        console.log(
+          response.data,
+          ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+        );
+        console.log(jobDetails, "?????????????????????????????????????");
+      })
+      .catch((error) => {
+        console.error("Error fetching job details:", error);
+      });
+  }, [id]);
+
+  if (!jobDetails) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div body className="body-bg-color">
@@ -66,10 +99,10 @@ function Carrerdetails() {
                             <Link to="/">Home</Link>
                             <ul>
                               <li>
-                              <Link to="/home1">Home 01 (AI Products)</Link>
+                                <Link to="/home1">Home 01 (AI Products)</Link>
                               </li>
                               <li>
-                              <Link to="/home2">
+                                <Link to="/home2">
                                   Home 02 (Content Writing)
                                 </Link>
                               </li>
@@ -84,9 +117,7 @@ function Carrerdetails() {
                               <li>
                                 <Link to="/Career">Career</Link>
                               </li>
-                              <li>
-                                <Link to="/Carrerdetails">Career Details</Link>
-                              </li>
+                              
                               <li>
                                 <Link to="/login">Login</Link>
                               </li>
@@ -94,7 +125,7 @@ function Carrerdetails() {
                                 <Link to="/signup">Create Account</Link>
                               </li>
                               <li>
-                              <Link to="/resetpassword">Reset Password</Link>
+                                <Link to="/resetpassword">Reset Password</Link>
                               </li>
                             </ul>
                           </li>
@@ -196,38 +227,28 @@ function Carrerdetails() {
             <div className="container">
               <div className="career-page-top__inner">
                 <div className="career-page-top__single">
-                  <div className="career-page-top__img">
-                    <img src="images/resource/career-page-top-img.jpg" alt="" />
-                  </div>
+                  <div className="career-page-top__img"></div>
                   <div className="career-page-top__content-box">
                     <div className="career-page-top__job-apply-box">
                       <div className="career-page-top__job-apply-left">
-                        <div className="career-page-top__job-apply-icon">
-                          <img src="images/icons/career-icon-1-1.png" alt="" />
-                        </div>
+                        <div className="career-page-top__job-apply-icon"></div>
                         <div className="career-page-top__job-apply-details-box">
                           <h3 className="career-page-top__job-apply-title">
-                            <a href="#">MERN stack Developer</a>
+                            {/* {jobDetails.position_name} */}
                           </h3>
                           <ul className="career-page-top__job-apply-theme-list list-unstyled">
-                            <li>
-                              <p>Marvel Theme</p>
-                            </li>
-                            <li>
-                              <p>10-50 Employees</p>
-                            </li>
-                            <li>
-                              <p>100k - 200 USD</p>
-                            </li>
+                            <li>{/* <p>{jobDetails.job_description}</p> */}</li>
+                            <li>{/* <p>{jobDetails.vacancy} vacancy</p> */}</li>
+                            <li>{/* <p>{jobDetails.salary}</p> */}</li>
                           </ul>
                           <div className="career-page-top__job-apply-country-list">
-                            <a href="#">Global Remote</a>
+                            {/* <a href="#">{jobDetails.job_mode}</a> */}
                             <a href="#">
                               <img
                                 src="images/icons/country-icon-1-1.png"
                                 alt=""
                               />
-                              Australia
+                              {/* {jobDetails.location} */}
                             </a>
                           </div>
                         </div>
@@ -262,445 +283,15 @@ function Carrerdetails() {
                       <h4 className="career-page-top__title-2">
                         Company Overview
                       </h4>
-                      <p className="career-page-top__text-1">
-                        MarvelTheme is who we are. We're a growing worldwide
-                        business that helps exceptional companies communicate
-                        with consumers through mobile messaging, email, audio,
-                        and video exceptional companies. We have a presence in
-                        over 45+ countries.
-                      </p>
+
                       <h4 className="career-page-top__title-3">
                         Job Requirements
                       </h4>
-                      <ul className="career-page-top__points-list list-unstyled">
-                        <li>
-                          <div className="career-page-top__points-shape"></div>
-                          <p>
-                            Participate actively in the transformation of user
-                            stories into tested, manageable, and high-quality
-                            code. This is a hands-on coding and code design
-                            career!
-                          </p>
-                        </li>
-                        <li>
-                          <div className="career-page-top__points-shape"></div>
-                          <p>
-                            Be a valuable member of a self-sufficient,
-                            cross-functional team that delivers our messaging
-                            experience to companies all over the world.
-                          </p>
-                        </li>
-                        <li>
-                          <div className="career-page-top__points-shape"></div>
-                          <p>
-                            Promote and exchange information in order to enhance
-                            techniques and best practices.
-                          </p>
-                        </li>
-                        <li>
-                          <div className="career-page-top__points-shape"></div>
-                          <p>
-                            Close collaboration with similarly enthusiastic team
-                            members having fun at work and feeling proud of your
-                            role in developing world-className customer
-                            engagement solutions
-                          </p>
-                        </li>
-                      </ul>
+
                       <h4 className="career-page-top__title-4">
-                        Skill and Experience
+                        Skills and Experience
                       </h4>
-                      <ul className="career-page-top__points-list list-unstyled">
-                        <li>
-                          <div className="career-page-top__points-shape"></div>
-                          <p>
-                            You have at least three years of product design
-                            experience.
-                          </p>
-                        </li>
-                        <li>
-                          <div className="career-page-top__points-shape"></div>
-                          <p>
-                            You've worked with Sketch, InVision, or Framer X.
-                          </p>
-                        </li>
-                        <li>
-                          <div className="career-page-top__points-shape"></div>
-                          <p>
-                            You've already worked in an agile setting (think
-                            two-week sprints).
-                          </p>
-                        </li>
-                        <li>
-                          <div className="career-page-top__points-shape"></div>
-                          <p>
-                            You've used Jira and Confluence in your workflow
-                            before.
-                          </p>
-                        </li>
-                      </ul>
                     </div>
-                  </div>
-                </div>
-                <div className="career-page-top__interested-job">
-                  <div className="career-page-top__interested-job-title-box">
-                    <h3 className="career-page-top__interested-job-title">
-                      Interested in this job?
-                    </h3>
-                    <p className="career-page-top__interested-job-sub-title">
-                      <span>46</span> days left to apply
-                    </p>
-                  </div>
-                  <div className="career-page-top__interested-job-btn-box">
-                    <a
-                      href="#"
-                      className="career-page-top__interested-job-btn thm-btn"
-                    >
-                      Apply Job Now <span className="icon-arrow-right"></span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="career-page">
-            <div className="container">
-              <div className="career-page__bottom">
-                <h3 className="career-page__bottom-title">Related Jobs</h3>
-                <ul className="career-page__list list-unstyled">
-                  <li>
-                    <div className="career-page__single">
-                      <div className="career-page__single-left">
-                        <div className="career-page__icon">
-                          <img src="images/icons/career-icon-1-1.png" alt="" />
-                        </div>
-                        <div className="career-page__content">
-                          <h3 className="career-page__single-title">
-                            <a href="#">MERN stack Developer</a>
-                          </h3>
-                          <ul className="career-page__theme-list list-unstyled">
-                            <li>
-                              <p>Marvel Theme</p>
-                            </li>
-                            <li>
-                              <p>10-50 Employees</p>
-                            </li>
-                            <li>
-                              <p>100k - 200 USD</p>
-                            </li>
-                          </ul>
-                          <div className="career-page__country-list">
-                            <a href="#">Global Remote</a>
-                            <a href="#">
-                              <img
-                                src="images/icons/country-icon-1-1.png"
-                                alt=""
-                              />
-                              Australia
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="career-page__single-right">
-                        <div className="career-page__btn-box">
-                          <a href="#" className="career-page__btn thm-btn">
-                            Apply Job<span className="icon-arrow-right"></span>
-                          </a>
-                        </div>
-                        <p className="career-page__minutes">30 Minutes Ago</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="career-page__single">
-                      <div className="career-page__single-left">
-                        <div className="career-page__icon">
-                          <img src="images/icons/career-icon-1-2.png" alt="" />
-                        </div>
-                        <div className="career-page__content">
-                          <h3 className="career-page__single-title">
-                            <a href="#">Lead Product Designer</a>
-                          </h3>
-                          <ul className="career-page__theme-list list-unstyled">
-                            <li>
-                              <p>Google Inc.</p>
-                            </li>
-                            <li>
-                              <p>10-50 Employees</p>
-                            </li>
-                            <li>
-                              <p>100k - 200 USD</p>
-                            </li>
-                          </ul>
-                          <div className="career-page__country-list">
-                            <a href="#">Full Time</a>
-                            <a href="#">
-                              <img
-                                src="images/icons/country-icon-1-2.png"
-                                alt=""
-                              />
-                              Canada
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="career-page__single-right">
-                        <div className="career-page__btn-box">
-                          <a href="#" className="career-page__btn thm-btn">
-                            Apply Job<span className="icon-arrow-right"></span>
-                          </a>
-                        </div>
-                        <p className="career-page__minutes">30 Minutes Ago</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="career-page__single">
-                      <div className="career-page__single-left">
-                        <div className="career-page__icon">
-                          <img src="images/icons/career-icon-1-3.png" alt="" />
-                        </div>
-                        <div className="career-page__content">
-                          <h3 className="career-page__single-title">
-                            <a href="#">Senior Web Developer</a>
-                          </h3>
-                          <ul className="career-page__theme-list list-unstyled">
-                            <li>
-                              <p>Slack</p>
-                            </li>
-                            <li>
-                              <p>10-50 Employees</p>
-                            </li>
-                            <li>
-                              <p>100k - 200 USD</p>
-                            </li>
-                          </ul>
-                          <div className="career-page__country-list">
-                            <a href="#">Global Remote</a>
-                            <a href="#">
-                              <img
-                                src="images/icons/country-icon-1-1.png"
-                                alt=""
-                              />
-                              Australia
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="career-page__single-right">
-                        <div className="career-page__btn-box">
-                          <a href="#" className="career-page__btn thm-btn">
-                            Apply Job<span className="icon-arrow-right"></span>
-                          </a>
-                        </div>
-                        <p className="career-page__minutes">30 Minutes Ago</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="career-page__single">
-                      <div className="career-page__single-left">
-                        <div className="career-page__icon">
-                          <img src="images/icons/career-icon-1-4.png" alt="" />
-                        </div>
-                        <div className="career-page__content">
-                          <h3 className="career-page__single-title">
-                            <a href="#">Digital Marketer</a>
-                          </h3>
-                          <ul className="career-page__theme-list list-unstyled">
-                            <li>
-                              <p>Dribbble</p>
-                            </li>
-                            <li>
-                              <p>10-50 Employees</p>
-                            </li>
-                            <li>
-                              <p>100k - 200 USD</p>
-                            </li>
-                          </ul>
-                          <div className="career-page__country-list">
-                            <a href="#">Global Remote</a>
-                            <a href="#">
-                              <img
-                                src="images/icons/country-icon-1-1.png"
-                                alt=""
-                              />
-                              Australia
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="career-page__single-right">
-                        <div className="career-page__btn-box">
-                          <a href="#" className="career-page__btn thm-btn">
-                            Apply Job<span className="icon-arrow-right"></span>
-                          </a>
-                        </div>
-                        <p className="career-page__minutes">30 Minutes Ago</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="career-page__single">
-                      <div className="career-page__single-left">
-                        <div className="career-page__icon">
-                          <img src="images/icons/career-icon-1-5.png" alt="" />
-                        </div>
-                        <div className="career-page__content">
-                          <h3 className="career-page__single-title">
-                            <a href="#">Senior Webflow Developer</a>
-                          </h3>
-                          <ul className="career-page__theme-list list-unstyled">
-                            <li>
-                              <p>Webflow</p>
-                            </li>
-                            <li>
-                              <p>10-50 Employees</p>
-                            </li>
-                            <li>
-                              <p>100k - 200 USD</p>
-                            </li>
-                          </ul>
-                          <div className="career-page__country-list">
-                            <a href="#">Global Remote</a>
-                            <a href="#">
-                              <img
-                                src="images/icons/country-icon-1-1.png"
-                                alt=""
-                              />
-                              Australia
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="career-page__single-right">
-                        <div className="career-page__btn-box">
-                          <a href="#" className="career-page__btn thm-btn">
-                            Apply Job<span className="icon-arrow-right"></span>
-                          </a>
-                        </div>
-                        <p className="career-page__minutes">30 Minutes Ago</p>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="career-page__single">
-                      <div className="career-page__single-left">
-                        <div className="career-page__icon">
-                          <img src="images/icons/career-icon-1-6.png" alt="" />
-                        </div>
-                        <div className="career-page__content">
-                          <h3 className="career-page__single-title">
-                            <a href="#">Senior Front End Developer</a>
-                          </h3>
-                          <ul className="career-page__theme-list list-unstyled">
-                            <li>
-                              <p>Linear App</p>
-                            </li>
-                            <li>
-                              <p>10-50 Employees</p>
-                            </li>
-                            <li>
-                              <p>100k - 200 USD</p>
-                            </li>
-                          </ul>
-                          <div className="career-page__country-list">
-                            <a href="#">Global Remote</a>
-                            <a href="#">
-                              <img
-                                src="images/icons/country-icon-1-1.png"
-                                alt=""
-                              />
-                              Australia
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="career-page__single-right">
-                        <div className="career-page__btn-box">
-                          <a href="#" className="career-page__btn thm-btn">
-                            Apply Job<span className="icon-arrow-right"></span>
-                          </a>
-                        </div>
-                        <p className="career-page__minutes">30 Minutes Ago</p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="career-page__pagination">
-                <ul className="pg-pagination list-unstyled">
-                  <li className="count">
-                    <a href="#">1</a>
-                  </li>
-                  <li className="count">
-                    <a href="#">2</a>
-                  </li>
-                  <li className="count">
-                    <a href="#">3</a>
-                  </li>
-                  <li className="count">
-                    <a href="#">4</a>
-                  </li>
-                  <li className="next">
-                    <a href="#" aria-label="Next">
-                      <span className="icon-arrow-right"></span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-
-          <section className="free-trail">
-            <div className="container">
-              <div className="free-trail__wrap">
-                <div
-                  className="free-trail__shape-3"
-                  style={{
-                    backgroundImage:
-                      "url(images/shapes/free-trail-shape-3.png)",
-                  }}
-                ></div>
-
-                <div className="free-trail__shape-1 float-bob-x"></div>
-                <div className="free-trail__start-1 zoominout">
-                  <img src="images/shapes/free-trail-start-1.png" alt="" />
-                </div>
-                <div className="free-trail__start-2 float-bob-y">
-                  <img src="images/shapes/free-trail-start-2.png" alt="" />
-                </div>
-                <div className="free-trail__start-3 float-bob-x">
-                  <img src="images/shapes/free-trail-start-3.png" alt="" />
-                </div>
-                <div className="free-trail__start-4 zoominout">
-                  <img src="images/shapes/free-trail-start-4.png" alt="" />
-                </div>
-                <div className="free-trail__inner">
-                  <div className="section-title text-center">
-                    <div className="section-title__tagline-box">
-                      <span className="section-title__tagline">
-                        14 Day’s Free Trail
-                      </span>
-                    </div>
-                    <h2 className="section-title__title">
-                      Be part of the future of AIMug Let’s <br /> Create
-                      Something
-                    </h2>
-                  </div>
-                  <p className="free-trail__text">
-                    Choose a topic & create something better than before, get
-                    started from today. <br />
-                    No Credit Card Required
-                  </p>
-                  <div className="free-trail__btn-box">
-                    <a
-                      href="contact.html"
-                      className="thm-btn-two free-trail__btn"
-                    >
-                      Get Started Free <i className="icon-up-right-arrow"></i>{" "}
-                    </a>
                   </div>
                 </div>
               </div>
@@ -739,7 +330,7 @@ function Carrerdetails() {
                       </div>
                       <div className="footer-widget__company-list-box">
                         <ul className="footer-widget__company-list">
-                        <li>
+                          <li>
                             <Link to="/login">Sign in</Link>
                           </li>
                           <li>
