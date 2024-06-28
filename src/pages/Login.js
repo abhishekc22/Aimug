@@ -54,6 +54,7 @@ function Login() {
         console.log("success");
         console.log(res.data, "565566666666666666666666666666666");
         localStorage.setItem('loginStatus', 'loggedIn');
+        localStorage.setItem('userId', res.data.user_id);
        
       }
     } catch (error) {

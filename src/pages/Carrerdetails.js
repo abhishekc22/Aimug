@@ -21,8 +21,11 @@ import "../css/04-animate.css";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 function Carrerdetails() {
+  const navigate= useNavigate()
   const { id } = useParams();
   const [jobDetails, setJobDetails] = useState(null);
   console.log(id, "566666666666666666666");
@@ -32,6 +35,30 @@ function Carrerdetails() {
   const axioinstance = axios.create({
     baseURL: baseurl,
   });
+
+  const handleApplyJob = async (jobId) => {
+    console.log(jobId,'5666666666666666666666666')
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      console.log("User not logged in");
+      return;
+    }
+
+    try {
+      const res = await axioinstance.post(`jobsapply/${jobId}/`, {
+        user_id: userId,
+      });
+
+      if (res.status === 201) {
+        navigate('/Career')
+        console.log("Job application successful");
+      } else {
+        console.log("Failed to apply for the job");
+      }
+    } catch (error) {
+      console.log("Error applying for the job", error);
+    }
+  };
 
   useEffect(() => {
     axioinstance
@@ -117,7 +144,7 @@ function Carrerdetails() {
                               <li>
                                 <Link to="/Career">Career</Link>
                               </li>
-                              
+
                               <li>
                                 <Link to="/login">Login</Link>
                               </li>
@@ -234,21 +261,27 @@ function Carrerdetails() {
                         <div className="career-page-top__job-apply-icon"></div>
                         <div className="career-page-top__job-apply-details-box">
                           <h3 className="career-page-top__job-apply-title">
-                            {/* {jobDetails.position_name} */}
+                            {jobDetails.position_name}
                           </h3>
                           <ul className="career-page-top__job-apply-theme-list list-unstyled">
-                            <li>{/* <p>{jobDetails.job_description}</p> */}</li>
-                            <li>{/* <p>{jobDetails.vacancy} vacancy</p> */}</li>
-                            <li>{/* <p>{jobDetails.salary}</p> */}</li>
+                            <li>
+                              <p>{jobDetails.job_description}</p>
+                            </li>
+                            <li>
+                              <p>{jobDetails.vacancy} vacancy</p>
+                            </li>
+                            <li>
+                              <p>{jobDetails.salary}</p>
+                            </li>
                           </ul>
                           <div className="career-page-top__job-apply-country-list">
-                            {/* <a href="#">{jobDetails.job_mode}</a> */}
+                            <a href="#">{jobDetails.job_mode}</a>
                             <a href="#">
                               <img
                                 src="images/icons/country-icon-1-1.png"
                                 alt=""
                               />
-                              {/* {jobDetails.location} */}
+                              {jobDetails.location}
                             </a>
                           </div>
                         </div>
@@ -258,6 +291,7 @@ function Carrerdetails() {
                           <a
                             href="#"
                             className="career-page-top__job-apply-btn thm-btn"
+                            onClick={() => handleApplyJob(jobDetails.id)} // Pass jobDetails.id to handleApplyJob
                           >
                             Apply Job<span className="icon-arrow-right"></span>
                           </a>
@@ -278,18 +312,14 @@ function Carrerdetails() {
                     </div>
                     <div className="career-page-top__content-box-two">
                       <h3 className="career-page-top__title-1">
-                        Job Description
+                        Job Description: {jobDetails.job_description}
                       </h3>
                       <h4 className="career-page-top__title-2">
-                        Company Overview
-                      </h4>
-
-                      <h4 className="career-page-top__title-3">
-                        Job Requirements
+                        Responsibility : {jobDetails.responsibility}
                       </h4>
 
                       <h4 className="career-page-top__title-4">
-                        Skills and Experience
+                        Qualifications : {jobDetails.qualifications}
                       </h4>
                     </div>
                   </div>
