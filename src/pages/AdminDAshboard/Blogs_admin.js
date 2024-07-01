@@ -1,13 +1,57 @@
-import React from "react";
 import "../../assets/css/bootstrap.min.css";
 import "../../assets/css/theme.min.css";
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { BiTrash, BiPlus, BiPencil } from "react-icons/bi";
 
-function Dashboard() {
+function Blogs_admin() {
+  const [blog, setBlog] = useState([]);
+  const [render, setRender] = useState(false);
+
+  const basurl = "http://127.0.0.1:8000/";
+
+  const axiosInstance = axios.create({
+    baseURL: basurl,
+  });
+
+  const handleDelete = (id) => {
+    axiosInstance
+      .delete(`jobadelete/${id}`)
+      .then((response) => {
+        console.log(response.status, "56666666666666666666666666666");
+        if (response.status === 204) {
+          if (render === false) {
+            setRender(true);
+          } else {
+            setRender(false);
+          }
+          console.log("Job deleted successfully");
+        }
+        console.log("Job deleted successfully");
+      })
+      .catch((error) => {
+        console.error("Error deleting job:", error);
+      });
+  };
+
+  useEffect(() => {
+    axiosInstance
+      .get(`blogs/`)
+      .then((response) => {
+        setBlog(response.data);
+      })
+      .catch((error) => {
+        console.error(
+          "There was an error fetching the job applications!",
+          error
+        );
+      });
+  }, [render]);
   return (
-    <div>
-      <div body>
-        <nav className="nxl-navigation">
+    <>
+      <div>
+        <div nav className="nxl-navigation">
           <div className="navbar-wrapper">
             <div className="m-header">
               <a href="index.html" className="b-brand">
@@ -23,6 +67,7 @@ function Dashboard() {
                 />
               </a>
             </div>
+
             <div className="navbar-content">
               <ul className="nxl-navbar">
                 <li className="nxl-item nxl-caption">
@@ -40,611 +85,17 @@ function Dashboard() {
                   </a>
                   <ul className="nxl-submenu">
                     <li className="nxl-item">
-                      <Link to="/carrirer_list" className="nxl-link"> carrer list</Link>                      
-                    </li>
-                    <li className="nxl-item">
-                    <li className="nxl-item">
-                      <Link to="/Service" className="nxl-link">service</Link>                      
-                    </li>
-                    </li>
-
-                    <li className="nxl-item">
-                      <Link to="/blogs_admin" className="nxl-link"> blog</Link>                      
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-cast"></i>
-                    </span>
-                    <span className="nxl-mtext">Reports</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="reports-sales.html">
-                        Sales Report
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="reports-leads.html">
-                        Leads Report
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="reports-project.html">
-                        Project Report
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="reports-timesheets.html">
-                        Timesheets Report
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-send"></i>
-                    </span>
-                    <span className="nxl-mtext">Applications</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="apps-chat.html">
-                        Chat
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="apps-email.html">
-                        Email
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="apps-tasks.html">
-                        Tasks
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="apps-notes.html">
-                        Notes
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="apps-storage.html">
-                        Storage
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="apps-calendar.html">
-                        Calendar
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-at-sign"></i>
-                    </span>
-                    <span className="nxl-mtext">Proposal</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="proposal.html">
-                        Proposal
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="proposal-view.html">
-                        Proposal View
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="proposal-edit.html">
-                        Proposal Edit
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="proposal-create.html">
-                        Proposal Create
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-dollar-sign"></i>
-                    </span>
-                    <span className="nxl-mtext">Payment</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="payment.html">
-                        Payment
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="invoice-view.html">
-                        Invoice View
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="invoice-create.html">
-                        Invoice Create
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-users"></i>
-                    </span>
-                    <span className="nxl-mtext">Customers</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="customers.html">
-                        Customers
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="customers-view.html">
-                        Customers View
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="customers-create.html">
-                        Customers Create
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-alert-circle"></i>
-                    </span>
-                    <span className="nxl-mtext">Leads</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="leads.html">
-                        Leads
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="leads-view.html">
-                        Leads View
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="leads-create.html">
-                        Leads Create
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-briefcase"></i>
-                    </span>
-                    <span className="nxl-mtext">Projects</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="projects.html">
-                        Projects
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="projects-view.html">
-                        Projects View
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="projects-create.html">
-                        Projects Create
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-layout"></i>
-                    </span>
-                    <span className="nxl-mtext">Widgets</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="widgets-lists.html">
-                        Lists
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="widgets-tables.html">
-                        Tables
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="widgets-charts.html">
-                        Charts
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="widgets-statistics.html">
-                        Statistics
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="widgets-miscellaneous.html">
-                        Miscellaneous
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-settings"></i>
-                    </span>
-                    <span className="nxl-mtext">Settings</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-general.html">
-                        General
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-seo.html">
-                        SEO
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-tags.html">
-                        Tags
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-email.html">
-                        Email
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-tasks.html">
-                        Tasks
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-leads.html">
-                        Leads
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-support.html">
-                        Support
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-finance.html">
-                        Finance
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-gateways.html">
-                        Gateways
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-customers.html">
-                        Customers
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-localization.html">
-                        Localization
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="settings-recaptcha.html">
-                        reCAPTCHA
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a
-                        className="nxl-link"
-                        href="settings-miscellaneous.html"
-                      >
-                        Miscellaneous
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-power"></i>
-                    </span>
-                    <span className="nxl-mtext">Authentication</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item nxl-hasmenu">
-                      <a href="javascript:void(0);" className="nxl-link">
-                        <span className="nxl-mtext">Login</span>
-                        <span className="nxl-arrow">
-                          <i className="feather-chevron-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nxl-submenu">
-                        <li className="nxl-item">
-                          <a className="nxl-link" href="auth-login-cover.html">
-                            Cover
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-login-minimal.html"
-                          >
-                            Minimal
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-login-creative.html"
-                          >
-                            Creative
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="nxl-item nxl-hasmenu">
-                      <a href="javascript:void(0);" className="nxl-link">
-                        <span className="nxl-mtext">Register</span>
-                        <span className="nxl-arrow">
-                          <i className="feather-chevron-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nxl-submenu">
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-register-cover.html"
-                          >
-                            Cover
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-register-minimal.html"
-                          >
-                            Minimal
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-register-creative.html"
-                          >
-                            Creative
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="nxl-item nxl-hasmenu">
-                      <a href="javascript:void(0);" className="nxl-link">
-                        <span className="nxl-mtext">Error-404</span>
-                        <span className="nxl-arrow">
-                          <i className="feather-chevron-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nxl-submenu">
-                        <li className="nxl-item">
-                          <a className="nxl-link" href="auth-404-cover.html">
-                            Cover
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a className="nxl-link" href="auth-404-minimal.html">
-                            Minimal
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a className="nxl-link" href="auth-404-creative.html">
-                            Creative
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="nxl-item nxl-hasmenu">
-                      <a href="javascript:void(0);" className="nxl-link">
-                        <span className="nxl-mtext">Reset Pass</span>
-                        <span className="nxl-arrow">
-                          <i className="feather-chevron-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nxl-submenu">
-                        <li className="nxl-item">
-                          <a className="nxl-link" href="auth-reset-cover.html">
-                            Cover
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-reset-minimal.html"
-                          >
-                            Minimal
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-reset-creative.html"
-                          >
-                            Creative
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="nxl-item nxl-hasmenu">
-                      <a href="javascript:void(0);" className="nxl-link">
-                        <span className="nxl-mtext">Verify OTP</span>
-                        <span className="nxl-arrow">
-                          <i className="feather-chevron-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nxl-submenu">
-                        <li className="nxl-item">
-                          <a className="nxl-link" href="auth-verify-cover.html">
-                            Cover
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-verify-minimal.html"
-                          >
-                            Minimal
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-verify-creative.html"
-                          >
-                            Creative
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li className="nxl-item nxl-hasmenu">
-                      <a href="javascript:void(0);" className="nxl-link">
-                        <span className="nxl-mtext">Maintenance</span>
-                        <span className="nxl-arrow">
-                          <i className="feather-chevron-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nxl-submenu">
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-maintenance-cover.html"
-                          >
-                            Cover
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-maintenance-minimal.html"
-                          >
-                            Minimal
-                          </a>
-                        </li>
-                        <li className="nxl-item">
-                          <a
-                            className="nxl-link"
-                            href="auth-maintenance-creative.html"
-                          >
-                            Creative
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-life-buoy"></i>
-                    </span>
-                    <span className="nxl-mtext">Help Center</span>
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <a
-                        className="nxl-link"
-                        href="https://themeforest.net/user/theme_ocean/"
-                      >
-                        Support
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href="help-knowledgebase.html">
-                        KnowledgeBase
-                      </a>
-                    </li>
-                    <li className="nxl-item">
-                      <a className="nxl-link" href=".docs/documentations.html">
-                        Documentations
-                      </a>
+                      <Link to="/blogs_admin" className="nxl-link">
+                        {" "}
+                        blogs
+                      </Link>
                     </li>
                   </ul>
                 </li>
               </ul>
-              <div className="card text-center">
-                <div className="card-body">
-                  <i className="feather-sunrise fs-4 text-dark"></i>
-                  <h6 className="mt-4 text-dark fw-bolder">
-                    Downloading Center
-                  </h6>
-                  <p className="fs-11 my-3 text-dark">
-                    Duralux is a production ready CRM to get started up and
-                    running easily.
-                  </p>
-                  <a
-                    href="javascript:void(0);"
-                    className="btn btn-primary text-dark w-100"
-                  >
-                    Download Now
-                  </a>
-                </div>
-              </div>
             </div>
           </div>
-        </nav>
+        </div>
         <header className="nxl-header">
           <div className="header-wrapper">
             <div className="header-left d-flex align-items-center gap-4">
@@ -659,26 +110,25 @@ function Dashboard() {
                   </div>
                 </div>
               </a>
+
               <div className="nxl-navigation-toggle">
                 <a href="javascript:void(0);" id="menu-mini-button">
                   <i className="feather-align-left"></i>
                 </a>
-                <a
-                  href="javascript:void(0);"
-                  id="menu-expend-button"
-                  style={{ display: "none" }}
-                >
+                <a href="" id="menu-expend-button" style={{ display: "none" }}>
                   <i className="feather-arrow-right"></i>
                 </a>
               </div>
+
               <div className="nxl-lavel-mega-menu-toggle d-flex d-lg-none">
-                <a href="javascript:void(0);" id="nxl-lavel-mega-menu-open">
+                <a href="" id="nxl-lavel-mega-menu-open">
                   <i className="feather-align-left"></i>
                 </a>
               </div>
+
               <div className="nxl-drp-link nxl-lavel-mega-menu">
                 <div className="nxl-lavel-mega-menu-toggle d-flex d-lg-none">
-                  <a href="javascript:void(0)" id="nxl-lavel-mega-menu-hide">
+                  <a href="" id="nxl-lavel-mega-menu-hide">
                     <i className="feather-arrow-left me-2"></i>
                     <span>Back</span>
                   </a>
@@ -1399,7 +849,7 @@ function Dashboard() {
                               </div>
                               <div className="mt-2 mt-lg-0">
                                 <a
-                                  href="https://bestwpware.com/cdn-cgi/l/email-protection#1d6a6f7c6d7e7279786f6e5d7a707c7471337e7270"
+                                  href="https://bestwpware.com/cdn-cgi/l/email-protection#1c6b6e7d6c7f7378796e6f5c7b717d7570327f7371"
                                   className="fs-13 fw-bold text-primary"
                                 >
                                   Contact Us &rarr;
@@ -1557,7 +1007,7 @@ function Dashboard() {
                                     <img
                                       src="assets/images/brand/google-drive.png"
                                       alt=""
-                                      className="img-fluid"
+                                      className="img-fluid0"
                                     />
                                   </div>
                                   <div className="menu-item-title">
@@ -1844,7 +1294,7 @@ function Dashboard() {
                                 </div>
                                 <div className="mt-4">
                                   <a
-                                    href="https://bestwpware.com/cdn-cgi/l/email-protection#d4a3a6b5a4b7bbb0b1a6a794b3b9b5bdb8fab7bbb9"
+                                    href="https://bestwpware.com/cdn-cgi/l/email-protection#ceb9bcafbeada1aaabbcbd8ea9a3afa7a2e0ada1a3"
                                     className="fs-13 fw-bold"
                                   >
                                     View all resources on Duralux &rarr;
@@ -2938,7 +2388,7 @@ function Dashboard() {
                                     </div>
                                     <div className="mt-4">
                                       <a
-                                        href="https://bestwpware.com/cdn-cgi/l/email-protection#5b2c293a2b38343f3e29281b3c363a323775383436"
+                                        href="https://bestwpware.com/cdn-cgi/l/email-protection#1d6a6f7c6d7e7279786f6e5d7a707c7471337e7270"
                                         className="fs-13 fw-bold"
                                       >
                                         View all features on Duralux &rarr;
@@ -3409,7 +2859,7 @@ function Dashboard() {
                                 <a
                                   href="https://bestwpware.com/cdn-cgi/l/email-protection"
                                   className="__cf_email__"
-                                  data-cfemail="9dfcf1f8e5b3f9f8f1f1fcddf2e8e9f1f2f2f6b3fef2f0"
+                                  data-cfemail="caaba6afb2e4aeafa6a6ab8aa5bfbea6a5a5a1e4a9a5a7"
                                 >
                                   [email&#160;protected]
                                 </a>
@@ -3443,7 +2893,7 @@ function Dashboard() {
                                 <a
                                   href="https://bestwpware.com/cdn-cgi/l/email-protection"
                                   className="__cf_email__"
-                                  data-cfemail="5f382d3a3a31713c2a2b3a1f302a2b33303034713c3032"
+                                  data-cfemail="0e697c6b6b60206d7b7a6b4e617b7a62616165206d6163"
                                 >
                                   [email&#160;protected]
                                 </a>
@@ -3477,7 +2927,7 @@ function Dashboard() {
                                 <a
                                   href="https://bestwpware.com/cdn-cgi/l/email-protection"
                                   className="__cf_email__"
-                                  data-cfemail="dcb1bdb0bdb2b5b9f2bdb2aab9a59cb3a9a8b0b3b3b7f2bfb3b1"
+                                  data-cfemail="d9b4b8b5b8b7b0bcf7b8b7afbca099b6acadb5b6b6b2f7bab6b4"
                                 >
                                   [email&#160;protected]
                                 </a>
@@ -3511,7 +2961,7 @@ function Dashboard() {
                                 <a
                                   href="https://bestwpware.com/cdn-cgi/l/email-protection"
                                   className="__cf_email__"
-                                  data-cfemail="5b303e352f3375332e353e1b342e2f3734343075383436"
+                                  data-cfemail="88e3ede6fce0a6e0fde6edc8e7fdfce4e7e7e3a6ebe7e5"
                                 >
                                   [email&#160;protected]
                                 </a>
@@ -3545,7 +2995,7 @@ function Dashboard() {
                                 <a
                                   href="https://bestwpware.com/cdn-cgi/l/email-protection"
                                   className="__cf_email__"
-                                  data-cfemail="422330212a2b276c212d2c2731022d37362e2d2d296c212d2f"
+                                  data-cfemail="f49586979c9d91da979b9a9187b49b8180989b9b9fda979b99"
                                 >
                                   [email&#160;protected]
                                 </a>
@@ -3895,8 +3345,7 @@ function Dashboard() {
                     <i className="feather-moon"></i>
                   </a>
                   <a
-                    href="#"
-                    onClick={(e) => e.preventDefault()}
+                    href="javascript:void(0);"
                     className="nxl-head-link me-0 light-button"
                     style={{ display: "none" }}
                   >
@@ -4133,7 +3582,7 @@ function Dashboard() {
                             <a
                               href="https://bestwpware.com/cdn-cgi/l/email-protection"
                               className="__cf_email__"
-                              data-cfemail="442528213c6a2021282825042b3130282b2b2f6a272b29"
+                              data-cfemail="ceafa2abb6e0aaaba2a2af8ea1bbbaa2a1a1a5e0ada1a3"
                             >
                               [email&#160;protected]
                             </a>
@@ -4278,62 +3727,245 @@ function Dashboard() {
             </div>
           </div>
         </header>
-        <main className="nxl-container">
-          <div className="nxl-content">
-            <div className="page-header">
-              <div className="page-header-left d-flex align-items-center">
-                <div className="page-header-title">
-                  <h5 className="m-b-10">Dashboard</h5>
+
+        <main className="nxl-container apps-container apps-notes">
+          <div className="nxl-content without-header nxl-full-content">
+            <div className="main-content d-flex">
+              <div
+                className="content-sidebar content-sidebar-md h-full"
+                data-scrollbar-target="#psScrollbarInit"
+              >
+                <div className="content-sidebar-header bg-white sticky-top hstack justify-content-between">
+                  <h4 className="fw-bolder mb-0">Notes</h4>
+                  <a
+                    href="javascript:void(0);"
+                    className="app-sidebar-close-trigger d-flex"
+                  >
+                    <i className="feather-x"></i>
+                  </a>
                 </div>
-                <ul className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <a href="index.html">Home</a>
-                  </li>
-                  <li className="breadcrumb-item">Dashboard</li>
-                </ul>
+                <div className="content-sidebar-header">
+                  <a
+                    href="javascript:void(0);"
+                    className="btn btn-primary w-100"
+                    id="add-notes"
+                  >
+                    <i className="feather-plus me-2"></i>
+                    <span>
+                      <Link to="/blog_modal">Add blog</Link>
+                    </span>
+                  </a>
+                </div>
               </div>
-              <div className="page-header-right ms-auto">
-                <div className="page-header-right-items">
-                  <div className="d-flex d-md-none">
+
+              <div
+                className="content-area"
+                data-scrollbar-target="#psScrollbarInit"
+              >
+                <div className="content-area-header sticky-top">
+                  <div className="page-header-left d-flex align-items-center gap-2">
                     <a
-                      href="javascript:void(0)"
-                      className="page-header-right-close-toggle"
+                      href="javascript:void(0);"
+                      className="app-sidebar-open-trigger me-2"
                     >
-                      <i className="feather-arrow-left me-2"></i>
-                      <span>Back</span>
+                      <i className="feather-align-left fs-20"></i>
                     </a>
-                  </div>
-                  <div className="d-flex align-items-center gap-2 page-header-right-items-wrapper">
-                    <div
-                      id="reportrange"
-                      className="reportrange-picker d-flex align-items-center"
-                    >
-                      <span className="reportrange-picker-field"></span>
-                    </div>
-                    <div className="dropdown filter-dropdown">
+                    <div className="dropdown">
                       <a
-                        className="btn btn-md btn-light-brand"
+                        href="javascript:void(0)"
+                        className="btn btn-light-brand dropdown-toggle"
                         data-bs-toggle="dropdown"
-                        data-bs-offset="0, 10"
-                        data-bs-auto-close="outside"
+                        data-bs-offset="0,18"
                       >
-                        <i className="feather-filter me-2"></i>
-                        <span>Filter</span>
+                        Project Notes
                       </a>
-                      <div className="dropdown-menu dropdown-menu-end">
+                      <ul className="dropdown-menu dropdown-menu-end">
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            All Notes
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            Lead Notes
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            Client Notes
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item active"
+                            href="javascript:void(0)"
+                          >
+                            Project Notes
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            Meeting Notes
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            Personal Notes
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            Customer Notes
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="dropdown">
+                      <a
+                        href="javascript:void(0)"
+                        className="avatar-text avatar-md"
+                        data-bs-toggle="dropdown"
+                        data-bs-offset="0,22"
+                      >
+                        <i className="feather-eye"></i>
+                      </a>
+                      <ul className="dropdown-menu">
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            <i className="feather-eye me-3"></i>
+                            <span>Read</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            <i className="feather-eye-off me-3"></i>
+                            <span>Unread</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            <i className="feather-star me-3"></i>
+                            <span>Starred</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            <i className="feather-shield-off me-3"></i>
+                            <span>Unstarred</span>
+                          </a>
+                        </li>
+                        <li className="dropdown-divider"></li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            <i className="feather-clock me-3"></i>
+                            <span>Snooze</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            <i className="feather-check-circle me-3"></i>
+                            <span>Add Tasks</span>
+                          </a>
+                        </li>
+                        <li className="dropdown-divider"></li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            <i className="feather-archive me-3"></i>
+                            <span>Archive</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            <i className="feather-alert-octagon me-3"></i>
+                            <span>Report Spam</span>
+                          </a>
+                        </li>
+                        <li className="dropdown-divider"></li>
+                        <li>
+                          <a
+                            className="dropdown-item"
+                            href="javascript:void(0)"
+                          >
+                            <i className="feather-trash-2 me-3"></i>
+                            <span>Delete</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className="dropdown">
+                      <a
+                        href="javascript:void(0)"
+                        className="d-flex"
+                        data-bs-toggle="dropdown"
+                        data-bs-offset="0,22"
+                        data-bs-auto-close="outside"
+                        aria-expanded="false"
+                      >
+                        <div
+                          className="avatar-text avatar-md"
+                          data-bs-toggle="tooltip"
+                          data-bs-trigger="hover"
+                          title="Tags"
+                        >
+                          <i className="feather-tag"></i>
+                        </div>
+                      </a>
+                      <div className="dropdown-menu">
                         <div className="dropdown-item">
                           <div className="custom-control custom-checkbox">
                             <input
                               type="checkbox"
                               className="custom-control-input"
-                              id="Role"
+                              id="Office"
                               checked="checked"
                             />
                             <label
                               className="custom-control-label c-pointer"
-                              for="Role"
+                              for="Office"
                             >
-                              Role
+                              Office
                             </label>
                           </div>
                         </div>
@@ -4342,14 +3974,13 @@ function Dashboard() {
                             <input
                               type="checkbox"
                               className="custom-control-input"
-                              id="Team"
-                              checked="checked"
+                              id="Family"
                             />
                             <label
                               className="custom-control-label c-pointer"
-                              for="Team"
+                              for="Family"
                             >
-                              Team
+                              Family
                             </label>
                           </div>
                         </div>
@@ -4358,14 +3989,14 @@ function Dashboard() {
                             <input
                               type="checkbox"
                               className="custom-control-input"
-                              id="Email"
+                              id="Friend"
                               checked="checked"
                             />
                             <label
                               className="custom-control-label c-pointer"
-                              for="Email"
+                              for="Friend"
                             >
-                              Email
+                              Friend
                             </label>
                           </div>
                         </div>
@@ -4374,14 +4005,14 @@ function Dashboard() {
                             <input
                               type="checkbox"
                               className="custom-control-input"
-                              id="Member"
-                              checked="checked"
+                              id="Marketplace"
                             />
                             <label
                               className="custom-control-label c-pointer"
-                              for="Member"
+                              for="Marketplace"
                             >
-                              Member
+                              {" "}
+                              Marketplace{" "}
                             </label>
                           </div>
                         </div>
@@ -4390,2106 +4021,1237 @@ function Dashboard() {
                             <input
                               type="checkbox"
                               className="custom-control-input"
-                              id="Recommendation"
-                              checked="checked"
+                              id="Development"
                             />
                             <label
                               className="custom-control-label c-pointer"
-                              for="Recommendation"
+                              for="Development"
                             >
-                              Recommendation
+                              {" "}
+                              Development{" "}
                             </label>
                           </div>
                         </div>
                         <div className="dropdown-divider"></div>
                         <a href="javascript:void(0);" className="dropdown-item">
                           <i className="feather-plus me-3"></i>
-                          <span>Create New</span>
+                          <span>Create Tag</span>
                         </a>
                         <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather-filter me-3"></i>
-                          <span>Manage Filter</span>
+                          <i className="feather-tag me-3"></i>
+                          <span>Manages Tag</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div className="dropdown">
+                      <a
+                        href="javascript:void(0)"
+                        className="d-flex"
+                        data-bs-toggle="dropdown"
+                        data-bs-offset="0,22"
+                        data-bs-auto-close="outside"
+                        aria-expanded="false"
+                      >
+                        <div
+                          className="avatar-text avatar-md"
+                          data-bs-toggle="tooltip"
+                          data-bs-trigger="hover"
+                          title="Labels"
+                        >
+                          <i className="feather-folder-plus"></i>
+                        </div>
+                      </a>
+                      <div className="dropdown-menu">
+                        <div className="dropdown-item">
+                          <div className="custom-control custom-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input"
+                              id="Updates"
+                            />
+                            <label
+                              className="custom-control-label c-pointer"
+                              for="Updates"
+                            >
+                              Updates
+                            </label>
+                          </div>
+                        </div>
+                        <div className="dropdown-item">
+                          <div className="custom-control custom-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input"
+                              id="Socials"
+                            />
+                            <label
+                              className="custom-control-label c-pointer"
+                              for="Socials"
+                            >
+                              Socials
+                            </label>
+                          </div>
+                        </div>
+                        <div className="dropdown-item">
+                          <div className="custom-control custom-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input"
+                              id="Primary"
+                              checked="checked"
+                            />
+                            <label
+                              className="custom-control-label c-pointer"
+                              for="Primary"
+                            >
+                              Primary
+                            </label>
+                          </div>
+                        </div>
+                        <div className="dropdown-item">
+                          <div className="custom-control custom-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input"
+                              id="Forums"
+                            />
+                            <label
+                              className="custom-control-label c-pointer"
+                              for="Forums"
+                            >
+                              Forums
+                            </label>
+                          </div>
+                        </div>
+                        <div className="dropdown-item">
+                          <div className="custom-control custom-checkbox">
+                            <input
+                              type="checkbox"
+                              className="custom-control-input"
+                              id="Promotions"
+                              checked="checked"
+                            />
+                            <label
+                              className="custom-control-label c-pointer"
+                              for="Promotions"
+                            >
+                              {" "}
+                              Promotions{" "}
+                            </label>
+                          </div>
+                        </div>
+                        <div className="dropdown-divider"></div>
+                        <a href="javascript:void(0);" className="dropdown-item">
+                          <i className="feather-plus me-3"></i>
+                          <span>Create Label</span>
+                        </a>
+                        <a href="javascript:void(0);" className="dropdown-item">
+                          <i className="feather-folder-plus me-3"></i>
+                          <span>Manages Label</span>
                         </a>
                       </div>
                     </div>
                   </div>
+                  <div className="page-header-right ms-auto">
+                    <div className="hstack gap-2">
+                      <div className="hstack">
+                        <a
+                          href="javascript:void(0)"
+                          className="search-form-open-toggle"
+                        >
+                          <div
+                            className="avatar-text avatar-md"
+                            data-bs-toggle="tooltip"
+                            data-bs-trigger="hover"
+                            title="Search"
+                          >
+                            <i className="feather feather-search"></i>
+                          </div>
+                        </a>
+                        <form
+                          className="search-form"
+                          style={{ display: "none" }}
+                        >
+                          <div className="search-form-inner">
+                            <a
+                              href="javascript:void(0)"
+                              className="search-form-close-toggle"
+                            >
+                              <div
+                                className="avatar-text avatar-md"
+                                data-bs-toggle="tooltip"
+                                data-bs-trigger="hover"
+                                title="Search Close"
+                              >
+                                <i className="feather feather-arrow-left"></i>
+                              </div>
+                            </a>
+                            <input
+                              type="search"
+                              className="py-3 px-0 border-0 w-100"
+                              id="notesSearch"
+                              placeholder="Search..."
+                            />
+                          </div>
+                        </form>
+                      </div>
+                      <a href="javascript:void(0)" className="d-none d-sm-flex">
+                        <div
+                          className="avatar-text avatar-md"
+                          data-bs-toggle="tooltip"
+                          data-bs-trigger="hover"
+                          title="Newest"
+                        >
+                          <i className="feather feather-chevron-left"></i>
+                        </div>
+                      </a>
+                      <a href="javascript:void(0)" className="d-none d-sm-flex">
+                        <div
+                          className="avatar-text avatar-md"
+                          data-bs-toggle="tooltip"
+                          data-bs-trigger="hover"
+                          title="Oldest"
+                        >
+                          <i className="feather feather-chevron-right"></i>
+                        </div>
+                      </a>
+                      <div className="dropdown d-none d-sm-flex">
+                        <a
+                          href="javascript:void(0)"
+                          className="btn btn-light-brand btn-sm rounded-pill dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                          data-bs-offset="0,23"
+                        >
+                          Newest
+                        </a>
+                        <ul className="dropdown-menu dropdown-menu-end">
+                          <li>
+                            <a
+                              className="dropdown-item"
+                              href="javascript:void(0)"
+                            >
+                              Title
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item"
+                              href="javascript:void(0)"
+                            >
+                              Priority
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item"
+                              href="javascript:void(0)"
+                            >
+                              Category
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item"
+                              href="javascript:void(0)"
+                            >
+                              Time & Date
+                            </a>
+                          </li>
+                          <li className="dropdown-divider"></li>
+                          <li>
+                            <a
+                              className="dropdown-item active"
+                              href="javascript:void(0)"
+                            >
+                              Newest
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item"
+                              href="javascript:void(0)"
+                            >
+                              Oldest
+                            </a>
+                          </li>
+                          <li className="dropdown-divider"></li>
+                          <li>
+                            <a
+                              className="dropdown-item"
+                              href="javascript:void(0)"
+                            >
+                              Ascending
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="dropdown-item"
+                              href="javascript:void(0)"
+                            >
+                              Descending
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="dropdown d-none d-sm-flex">
+                        <a
+                          href="javascript:void(0)"
+                          className="d-flex"
+                          data-bs-toggle="dropdown"
+                          data-bs-offset="0,22"
+                          data-bs-auto-close="outside"
+                        >
+                          <div
+                            className="avatar-text avatar-md"
+                            data-bs-toggle="tooltip"
+                            data-bs-trigger="hover"
+                            title="More Options"
+                          >
+                            <i className="feather feather-more-vertical"></i>
+                          </div>
+                        </a>
+                        <div className="dropdown-menu dropdown-menu-end">
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-plus me-3"></i>
+                            <span>Add to Group</span>
+                          </a>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-user-plus me-3"></i>
+                            <span>Add to Contact</span>
+                          </a>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-eye-off me-3"></i>
+                            <span>Make as Unread</span>
+                          </a>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-sliders me-3"></i>
+                            <span>Filter Messages</span>
+                          </a>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-archive me-3"></i>
+                            <span>Make as Archive</span>
+                          </a>
+                          <div className="dropdown-divider"></div>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-slash me-3"></i>
+                            <span>Report Spam</span>
+                          </a>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-sliders me-3"></i>
+                            <span>Report phishing</span>
+                          </a>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-download me-3"></i>
+                            <span>Download Messages</span>
+                          </a>
+                          <div className="dropdown-divider"></div>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-bell-off me-3"></i>
+                            <span>Mute Conversion</span>
+                          </a>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-slash me-3"></i>
+                            <span>Block Conversion</span>
+                          </a>
+                          <a
+                            href="javascript:void(0);"
+                            className="dropdown-item"
+                          >
+                            <i className="feather feather-trash-2 me-3"></i>
+                            <span>Delete Conversion</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="d-md-none d-flex align-items-center">
-                  <a
-                    href="javascript:void(0)"
-                    className="page-header-right-open-toggle"
-                  >
-                    <i className="feather-align-right fs-20"></i>
-                  </a>
+                <div className="content-area-body pb-0">
+                  <div className="row note-has-grid" id="note-full-container">
+                    {blog.map((i) => (
+                      <div
+                        className="col-xxl-4 col-xl-6 col-lg-4 col-sm-6 single-note-item all-category note-important note-tasks"
+                        key={i.id}
+                      >
+                        <div className="card card-body mb-4 stretch stretch-full">
+                          <span className="side-stick"></span>
+                          <h5 className="note-title text-truncate w-75 mb-1">
+                            {i.title}
+                            <i className="point bi bi-circle-fill ms-1 fs-7"></i>
+                          </h5>
+                          <p className="fs-11 text-muted note-date">
+                            {i.description}
+                          </p>
+                          <div className="note-content flex-grow-1">
+                            <p className="text-muted note-inner-content">
+                              <strong>Autor:</strong> {i.author}
+                            </p>
+
+                            <p className="text-muted note-inner-content">
+                              <strong>created_at:</strong> {i.created_at}
+                            </p>
+                          </div>
+
+                          {/* Icons for delete, update, and add */}
+                          <div className="d-flex justify-content-end">
+                            <button
+                              className="btn btn-sm btn-outline-danger me-2"
+                              onClick={() => handleDelete(i.id)}
+                            >
+                              <BiTrash /> Delete
+                            </button>
+                            Example: Show add icon only if applicable
+                            {i.canAdd && (
+                              <button className="btn btn-sm btn-outline-primary me-2">
+                                <BiPlus /> Add
+                              </button>
+                            )}
+                            <Link
+                              to={`/edit-job/${i.id}`}
+                              className="btn btn-sm btn-outline-secondary me-2"
+                            >
+                              <BiPencil /> Update
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="main-content">
-              <div className="row">
-                <div className="col-xxl-3 col-md-6">
-                  <div className="card stretch stretch-full">
-                    <div className="card-body">
-                      <div className="d-flex align-items-start justify-content-between mb-4">
-                        <div className="d-flex gap-4 align-items-center">
-                          <div className="avatar-text avatar-lg bg-gray-200">
-                            <i className="feather-dollar-sign"></i>
-                          </div>
-                          <div>
-                            <div className="fs-4 fw-bold text-dark">
-                              <span className="counter">45</span>/
-                              <span className="counter">76</span>
-                            </div>
-                            <h3 className="fs-13 fw-semibold text-truncate-1-line">
-                              Invoices Awaiting Payment
-                            </h3>
-                          </div>
-                        </div>
-                        <a href="javascript:void(0);" className="">
-                          <i className="feather-more-vertical"></i>
-                        </a>
-                      </div>
-                      <div className="pt-4">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <a
-                            href="javascript:void(0);"
-                            className="fs-12 fw-medium text-muted text-truncate-1-line"
-                          >
-                            Invoices Awaiting{" "}
-                          </a>
-                          <div className="w-100 text-end">
-                            <span className="fs-12 text-dark">$5,569</span>
-                            <span className="fs-11 text-muted">(56%)</span>
-                          </div>
-                        </div>
-                        <div className="progress mt-2 ht-3">
-                          <div
-                            className="progress-bar bg-primary"
-                            role="progressbar"
-                            style={{ width: "56%" }}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xxl-3 col-md-6">
-                  <div className="card stretch stretch-full">
-                    <div className="card-body">
-                      <div className="d-flex align-items-start justify-content-between mb-4">
-                        <div className="d-flex gap-4 align-items-center">
-                          <div className="avatar-text avatar-lg bg-gray-200">
-                            <i className="feather-cast"></i>
-                          </div>
-                          <div>
-                            <div className="fs-4 fw-bold text-dark">
-                              <span className="counter">48</span>/
-                              <span className="counter">86</span>
-                            </div>
-                            <h3 className="fs-13 fw-semibold text-truncate-1-line">
-                              Converted Leads
-                            </h3>
-                          </div>
-                        </div>
-                        <a href="javascript:void(0);" className="">
-                          <i className="feather-more-vertical"></i>
-                        </a>
-                      </div>
-                      <div className="pt-4">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <a
-                            href="javascript:void(0);"
-                            className="fs-12 fw-medium text-muted text-truncate-1-line"
-                          >
-                            Converted Leads{" "}
-                          </a>
-                          <div className="w-100 text-end">
-                            <span className="fs-12 text-dark">
-                              52 Completed
-                            </span>
-                            <span className="fs-11 text-muted">(63%)</span>
-                          </div>
-                        </div>
-                        <div className="progress mt-2 ht-3">
-                          <div
-                            className="progress-bar bg-warning"
-                            role="progressbar"
-                            style={{ width: "63%" }}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xxl-3 col-md-6">
-                  <div className="card stretch stretch-full">
-                    <div className="card-body">
-                      <div className="d-flex align-items-start justify-content-between mb-4">
-                        <div className="d-flex gap-4 align-items-center">
-                          <div className="avatar-text avatar-lg bg-gray-200">
-                            <i className="feather-briefcase"></i>
-                          </div>
-                          <div>
-                            <div className="fs-4 fw-bold text-dark">
-                              <span className="counter">16</span>/
-                              <span className="counter">20</span>
-                            </div>
-                            <h3 className="fs-13 fw-semibold text-truncate-1-line">
-                              Projects In Progress
-                            </h3>
-                          </div>
-                        </div>
-                        <a href="javascript:void(0);" className="">
-                          <i className="feather-more-vertical"></i>
-                        </a>
-                      </div>
-                      <div className="pt-4">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <a
-                            href="javascript:void(0);"
-                            className="fs-12 fw-medium text-muted text-truncate-1-line"
-                          >
-                            Projects In Progress{" "}
-                          </a>
-                          <div className="w-100 text-end">
-                            <span className="fs-12 text-dark">
-                              16 Completed
-                            </span>
-                            <span className="fs-11 text-muted">(78%)</span>
-                          </div>
-                        </div>
-                        <div className="progress mt-2 ht-3">
-                          <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: "78%" }}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xxl-3 col-md-6">
-                  <div className="card stretch stretch-full">
-                    <div className="card-body">
-                      <div className="d-flex align-items-start justify-content-between mb-4">
-                        <div className="d-flex gap-4 align-items-center">
-                          <div className="avatar-text avatar-lg bg-gray-200">
-                            <i className="feather-activity"></i>
-                          </div>
-                          <div>
-                            <div className="fs-4 fw-bold text-dark">
-                              <span className="counter">46.59</span>%
-                            </div>
-                            <h3 className="fs-13 fw-semibold text-truncate-1-line">
-                              Conversion Rate
-                            </h3>
-                          </div>
-                        </div>
-                        <a href="javascript:void(0);" className="">
-                          <i className="feather-more-vertical"></i>
-                        </a>
-                      </div>
-                      <div className="pt-4">
-                        <div className="d-flex align-items-center justify-content-between">
-                          <a
-                            href="javascript:void(0);"
-                            className="fs-12 fw-medium text-muted text-truncate-1-line"
-                          >
-                            {" "}
-                            Conversion Rate{" "}
-                          </a>
-                          <div className="w-100 text-end">
-                            <span className="fs-12 text-dark">$2,254</span>
-                            <span className="fs-11 text-muted">(46%)</span>
-                          </div>
-                        </div>
-                        <div className="progress mt-2 ht-3">
-                          <div
-                            className="progress-bar bg-danger"
-                            role="progressbar"
-                            style={{ width: "46%" }}
-                          ></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xxl-8">
-                  <div className="card stretch stretch-full">
-                    <div className="card-header">
-                      <h5 className="card-title">Payment Record</h5>
-                      <div className="card-header-action">
-                        <div className="card-header-btn">
-                          <div data-bs-toggle="tooltip" title="Delete">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-danger"
-                              data-bs-toggle="remove"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div data-bs-toggle="tooltip" title="Refresh">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-warning"
-                              data-bs-toggle="refresh"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div
-                            data-bs-toggle="tooltip"
-                            title="Maximize/Minimize"
-                          >
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-success"
-                              data-bs-toggle="expand"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                        </div>
-                        <div className="dropdown">
-                          <a
-                            href="javascript:void(0);"
-                            className="avatar-text avatar-sm"
-                            data-bs-toggle="dropdown"
-                            data-bs-offset="25, 25"
-                          >
-                            <div data-bs-toggle="tooltip" title="Options">
-                              <i className="feather-more-vertical"></i>
-                            </div>
-                          </a>
-                          <div className="dropdown-menu dropdown-menu-end">
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-at-sign"></i>New
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-calendar"></i>Event
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-bell"></i>Snoozed
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-trash-2"></i>Deleted
-                            </a>
-                            <div className="dropdown-divider"></div>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-settings"></i>Settings
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-life-buoy"></i>Tips & Tricks
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card-body custom-card-action p-0">
-                      <div id="payment-records-chart"></div>
-                    </div>
-                    <div className="card-footer">
-                      <div className="row g-4">
-                        <div className="col-lg-3">
-                          <div className="p-3 border border-dashed rounded">
-                            <div className="fs-12 text-muted mb-1">
-                              Awaiting
-                            </div>
-                            <h6 className="fw-bold text-dark">$5,486</h6>
-                            <div className="progress mt-2 ht-3">
-                              <div
-                                className="progress-bar bg-primary"
-                                role="progressbar"
-                                style={{ width: "81%" }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-3">
-                          <div className="p-3 border border-dashed rounded">
-                            <div className="fs-12 text-muted mb-1">
-                              Completed
-                            </div>
-                            <h6 className="fw-bold text-dark">$9,275</h6>
-                            <div className="progress mt-2 ht-3">
-                              <div
-                                className="progress-bar bg-success"
-                                role="progressbar"
-                                style={{ width: "82%" }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-3">
-                          <div className="p-3 border border-dashed rounded">
-                            <div className="fs-12 text-muted mb-1">
-                              Rejected
-                            </div>
-                            <h6 className="fw-bold text-dark">$3,868</h6>
-                            <div className="progress mt-2 ht-3">
-                              <div
-                                className="progress-bar bg-danger"
-                                role="progressbar"
-                                style={{ width: "68%" }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-lg-3">
-                          <div className="p-3 border border-dashed rounded">
-                            <div className="fs-12 text-muted mb-1">Revenue</div>
-                            <h6 className="fw-bold text-dark">$50,668</h6>
-                            <div className="progress mt-2 ht-3">
-                              <div
-                                className="progress-bar bg-dark"
-                                role="progressbar"
-                                style={{ width: "75%" }}
-                              ></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xxl-4">
-                  <div className="card stretch stretch-full overflow-hidden">
-                    <div className="bg-primary text-white">
-                      <div className="p-4">
-                        <span className="badge bg-light text-primary text-dark float-end">
-                          12%
-                        </span>
-                        <div className="text-start">
-                          <h4 className="text-reset">30,569</h4>
-                          <p className="text-reset m-0">Total Sales</p>
-                        </div>
-                      </div>
-                      <div id="total-sales-color-graph"></div>
-                    </div>
-                    <div className="card-body">
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div className="hstack gap-3">
-                          <div className="avatar-image avatar-lg p-2 rounded">
-                            <img
-                              className="img-fluid"
-                              src="assets/images/brand/shopify.png"
-                              alt=""
+          </div>
+        </main>
+        <div
+          className="modal fade"
+          id="addnotesmodal"
+          tabindex="-1"
+          data-bs-keyboard="false"
+          role="dialog"
+        >
+          <div
+            className="modal-dialog modal-dialog-scrollable modal-dialog-centered"
+            role="document"
+          >
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="modalTitleId">
+                  Add Notes
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="notes-box">
+                  <div className="notes-content">
+                    <form action="javascript:void(0);" id="addnotesmodalTitle">
+                      <div className="row">
+                        <div className="col-md-12 mb-3">
+                          <div className="note-title">
+                            <label className="form-label">Note Title</label>
+                            <input
+                              type="text"
+                              id="note-has-title"
+                              className="form-control"
+                              minlength="25"
+                              placeholder="Title"
                             />
                           </div>
-                          <div>
-                            <a href="javascript:void(0);" className="d-block">
-                              Shopify eCommerce Store
-                            </a>
-                            <span className="fs-12 text-muted">
-                              Development
-                            </span>
-                          </div>
                         </div>
-                        <div>
-                          <div className="fw-bold text-dark">$1200</div>
-                          <div className="fs-12 text-end">6 Projects</div>
+                        <div className="col-md-12">
+                          <div className="note-description">
+                            <label className="form-label">
+                              Note Description
+                            </label>
+                            <textarea
+                              id="note-has-description"
+                              className="form-control"
+                              minlength="60"
+                              placeholder="Description"
+                              rows="5"
+                            ></textarea>
+                          </div>
                         </div>
                       </div>
-                      <hr className="border-dashed my-3" />
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div className="hstack gap-3">
-                          <div className="avatar-image avatar-lg p-2 rounded">
-                            <img
-                              className="img-fluid"
-                              src="assets/images/brand/app-store.png"
-                              alt=""
-                            />
-                          </div>
-                          <div>
-                            <a href="javascript:void(0);" className="d-block">
-                              iOS Apps Development
-                            </a>
-                            <span className="fs-12 text-muted">
-                              Development
-                            </span>
-                          </div>
-                        </div>
-                        <div>
-                          <div className="fw-bold text-dark">$1450</div>
-                          <div className="fs-12 text-end">3 Projects</div>
-                        </div>
-                      </div>
-                      <hr className="border-dashed my-3" />
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div className="hstack gap-3">
-                          <div className="avatar-image avatar-lg p-2 rounded">
-                            <img
-                              className="img-fluid"
-                              src="assets/images/brand/figma.png"
-                              alt=""
-                            />
-                          </div>
-                          <div>
-                            <a href="javascript:void(0);" className="d-block">
-                              Figma Dashboard Design
-                            </a>
-                            <span className="fs-12 text-muted">
-                              UI/UX Design
-                            </span>
-                          </div>
-                        </div>
-                        <div>
-                          <div className="fw-bold text-dark">$1250</div>
-                          <div className="fs-12 text-end">5 Projects</div>
-                        </div>
-                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button id="btn-n-save" className="float-left btn btn-success">
+                  Save
+                </button>
+                <button className="btn btn-danger" data-dismiss="modal">
+                  Discard
+                </button>
+                <button
+                  id="btn-n-add"
+                  className="btn btn-success"
+                  disabled="disabled"
+                >
+                  Add Note
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="modal fade-scale"
+          id="searchModal"
+          aria-hidden="true"
+          tabindex="-1"
+        >
+          <div className="modal-dialog modal-lg modal-dialog-top modal-dialog-scrollable">
+            <div className="modal-content">
+              <div className="modal-header search-form py-0">
+                <div className="input-group">
+                  <span className="input-group-text">
+                    <i className="feather-search fs-4 text-muted"></i>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control search-input-field"
+                    placeholder="Search..."
+                  />
+                  <span className="input-group-text">
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </span>
+                </div>
+              </div>
+              <div className="modal-body">
+                <div className="searching-for mb-5">
+                  <h4 className="fs-13 fw-normal text-gray-600 mb-3">
+                    I'm searching for...
+                  </h4>
+                  <div className="row g-1">
+                    <div className="col-md-4 col-xl-2">
+                      <a
+                        href="javascript:void(0);"
+                        className="d-flex align-items-center gap-2 px-3 lh-lg border rounded-pill"
+                      >
+                        <i className="feather-compass"></i>
+                        <span>Recent</span>
+                      </a>
                     </div>
+                    <div className="col-md-4 col-xl-2">
+                      <a
+                        href="javascript:void(0);"
+                        className="d-flex align-items-center gap-2 px-3 lh-lg border rounded-pill"
+                      >
+                        <i className="feather-command"></i>
+                        <span>Command</span>
+                      </a>
+                    </div>
+                    <div className="col-md-4 col-xl-2">
+                      <a
+                        href="javascript:void(0);"
+                        className="d-flex align-items-center gap-2 px-3 lh-lg border rounded-pill"
+                      >
+                        <i className="feather-users"></i>
+                        <span>Peoples</span>
+                      </a>
+                    </div>
+                    <div className="col-md-4 col-xl-2">
+                      <a
+                        href="javascript:void(0);"
+                        className="d-flex align-items-center gap-2 px-3 lh-lg border rounded-pill"
+                      >
+                        <i className="feather-file"></i>
+                        <span>Files</span>
+                      </a>
+                    </div>
+                    <div className="col-md-4 col-xl-2">
+                      <a
+                        href="javascript:void(0);"
+                        className="d-flex align-items-center gap-2 px-3 lh-lg border rounded-pill"
+                      >
+                        <i className="feather-video"></i>
+                        <span>Medias</span>
+                      </a>
+                    </div>
+                    <div className="col-md-4 col-xl-2">
+                      <a
+                        href="javascript:void(0);"
+                        className="d-flex align-items-center gap-2 px-3 lh-lg border rounded-pill"
+                      >
+                        <span>More</span>
+                        <i className="feather-chevron-down"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div className="recent-result mb-5">
+                  <h4 className="fs-13 fw-normal text-gray-600 mb-3">
+                    Recnet{" "}
+                    <span className="badge small bg-gray-200 rounded ms-1 text-dark">
+                      3
+                    </span>
+                  </h4>
+                  <div className="d-flex align-items-center justify-content-between mb-4">
                     <a
                       href="javascript:void(0);"
-                      className="card-footer fs-11 fw-bold text-uppercase text-center py-4"
+                      className="d-flex align-items-start gap-3"
                     >
-                      Full Details
+                      <i className="feather-airplay fs-5"></i>
+                      <div className="fs-13 fw-semibold">
+                        CRM dashboard redesign
+                      </div>
+                    </a>
+                    <a
+                      href="javascript:void(0);"
+                      className="badge border rounded text-dark"
+                    >
+                      /<i className="feather-command ms-1"></i>
+                    </a>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between mb-4">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-start gap-3"
+                    >
+                      <i className="feather-file-plus fs-5"></i>
+                      <div className="fs-13 fw-semibold">
+                        Create new eocument
+                      </div>
+                    </a>
+                    <a
+                      href="javascript:void(0);"
+                      className="badge border rounded text-dark"
+                    >
+                      N /<i className="feather-command ms-1"></i>
+                    </a>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-start gap-3"
+                    >
+                      <i className="feather-user-plus fs-5"></i>
+                      <div className="fs-13 fw-semibold">
+                        Invite project colleagues
+                      </div>
+                    </a>
+                    <a
+                      href="javascript:void(0);"
+                      className="badge border rounded text-dark"
+                    >
+                      P /<i className="feather-command ms-1"></i>
                     </a>
                   </div>
                 </div>
-                <div className="col-lg-4">
-                  <div className="card mb-4 stretch stretch-full">
-                    <div className="card-header d-flex align-items-center justify-content-between">
-                      <div className="d-flex gap-3 align-items-center">
-                        <div className="avatar-text">
-                          <i className="feather feather-star"></i>
-                        </div>
-                        <div>
-                          <div className="fw-semibold text-dark">
-                            Tasks Completed
-                          </div>
-                          <div className="fs-12 text-muted">
-                            22/35 completed
-                          </div>
-                        </div>
-                      </div>
-                      <div className="fs-4 fw-bold text-dark">22/35</div>
-                    </div>
-                    <div className="card-body d-flex align-items-center justify-content-between gap-4">
-                      <div id="task-completed-area-chart"></div>
-                      <div className="fs-12 text-muted text-nowrap">
-                        <span className="fw-semibold text-primary">
-                          28% more
-                        </span>
-                        <br />
-                        <span>from last week</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="card mb-4 stretch stretch-full">
-                    <div className="card-header d-flex align-items-center justify-content-between">
-                      <div className="d-flex gap-3 align-items-center">
-                        <div className="avatar-text">
-                          <i className="feather feather-file-text"></i>
-                        </div>
-                        <div>
-                          <div className="fw-semibold text-dark">New Tasks</div>
-                          <div className="fs-12 text-muted">0/20 tasks</div>
-                        </div>
-                      </div>
-                      <div className="fs-4 fw-bold text-dark">5/20</div>
-                    </div>
-                    <div className="card-body d-flex align-items-center justify-content-between gap-4">
-                      <div id="new-tasks-area-chart"></div>
-                      <div className="fs-12 text-muted text-nowrap">
-                        <span className="fw-semibold text-success">
-                          34% more
-                        </span>
-                        <br />
-                        <span>from last week</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-lg-4">
-                  <div className="card mb-4 stretch stretch-full">
-                    <div className="card-header d-flex align-items-center justify-content-between">
-                      <div className="d-flex gap-3 align-items-center">
-                        <div className="avatar-text">
-                          <i className="feather feather-airplay"></i>
-                        </div>
-                        <div>
-                          <div className="fw-semibold text-dark">
-                            Project Done
-                          </div>
-                          <div className="fs-12 text-muted">20/30 project</div>
-                        </div>
-                      </div>
-                      <div className="fs-4 fw-bold text-dark">20/30</div>
-                    </div>
-                    <div className="card-body d-flex align-items-center justify-content-between gap-4">
-                      <div id="project-done-area-chart"></div>
-                      <div className="fs-12 text-muted text-nowrap">
-                        <span className="fw-semibold text-danger">
-                          42% more
-                        </span>
-                        <br />
-                        <span>from last week</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xxl-4">
-                  <div className="card stretch stretch-full">
-                    <div className="card-header">
-                      <h5 className="card-title">Leads Overview</h5>
-                      <div className="card-header-action">
-                        <div className="card-header-btn">
-                          <div data-bs-toggle="tooltip" title="Delete">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-danger"
-                              data-bs-toggle="remove"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div data-bs-toggle="tooltip" title="Refresh">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-warning"
-                              data-bs-toggle="refresh"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div
-                            data-bs-toggle="tooltip"
-                            title="Maximize/Minimize"
-                          >
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-success"
-                              data-bs-toggle="expand"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                        </div>
-                        <div className="dropdown">
-                          <a
-                            href="javascript:void(0);"
-                            className="avatar-text avatar-sm"
-                            data-bs-toggle="dropdown"
-                            data-bs-offset="25, 25"
-                          >
-                            <div data-bs-toggle="tooltip" title="Options">
-                              <i className="feather-more-vertical"></i>
-                            </div>
-                          </a>
-                          <div className="dropdown-menu dropdown-menu-end">
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-at-sign"></i>New
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-calendar"></i>Event
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-bell"></i>Snoozed
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-trash-2"></i>Deleted
-                            </a>
-                            <div className="dropdown-divider"></div>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-settings"></i>Settings
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-life-buoy"></i>Tips & Tricks
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card-body custom-card-action">
-                      <div id="leads-overview-donut"></div>
-                      <div className="row g-2">
-                        <div className="col-4">
-                          <a
-                            href="javascript:void(0);"
-                            className="p-2 hstack gap-2 rounded border border-dashed border-gray-5"
-                          >
-                            <span
-                              className="wd-7 ht-7 rounded-circle d-inline-block"
-                              style={{ backgroundColor: "#3454d1" }}
-                            ></span>
-
-                            <span>
-                              New
-                              <span className="fs-10 text-muted ms-1">
-                                (20K)
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                        <div className="col-4">
-                          <a
-                            href="javascript:void(0);"
-                            className="p-2 hstack gap-2 rounded border border-dashed border-gray-5"
-                          >
-                            <span
-                              className="wd-7 ht-7 rounded-circle d-inline-block"
-                              style={{ backgroundColor: "#0d519e" }}
-                            ></span>
-
-                            <span>
-                              Contacted
-                              <span className="fs-10 text-muted ms-1">
-                                (15K)
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                        <div className="col-4">
-                          <a
-                            href="javascript:void(0);"
-                            className="p-2 hstack gap-2 rounded border border-dashed border-gray-5"
-                          >
-                            <span
-                              className="wd-7 ht-7 rounded-circle d-inline-block"
-                              style={{ backgroundColor: "#1976d2" }}
-                            ></span>
-
-                            <span>
-                              Qualified
-                              <span className="fs-10 text-muted ms-1">
-                                (10K)
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                        <div className="col-4">
-                          <a
-                            href="javascript:void(0);"
-                            className="p-2 hstack gap-2 rounded border border-dashed border-gray-5"
-                          >
-                            <span
-                              className="wd-7 ht-7 rounded-circle d-inline-block"
-                              style={{ backgroundColor: "#1e88e5" }}
-                            ></span>
-
-                            <span>
-                              Working
-                              <span className="fs-10 text-muted ms-1">
-                                (18K)
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                        <div className="col-4">
-                          <a
-                            href="javascript:void(0);"
-                            className="p-2 hstack gap-2 rounded border border-dashed border-gray-5"
-                          >
-                            <span
-                              className="wd-7 ht-7 rounded-circle d-inline-block"
-                              style={{ backgroundColor: "#2196f3" }}
-                            ></span>
-
-                            <span>
-                              Customer
-                              <span className="fs-10 text-muted ms-1">
-                                (10K)
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                        <div className="col-4">
-                          <a
-                            href="javascript:void(0);"
-                            className="p-2 hstack gap-2 rounded border border-dashed border-gray-5"
-                          >
-                            <span
-                              className="wd-7 ht-7 rounded-circle d-inline-block"
-                              style={{ backgroundColor: "#42a5f5" }}
-                            ></span>
-                            <span>
-                              Proposal
-                              <span className="fs-10 text-muted ms-1">
-                                (15K)
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                        <div className="col-4">
-                          <a
-                            href="javascript:void(0);"
-                            className="p-2 hstack gap-2 rounded border border-dashed border-gray-5"
-                          >
-                            <span
-                              className="wd-7 ht-7 rounded-circle d-inline-block"
-                              style={{ backgroundColor: "#64b5f6" }}
-                            ></span>
-
-                            <span>
-                              Leads
-                              <span className="fs-10 text-muted ms-1">
-                                (16K)
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                        <div className="col-4">
-                          <a
-                            href="javascript:void(0);"
-                            className="p-2 hstack gap-2 rounded border border-dashed border-gray-5"
-                          >
-                            <span
-                              className="wd-7 ht-7 rounded-circle d-inline-block"
-                              style={{ backgroundColor: "#90caf9" }}
-                            ></span>
-
-                            <span>
-                              Progress
-                              <span className="fs-10 text-muted ms-1">
-                                (14K)
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                        <div className="col-4">
-                          <a
-                            href="javascript:void(0);"
-                            className="p-2 hstack gap-2 rounded border border-dashed border-gray-5"
-                          >
-                            <span
-                              className="wd-7 ht-7 rounded-circle d-inline-block"
-                              style={{ backgroundColor: "#aad6fa" }}
-                            ></span>
-
-                            <span>
-                              Others
-                              <span className="fs-10 text-muted ms-1">
-                                (10K)
-                              </span>
-                            </span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xxl-8">
-                  <div className="card stretch stretch-full">
-                    <div className="card-header">
-                      <h5 className="card-title">Latest Leads</h5>
-                      <div className="card-header-action">
-                        <div className="card-header-btn">
-                          <div data-bs-toggle="tooltip" title="Delete">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-danger"
-                              data-bs-toggle="remove"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div data-bs-toggle="tooltip" title="Refresh">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-warning"
-                              data-bs-toggle="refresh"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div
-                            data-bs-toggle="tooltip"
-                            title="Maximize/Minimize"
-                          >
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-success"
-                              data-bs-toggle="expand"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                        </div>
-                        <div className="dropdown">
-                          <a
-                            href="javascript:void(0);"
-                            className="avatar-text avatar-sm"
-                            data-bs-toggle="dropdown"
-                            data-bs-offset="25, 25"
-                          >
-                            <div data-bs-toggle="tooltip" title="Options">
-                              <i className="feather-more-vertical"></i>
-                            </div>
-                          </a>
-                          <div className="dropdown-menu dropdown-menu-end">
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-at-sign"></i>New
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-calendar"></i>Event
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-bell"></i>Snoozed
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-trash-2"></i>Deleted
-                            </a>
-                            <div className="dropdown-divider"></div>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-settings"></i>Settings
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-life-buoy"></i>Tips & Tricks
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card-body custom-card-action p-0">
-                      <div className="table-responsive">
-                        <table className="table table-hover mb-0">
-                          <thead>
-                            <tr className="border-b">
-                              <th scope="row">Users</th>
-                              <th>Proposal</th>
-                              <th>Date</th>
-                              <th>Status</th>
-                              <th className="text-end">Actions</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>
-                                <div className="d-flex align-items-center gap-3">
-                                  <div className="avatar-image">
-                                    <img
-                                      src="assets/images/avatar/2.png"
-                                      alt=""
-                                      className="img-fluid"
-                                    />
-                                  </div>
-                                  <a href="javascript:void(0);">
-                                    <span className="d-block">
-                                      Archie Cantones
-                                    </span>
-                                    <span className="fs-12 d-block fw-normal text-muted">
-                                      <span
-                                        className="__cf_email__"
-                                        data-cfemail="4d2c3f2e242863392223283e0d2a202c2421632e2220"
-                                      >
-                                        [email&#160;protected]
-                                      </span>
-                                    </span>
-                                  </a>
-                                </div>
-                              </td>
-                              <td>
-                                <span className="badge bg-gray-200 text-dark">
-                                  Sent
-                                </span>
-                              </td>
-                              <td>11/06/2023 10:53</td>
-                              <td>
-                                <span className="badge bg-soft-success text-success">
-                                  Completed
-                                </span>
-                              </td>
-                              <td className="text-end">
-                                <a href="javascript:void(0);">
-                                  <i className="feather-more-vertical"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <div className="d-flex align-items-center gap-3">
-                                  <div className="avatar-image">
-                                    <img
-                                      src="assets/images/avatar/3.png"
-                                      alt=""
-                                      className="img-fluid"
-                                    />
-                                  </div>
-                                  <a href="javascript:void(0);">
-                                    <span className="d-block">
-                                      Holmes Cherryman
-                                    </span>
-                                    <span className="fs-12 d-block fw-normal text-muted">
-                                      <span
-                                        className="__cf_email__"
-                                        data-cfemail="e0878f8c8d93ce8388818ea0878d81898cce838f8d"
-                                      >
-                                        [email&#160;protected]
-                                      </span>
-                                    </span>
-                                  </a>
-                                </div>
-                              </td>
-                              <td>
-                                <span className="badge bg-gray-200 text-dark">
-                                  New
-                                </span>
-                              </td>
-                              <td>11/06/2023 10:53</td>
-                              <td>
-                                <span className="badge bg-soft-primary text-primary">
-                                  In Progress{" "}
-                                </span>
-                              </td>
-                              <td className="text-end">
-                                <a href="javascript:void(0);">
-                                  <i className="feather-more-vertical"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <div className="d-flex align-items-center gap-3">
-                                  <div className="avatar-image">
-                                    <img
-                                      src="assets/images/avatar/4.png"
-                                      alt=""
-                                      className="img-fluid"
-                                    />
-                                  </div>
-                                  <a href="javascript:void(0);">
-                                    <span className="d-block">
-                                      Malanie Hanvey
-                                    </span>
-                                    <span className="fs-12 d-block fw-normal text-muted">
-                                      <span
-                                        className="__cf_email__"
-                                        data-cfemail="2b474a45424e05455d4e52456b4c464a424705484446"
-                                      >
-                                        [email&#160;protected]
-                                      </span>
-                                    </span>
-                                  </a>
-                                </div>
-                              </td>
-                              <td>
-                                <span className="badge bg-gray-200 text-dark">
-                                  Sent
-                                </span>
-                              </td>
-                              <td>11/06/2023 10:53</td>
-                              <td>
-                                <span className="badge bg-soft-success text-success">
-                                  Completed
-                                </span>
-                              </td>
-                              <td className="text-end">
-                                <a href="javascript:void(0);">
-                                  <i className="feather-more-vertical"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <div className="d-flex align-items-center gap-3">
-                                  <div className="avatar-image">
-                                    <img
-                                      src="assets/images/avatar/5.png"
-                                      alt=""
-                                      className="img-fluid"
-                                    />
-                                  </div>
-                                  <a href="javascript:void(0);">
-                                    <span className="d-block">
-                                      Kenneth Hune
-                                    </span>
-                                    <span className="fs-12 d-block fw-normal text-muted">
-                                      <span
-                                        className="__cf_email__"
-                                        data-cfemail="2b45454e5f43055e454e6b4c464a424705484446"
-                                      >
-                                        [email&#160;protected]
-                                      </span>
-                                    </span>
-                                  </a>
-                                </div>
-                              </td>
-                              <td>
-                                <span className="badge bg-gray-200 text-dark">
-                                  Returning
-                                </span>
-                              </td>
-                              <td>11/06/2023 10:53</td>
-                              <td>
-                                <span className="badge bg-soft-warning text-warning">
-                                  Not Interested
-                                </span>
-                              </td>
-                              <td className="text-end">
-                                <a href="javascript:void(0);">
-                                  <i className="feather-more-vertical"></i>
-                                </a>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <div className="d-flex align-items-center gap-3">
-                                  <div className="avatar-image">
-                                    <img
-                                      src="assets/images/avatar/6.png"
-                                      alt=""
-                                      className="img-fluid"
-                                    />
-                                  </div>
-                                  <a href="javascript:void(0);">
-                                    <span className="d-block">
-                                      Valentine Maton
-                                    </span>
-                                    <span className="fs-12 d-block fw-normal text-muted">
-                                      <span
-                                        className="__cf_email__"
-                                        data-cfemail="1978757c7770777c37786d7677597e74787075377a7674"
-                                      >
-                                        [email&#160;protected]
-                                      </span>
-                                    </span>
-                                  </a>
-                                </div>
-                              </td>
-                              <td>
-                                <span className="badge bg-gray-200 text-dark">
-                                  Sent
-                                </span>
-                              </td>
-                              <td>11/06/2023 10:53</td>
-                              <td>
-                                <span className="badge bg-soft-success text-success">
-                                  Completed
-                                </span>
-                              </td>
-                              <td className="text-end">
-                                <a href="javascript:void(0);">
-                                  <i className="feather-more-vertical"></i>
-                                </a>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div className="card-footer">
-                      <ul className="list-unstyled d-flex align-items-center gap-2 mb-0 pagination-common-style">
-                        <li>
-                          <a href="javascript:void(0);">
-                            <i className="bi bi-arrow-left"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="javascript:void(0);" className="active">
-                            1
-                          </a>
-                        </li>
-                        <li>
-                          <a href="javascript:void(0);">2</a>
-                        </li>
-                        <li>
-                          <a href="javascript:void(0);">
-                            <i className="bi bi-dot"></i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="javascript:void(0);">8</a>
-                        </li>
-                        <li>
-                          <a href="javascript:void(0);">9</a>
-                        </li>
-                        <li>
-                          <a href="javascript:void(0);">
-                            <i className="bi bi-arrow-right"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xxl-4">
-                  <div className="card stretch stretch-full">
-                    <div className="card-header">
-                      <h5 className="card-title">Upcoming Schedule</h5>
-                      <div className="card-header-action">
-                        <div className="card-header-btn">
-                          <div data-bs-toggle="tooltip" title="Delete">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-danger"
-                              data-bs-toggle="remove"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div data-bs-toggle="tooltip" title="Refresh">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-warning"
-                              data-bs-toggle="refresh"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div
-                            data-bs-toggle="tooltip"
-                            title="Maximize/Minimize"
-                          >
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-success"
-                              data-bs-toggle="expand"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                        </div>
-                        <div className="dropdown">
-                          <a
-                            href="javascript:void(0);"
-                            className="avatar-text avatar-sm"
-                            data-bs-toggle="dropdown"
-                            data-bs-offset="25, 25"
-                          >
-                            <div data-bs-toggle="tooltip" title="Options">
-                              <i className="feather-more-vertical"></i>
-                            </div>
-                          </a>
-                          <div className="dropdown-menu dropdown-menu-end">
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-at-sign"></i>New
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-calendar"></i>Event
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-bell"></i>Snoozed
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-trash-2"></i>Deleted
-                            </a>
-                            <div className="dropdown-divider"></div>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-settings"></i>Settings
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-life-buoy"></i>Tips & Tricks
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card-body">
-                      <div className="p-3 border border-dashed rounded-3 mb-3">
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex align-items-center gap-3">
-                            <div className="wd-50 ht-50 bg-soft-primary text-primary lh-1 d-flex align-items-center justify-content-center flex-column rounded-2 schedule-date">
-                              <span className="fs-18 fw-bold mb-1 d-block">
-                                20
-                              </span>
-                              <span className="fs-10 fw-semibold text-uppercase d-block">
-                                Dec
-                              </span>
-                            </div>
-                            <div className="text-dark">
-                              <a
-                                href="javascript:void(0);"
-                                className="fw-bold mb-2 text-truncate-1-line"
-                              >
-                                React Dashboard Design
-                              </a>
-                              <span className="fs-11 fw-normal text-muted text-truncate-1-line">
-                                11:30am - 12:30pm
-                              </span>
-                            </div>
-                          </div>
-                          <div className="img-group lh-0 ms-3 justify-content-start d-none d-sm-flex">
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Janette Dalton"
-                            >
-                              <img
-                                src="assets/images/avatar/2.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Michael Ksen"
-                            >
-                              <img
-                                src="assets/images/avatar/3.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Socrates Itumay"
-                            >
-                              <img
-                                src="assets/images/avatar/4.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Marianne Audrey"
-                            >
-                              <img
-                                src="assets/images/avatar/6.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-text avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Explorer More"
-                            >
-                              <i className="feather-more-horizontal"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="p-3 border border-dashed rounded-3 mb-3">
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex align-items-center gap-3">
-                            <div className="wd-50 ht-50 bg-soft-warning text-warning lh-1 d-flex align-items-center justify-content-center flex-column rounded-2 schedule-date">
-                              <span className="fs-18 fw-bold mb-1 d-block">
-                                30
-                              </span>
-                              <span className="fs-10 fw-semibold text-uppercase d-block">
-                                Dec
-                              </span>
-                            </div>
-                            <div className="text-dark">
-                              <a
-                                href="javascript:void(0);"
-                                className="fw-bold mb-2 text-truncate-1-line"
-                              >
-                                Admin Design Concept
-                              </a>
-                              <span className="fs-11 fw-normal text-muted text-truncate-1-line">
-                                10:00am - 12:00pm
-                              </span>
-                            </div>
-                          </div>
-                          <div className="img-group lh-0 ms-3 justify-content-start d-none d-sm-flex">
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Janette Dalton"
-                            >
-                              <img
-                                src="assets/images/avatar/2.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Michael Ksen"
-                            >
-                              <img
-                                src="assets/images/avatar/3.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Marianne Audrey"
-                            >
-                              <img
-                                src="assets/images/avatar/5.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Marianne Audrey"
-                            >
-                              <img
-                                src="assets/images/avatar/6.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-text avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Explorer More"
-                            >
-                              <i className="feather-more-horizontal"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="p-3 border border-dashed rounded-3 mb-3">
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex align-items-center gap-3">
-                            <div className="wd-50 ht-50 bg-soft-success text-success lh-1 d-flex align-items-center justify-content-center flex-column rounded-2 schedule-date">
-                              <span className="fs-18 fw-bold mb-1 d-block">
-                                17
-                              </span>
-                              <span className="fs-10 fw-semibold text-uppercase d-block">
-                                Dec
-                              </span>
-                            </div>
-                            <div className="text-dark">
-                              <a
-                                href="javascript:void(0);"
-                                className="fw-bold mb-2 text-truncate-1-line"
-                              >
-                                Standup Team Meeting
-                              </a>
-                              <span className="fs-11 fw-normal text-muted text-truncate-1-line">
-                                8:00am - 9:00am
-                              </span>
-                            </div>
-                          </div>
-                          <div className="img-group lh-0 ms-3 justify-content-start d-none d-sm-flex">
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Janette Dalton"
-                            >
-                              <img
-                                src="assets/images/avatar/2.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Michael Ksen"
-                            >
-                              <img
-                                src="assets/images/avatar/3.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Socrates Itumay"
-                            >
-                              <img
-                                src="assets/images/avatar/4.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Marianne Audrey"
-                            >
-                              <img
-                                src="assets/images/avatar/5.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-text avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Explorer More"
-                            >
-                              <i className="feather-more-horizontal"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="p-3 border border-dashed rounded-3 mb-2">
-                        <div className="d-flex justify-content-between">
-                          <div className="d-flex align-items-center gap-3">
-                            <div className="wd-50 ht-50 bg-soft-danger text-danger lh-1 d-flex align-items-center justify-content-center flex-column rounded-2 schedule-date">
-                              <span className="fs-18 fw-bold mb-1 d-block">
-                                25
-                              </span>
-                              <span className="fs-10 fw-semibold text-uppercase d-block">
-                                Dec
-                              </span>
-                            </div>
-                            <div className="text-dark">
-                              <a
-                                href="javascript:void(0);"
-                                className="fw-bold mb-2 text-truncate-1-line"
-                              >
-                                Zoom Team Meeting
-                              </a>
-                              <span className="fs-11 fw-normal text-muted text-truncate-1-line">
-                                03:30pm - 05:30pm
-                              </span>
-                            </div>
-                          </div>
-                          <div className="img-group lh-0 ms-3 justify-content-start d-none d-sm-flex">
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Janette Dalton"
-                            >
-                              <img
-                                src="assets/images/avatar/2.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Socrates Itumay"
-                            >
-                              <img
-                                src="assets/images/avatar/4.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Marianne Audrey"
-                            >
-                              <img
-                                src="assets/images/avatar/5.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-image avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Marianne Audrey"
-                            >
-                              <img
-                                src="assets/images/avatar/6.png"
-                                className="img-fluid"
-                                alt="image"
-                              />
-                            </a>
-                            <a
-                              href="javascript:void(0)"
-                              className="avatar-text avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Explorer More"
-                            >
-                              <i className="feather-more-horizontal"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                <div className="command-result mb-5">
+                  <h4 className="fs-13 fw-normal text-gray-600 mb-3">
+                    Command{" "}
+                    <span className="badge small bg-gray-200 rounded ms-1 text-dark">
+                      5
+                    </span>
+                  </h4>
+                  <div className="d-flex align-items-center justify-content-between mb-4">
                     <a
                       href="javascript:void(0);"
-                      className="card-footer fs-11 fw-bold text-uppercase text-center py-4"
+                      className="d-flex align-items-start gap-3"
                     >
-                      Upcomming Schedule
+                      <i className="feather-user fs-5"></i>
+                      <div className="fs-13 fw-semibold">My profile</div>
+                    </a>
+                    <a
+                      href="javascript:void(0);"
+                      className="badge border rounded text-dark"
+                    >
+                      P /<i className="feather-command ms-1"></i>
+                    </a>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between mb-4">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-start gap-3"
+                    >
+                      <i className="feather-users fs-5"></i>
+                      <div className="fs-13 fw-semibold">Team profile</div>
+                    </a>
+                    <a
+                      href="javascript:void(0);"
+                      className="badge border rounded text-dark"
+                    >
+                      T /<i className="feather-command ms-1"></i>
+                    </a>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between mb-4">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-start gap-3"
+                    >
+                      <i className="feather-user-plus fs-5"></i>
+                      <div className="fs-13 fw-semibold">Invite colleagues</div>
+                    </a>
+                    <a
+                      href="javascript:void(0);"
+                      className="badge border rounded text-dark"
+                    >
+                      I /<i className="feather-command ms-1"></i>
+                    </a>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between mb-4">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-start gap-3"
+                    >
+                      <i className="feather-briefcase fs-5"></i>
+                      <div className="fs-13 fw-semibold">
+                        Create new project
+                      </div>
+                    </a>
+                    <a
+                      href="javascript:void(0);"
+                      className="badge border rounded text-dark"
+                    >
+                      CP /<i className="feather-command ms-1"></i>
+                    </a>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-start gap-3"
+                    >
+                      <i className="feather-life-buoy fs-5"></i>
+                      <div className="fs-13 fw-semibold">Support center</div>
+                    </a>
+                    <a
+                      href="javascript:void(0);"
+                      className="badge border rounded text-dark"
+                    >
+                      SC /<i className="feather-command ms-1"></i>
                     </a>
                   </div>
                 </div>
-
-                <div className="col-xxl-4">
-                  <div className="card stretch stretch-full">
-                    <div className="card-header">
-                      <h5 className="card-title">Project Status</h5>
-                      <div className="card-header-action">
-                        <div className="card-header-btn">
-                          <div data-bs-toggle="tooltip" title="Delete">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-danger"
-                              data-bs-toggle="remove"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div data-bs-toggle="tooltip" title="Refresh">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-warning"
-                              data-bs-toggle="refresh"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div
-                            data-bs-toggle="tooltip"
-                            title="Maximize/Minimize"
-                          >
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-success"
-                              data-bs-toggle="expand"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                        </div>
-                        <div className="dropdown">
-                          <a
-                            href="javascript:void(0);"
-                            className="avatar-text avatar-sm"
-                            data-bs-toggle="dropdown"
-                            data-bs-offset="25, 25"
-                          >
-                            <div data-bs-toggle="tooltip" title="Options">
-                              <i className="feather-more-vertical"></i>
-                            </div>
-                          </a>
-                          <div className="dropdown-menu dropdown-menu-end">
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-at-sign"></i>New
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-calendar"></i>Event
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-bell"></i>Snoozed
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-trash-2"></i>Deleted
-                            </a>
-                            <div className="dropdown-divider"></div>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-settings"></i>Settings
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-life-buoy"></i>Tips & Tricks
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card-body custom-card-action">
-                      <div className="mb-3">
-                        <div className="mb-4 pb-1 d-flex">
-                          <div className="d-flex w-50 align-items-center me-3">
-                            <img
-                              src="assets/images/brand/app-store.png"
-                              alt="laravel-logo"
-                              className="me-3"
-                              width="35"
-                            />
-                            <div>
-                              <a
-                                href="javascript:void(0);"
-                                className="text-truncate-1-line"
-                              >
-                                Apps Development
-                              </a>
-                              <div className="fs-11 text-muted">
-                                Applications
-                              </div>
-                            </div>
-                          </div>
-                          <div className="d-flex flex-grow-1 align-items-center">
-                            <div className="progress w-100 me-3 ht-5">
-                              <div
-                                className="progress-bar bg-danger"
-                                role="progressbar"
-                                style={{ width: "54%" }}
-                                aria-valuenow="54"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                              ></div>
-                            </div>
-                            <span className="text-muted">54%</span>
-                          </div>
-                        </div>
-                        <hr className="border-dashed my-3" />
-                        <div className="mb-4 pb-1 d-flex">
-                          <div className="d-flex w-50 align-items-center me-3">
-                            <img
-                              src="assets/images/brand/figma.png"
-                              alt="figma-logo"
-                              className="me-3"
-                              width="35"
-                            />
-                            <div>
-                              <a
-                                href="javascript:void(0);"
-                                className="text-truncate-1-line"
-                              >
-                                Dashboard Design
-                              </a>
-                              <div className="fs-11 text-muted">App UI Kit</div>
-                            </div>
-                          </div>
-                          <div className="d-flex flex-grow-1 align-items-center">
-                            <div className="progress w-100 me-3 ht-5">
-                              <div
-                                className="progress-bar bg-primary"
-                                role="progressbar"
-                                style={{ width: "86%" }}
-                                aria-valuenow="86"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                              ></div>
-                            </div>
-                            <span className="text-muted">86%</span>
-                          </div>
-                        </div>
-                        <hr className="border-dashed my-3" />
-                        <div className="mb-4 pb-1 d-flex">
-                          <div className="d-flex w-50 align-items-center me-3">
-                            <img
-                              src="assets/images/brand/facebook.png"
-                              alt="vue-logo"
-                              className="me-3"
-                              width="35"
-                            />
-                            <div>
-                              <a
-                                href="javascript:void(0);"
-                                className="text-truncate-1-line"
-                              >
-                                Facebook Marketing
-                              </a>
-                              <div className="fs-11 text-muted">Marketing</div>
-                            </div>
-                          </div>
-                          <div className="d-flex flex-grow-1 align-items-center">
-                            <div className="progress w-100 me-3 ht-5">
-                              <div
-                                className="progress-bar bg-success"
-                                role="progressbar"
-                                style={{ width: "90%" }}
-                                aria-valuenow="90"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                              ></div>
-                            </div>
-                            <span className="text-muted">90%</span>
-                          </div>
-                        </div>
-                        <hr className="border-dashed my-3" />
-                        <div className="mb-4 pb-1 d-flex">
-                          <div className="d-flex w-50 align-items-center me-3">
-                            <img
-                              src="assets/images/brand/github.png"
-                              alt="react-logo"
-                              className="me-3"
-                              width="35"
-                            />
-                            <div>
-                              <a
-                                href="javascript:void(0);"
-                                className="text-truncate-1-line"
-                              >
-                                React Dashboard Github
-                              </a>
-                              <div className="fs-11 text-muted">Dashboard</div>
-                            </div>
-                          </div>
-                          <div className="d-flex flex-grow-1 align-items-center">
-                            <div className="progress w-100 me-3 ht-5">
-                              <div
-                                className="progress-bar bg-info"
-                                role="progressbar"
-                                style={{ width: "37%" }}
-                                aria-valuenow="37"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                              ></div>
-                            </div>
-                            <span className="text-muted">37%</span>
-                          </div>
-                        </div>
-                        <hr className="border-dashed my-3" />
-                        <div className="d-flex">
-                          <div className="d-flex w-50 align-items-center me-3">
-                            <img
-                              src="assets/images/brand/paypal.png"
-                              alt="sketch-logo"
-                              className="me-3"
-                              width="35"
-                            />
-                            <div>
-                              <a
-                                href="javascript:void(0);"
-                                className="text-truncate-1-line"
-                              >
-                                Paypal Payment Gateway
-                              </a>
-                              <div className="fs-11 text-muted">Payment</div>
-                            </div>
-                          </div>
-                          <div className="d-flex flex-grow-1 align-items-center">
-                            <div className="progress w-100 me-3 ht-5">
-                              <div
-                                className="progress-bar bg-warning"
-                                role="progressbar"
-                                style={{ width: "29%" }}
-                                aria-valuenow="29"
-                                aria-valuemin="0"
-                                aria-valuemax="100"
-                              ></div>
-                            </div>
-                            <span className="text-muted">29%</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                <div className="file-result mb-4">
+                  <h4 className="fs-13 fw-normal text-gray-600 mb-3">
+                    Files{" "}
+                    <span className="badge small bg-gray-200 rounded ms-1 text-dark">
+                      3
+                    </span>
+                  </h4>
+                  <div className="d-flex align-items-center justify-content-between mb-4">
                     <a
                       href="javascript:void(0);"
-                      className="card-footer fs-11 fw-bold text-uppercase text-center"
+                      className="d-flex align-items-start gap-3"
                     >
-                      Upcomming Projects
+                      <i className="feather-folder-plus fs-5"></i>
+                      <div className="fs-13 fw-semibold">
+                        CRM Desing Project{" "}
+                        <span className="fs-12 fw-normal text-muted">
+                          (56.74 MB)
+                        </span>
+                      </div>
+                    </a>
+                    <a href="javascript:void(0);" className="file-download">
+                      <i className="feather-download"></i>
                     </a>
                   </div>
-                </div>
-
-                <div className="col-xxl-4">
-                  <div className="card stretch stretch-full">
-                    <div className="card-header">
-                      <h5 className="card-title">Team Progress</h5>
-                      <div className="card-header-action">
-                        <div className="card-header-btn">
-                          <div data-bs-toggle="tooltip" title="Delete">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-danger"
-                              data-bs-toggle="remove"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div data-bs-toggle="tooltip" title="Refresh">
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-warning"
-                              data-bs-toggle="refresh"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                          <div
-                            data-bs-toggle="tooltip"
-                            title="Maximize/Minimize"
-                          >
-                            <a
-                              href="javascript:void(0);"
-                              className="avatar-text avatar-xs bg-success"
-                              data-bs-toggle="expand"
-                            >
-                              {" "}
-                            </a>
-                          </div>
-                        </div>
-                        <div className="dropdown">
-                          <a
-                            href="javascript:void(0);"
-                            className="avatar-text avatar-sm"
-                            data-bs-toggle="dropdown"
-                            data-bs-offset="25, 25"
-                          >
-                            <div data-bs-toggle="tooltip" title="Options">
-                              <i className="feather-more-vertical"></i>
-                            </div>
-                          </a>
-                          <div className="dropdown-menu dropdown-menu-end">
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-at-sign"></i>New
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-calendar"></i>Event
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-bell"></i>Snoozed
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-trash-2"></i>Deleted
-                            </a>
-                            <div className="dropdown-divider"></div>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-settings"></i>Settings
-                            </a>
-                            <a
-                              href="javascript:void(0);"
-                              className="dropdown-item"
-                            >
-                              <i className="feather-life-buoy"></i>Tips & Tricks
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card-body custom-card-action">
-                      <div className="hstack justify-content-between border border-dashed rounded-3 p-3 mb-3">
-                        <div className="hstack gap-3">
-                          <div className="avatar-image">
-                            <img
-                              src="assets/images/avatar/1.png"
-                              alt=""
-                              className="img-fluid"
-                            />
-                          </div>
-                          <div>
-                            <a href="javascript:void(0);">Alexandra Della</a>
-                            <div className="fs-11 text-muted">
-                              Frontend Developer
-                            </div>
-                          </div>
-                        </div>
-                        <div className="team-progress-1"></div>
-                      </div>
-                      <div className="hstack justify-content-between border border-dashed rounded-3 p-3 mb-3">
-                        <div className="hstack gap-3">
-                          <div className="avatar-image">
-                            <img
-                              src="assets/images/avatar/2.png"
-                              alt=""
-                              className="img-fluid"
-                            />
-                          </div>
-                          <div>
-                            <a href="javascript:void(0);">Archie Cantones</a>
-                            <div className="fs-11 text-muted">
-                              UI/UX Designer
-                            </div>
-                          </div>
-                        </div>
-                        <div className="team-progress-2"></div>
-                      </div>
-                      <div className="hstack justify-content-between border border-dashed rounded-3 p-3 mb-3">
-                        <div className="hstack gap-3">
-                          <div className="avatar-image">
-                            <img
-                              src="assets/images/avatar/3.png"
-                              alt=""
-                              className="img-fluid"
-                            />
-                          </div>
-                          <div>
-                            <a href="javascript:void(0);">Malanie Hanvey</a>
-                            <div className="fs-11 text-muted">
-                              Backend Developer
-                            </div>
-                          </div>
-                        </div>
-                        <div className="team-progress-3"></div>
-                      </div>
-                      <div className="hstack justify-content-between border border-dashed rounded-3 p-3 mb-2">
-                        <div className="hstack gap-3">
-                          <div className="avatar-image">
-                            <img
-                              src="assets/images/avatar/4.png"
-                              alt=""
-                              className="img-fluid"
-                            />
-                          </div>
-                          <div>
-                            <a href="javascript:void(0);">Kenneth Hune</a>
-                            <div className="fs-11 text-muted">
-                              Digital Marketer
-                            </div>
-                          </div>
-                        </div>
-                        <div className="team-progress-4"></div>
-                      </div>
-                    </div>
+                  <div className="d-flex align-items-center justify-content-between mb-4">
                     <a
                       href="javascript:void(0);"
-                      className="card-footer fs-11 fw-bold text-uppercase text-center"
+                      className="d-flex align-items-start gap-3"
                     >
-                      Update 30 Min Ago
+                      <i className="feather-folder-plus fs-5"></i>
+                      <div className="fs-13 fw-semibold">
+                        Admin Dashboard Project{" "}
+                        <span className="fs-12 fw-normal text-muted">
+                          (46.83 MB)
+                        </span>
+                      </div>
+                    </a>
+                    <a href="javascript:void(0);" className="file-download">
+                      <i className="feather-download"></i>
+                    </a>
+                  </div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-start gap-3"
+                    >
+                      <i className="feather-folder-plus fs-5"></i>
+                      <div className="fs-13 fw-semibold">
+                        CRM Dashboard Project{" "}
+                        <span className="fs-12 fw-normal text-muted">
+                          (68.59 MB)
+                        </span>
+                      </div>
+                    </a>
+                    <a href="javascript:void(0);" className="file-download">
+                      <i className="feather-download"></i>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <footer className="footer">
-            <p className="fs-11 text-muted fw-medium text-uppercase mb-0 copyright">
-              <span>Copyright ©</span>
-              <script
-                data-cfasync="false"
-                src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
-              ></script>
-              <script>document.write(new Date().getFullYear());</script>
-            </p>
-            <div className="d-flex align-items-center gap-4">
+        </div>
+        <div
+          className="modal fade-scale"
+          id="languageSelectModal"
+          aria-hidden="true"
+          aria-labelledby="languageSelectModalLabel"
+          tabindex="-1"
+        >
+          <div className="modal-dialog modal-lg modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="languageSelectModalLabel">
+                  Select Language
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/sa.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Arabic </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/bd.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Bengali </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/ch.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Chinese </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/hr.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Croatian </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/dk.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Danish </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/nl.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Dutch </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select active">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/us.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>English </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/fi.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Filipino </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/fr.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>French </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/de.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>German </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/il.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Hebrew </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/in.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Hindi </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/id.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Indonesian </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/it.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Italian </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/jp.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Japanese </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/kr.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Korean </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/ir.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Persian </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/pt.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Portuguese </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/ru.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Russian </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/es.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Spanish </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/sv.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Swedish </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/tr.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Turkish </span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/pk.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Urdo</span>
+                    </a>
+                  </div>
+                  <div className="col-6 col-md-4 col-lg-3 language_select">
+                    <a
+                      href="javascript:void(0);"
+                      className="d-flex align-items-center gap-2"
+                    >
+                      <div className="avatar-image avatar-sm">
+                        <img
+                          src="assets/vendors/img/flags/1x1/vi.svg"
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                      <span>Vietnamese</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="position-fixed"
+          style={{ right: "5px", bottom: "5px", zIndex: 999999 }}
+        >
+          <div
+            id="toast"
+            className="toast bg-black hide"
+            data-bs-delay="3000"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
+            <div className="toast-header px-3 bg-transparent d-flex align-items-center justify-content-between border-bottom border-light border-opacity-10">
+              <div className="text-white mb-0 mr-auto">Downloading...</div>
               <a
-                href="javascript:void(0);"
-                className="fs-11 fw-semibold text-uppercase"
+                href="javascript:void(0)"
+                className="ms-2 mb-1 close fw-normal"
+                data-bs-dismiss="toast"
+                aria-label="Close"
               >
-                Help
-              </a>
-              <a
-                href="javascript:void(0);"
-                className="fs-11 fw-semibold text-uppercase"
-              >
-                Terms
-              </a>
-              <a
-                href="javascript:void(0);"
-                className="fs-11 fw-semibold text-uppercase"
-              >
-                Privacy
+                <span className="text-white">&times;</span>
               </a>
             </div>
-          </footer>
-        </main>
-
+            <div className="toast-body p-3 text-white">
+              <h6 className="fs-13 text-white">Project.zip</h6>
+              <span className="text-light fs-11">4.2mb of 5.5mb</span>
+            </div>
+            <div className="toast-footer p-3 pt-0 border-top border-light border-opacity-10">
+              <div className="progress mt-3" style={{ height: "5px" }}>
+                <div
+                  className="progress-bar progress-bar-striped progress-bar-animated w-75 bg-dark"
+                  role="progressbar"
+                  aria-valuenow="75"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div className="theme-customizer">
           <div className="customizer-handle">
             <a
@@ -6520,6 +5282,7 @@ function Dashboard() {
                 >
                   Navigation
                 </label>
+
                 <div
                   className="row g-2 theme-options-items app-navigation"
                   id="appNavigationList"
@@ -6567,6 +5330,7 @@ function Dashboard() {
                 >
                   Header
                 </label>
+
                 <div
                   className="row g-2 theme-options-items app-header"
                   id="appHeaderList"
@@ -7023,13 +5787,9 @@ function Dashboard() {
             <div className="customizer-sidebar-footer px-4 ht-60 border-top d-flex align-items-center gap-2">
               <div className="flex-fill w-50">
                 <a
-                  href="#"
+                  href="javascript:void(0);"
                   className="btn btn-danger"
                   data-style="reset-all-common-style"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // Add your onClick functionality here
-                  }}
                 >
                   Reset
                 </a>
@@ -7043,8 +5803,8 @@ function Dashboard() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
-export default Dashboard;
+export default Blogs_admin;

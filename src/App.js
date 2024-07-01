@@ -19,7 +19,10 @@ import Admin_careeelist from "./pages/AdminDAshboard/Admin_careeelist";
 import Modal from "./pages/AdminDAshboard/Modal";
 import Protectrouter from "./pages/Protectrouter";
 import Editcarrer from "./Editcarrer";
-
+import Blogs_admin from "./pages/AdminDAshboard/Blogs_admin";
+import Service from "./pages/AdminDAshboard/Service";
+import Blog_modal from "./pages/AdminDAshboard/Blog_modal";
+import Service_modal from "./pages/AdminDAshboard/Service_modal";
 
 function App() {
   return (
@@ -44,6 +47,10 @@ function App() {
           <Route path="/carrirer_list" element={<Admin_careeelist />} />
           <Route path="/Add_job" element={<Modal />} />
           <Route path="/edit-job/:id" element={<Editcarrer />} />
+          <Route path="/blogs_admin" element={<Blogs_admin />} />
+          <Route path="/Service" element={<Service />} />
+          <Route path="/blog_modal" element={<Blog_modal />} />
+          <Route path="/service_modal" element={<Service_modal />} />
         </Routes>
       </Router>
     </div>
