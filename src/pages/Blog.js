@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import "../css/bootstrap.css";
 import "../css/responsive.css";
@@ -19,8 +19,29 @@ import "../css/01-global.css";
 import "../css/style.css";
 import "../css/04-animate.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Blog() {
+  const [blog, setBlogs] = useState([]);
+
+  const baseurl = "http://127.0.0.1:8000/";
+
+  const axioinstance = axios.create({
+    baseURL: baseurl,
+  });
+
+  useEffect(() => {
+    axioinstance
+      .get("blogs/")
+      .then((response) => {
+        setBlogs(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching job applications:", error);
+      });
+  }, []);
+
   return (
     <div>
       <div body className="body-bg-color">
@@ -65,16 +86,6 @@ function Blog() {
                         <ul className="navigation clearfix">
                           <li className="dropdown">
                             <Link to="/">Home</Link>
-                            <ul>
-                              <li>
-                              <Link to="/home1">Home 01 (AI Products)</Link>
-                              </li>
-                              <li>
-                              <Link to="/home2">
-                                  Home 02 (Content Writing)
-                                </Link>
-                              </li>
-                            </ul>
                           </li>
                           <li>
                             <Link to="/about">About</Link>
@@ -85,7 +96,7 @@ function Blog() {
                               <li>
                                 <Link to="/Career">Career</Link>
                               </li>
-                              
+
                               <li>
                                 <Link to="/login">Login</Link>
                               </li>
@@ -93,7 +104,10 @@ function Blog() {
                                 <Link to="/signup">Create Account</Link>
                               </li>
                               <li>
-                              <Link to="/resetpassword">Reset Password</Link>
+                                <Link to="/resetpassword">Reset Password</Link>
+                              </li>
+                              <li>
+                                <Link to="/userservice">services</Link>
                               </li>
                             </ul>
                           </li>
@@ -109,7 +123,7 @@ function Blog() {
                             </ul>
                           </li>
                           <li>
-                          <Link to="/contact">Contact</Link>
+                            <Link to="/contact">Contact</Link>
                           </li>
                         </ul>
                       </div>
@@ -119,7 +133,7 @@ function Blog() {
                   <div className="outer-box d-flex align-items-center">
                     <ul className="main-header__login-sing-up">
                       <li>
-                      <Link to="/signup">Signup</Link>
+                        <Link to="/signup">Signup</Link>
                       </li>
                     </ul>
 
@@ -194,222 +208,38 @@ function Blog() {
           <section className="blog-page">
             <div className="container">
               <div className="row">
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="blog-page__single">
-                    <div className="blog-page__img-box">
-                      <div className="blog-page__img">
-                        <img src="images/blog/blog-page-1-1.jpg" alt="" />
+                {blog.map((item) => (
+                  <div key={item.id} className="col-xl-4 col-lg-4 col-md-6">
+                    <div className="blog-page__single">
+                     
+                      <h3 className="blog-page__title">
+                        <a href="#">{item.title}</a>
+                      </h3>
+                      <div className="blog-page__author">
+                        <p>
+                          <span className="icon-author"></span>
+                          {item.content}
+                        </p>
                       </div>
-                    </div>
-                    <h3 className="blog-page__title">
-                      <a href="blog-details.html">
-                        Best free AI content generator & AI writers for 2023
-                      </a>
-                    </h3>
-                    <div className="blog-page__date">
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                      <div className="blog-page__description">
+                        <p>{item.author}</p>
+                      </div>
 
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="blog-page__single">
-                    <div className="blog-page__img-box">
-                      <div className="blog-page__img">
-                        <img src="images/blog/blog-page-1-2.jpg" alt="" />
+                      <div className="blog-page__date">
+                        <p>
+                          <span className="icon-date"></span>
+                          {new Date(item.created_at).toLocaleDateString()}
+                        </p>
+                        <p>
+                          <span className="icon-three-o-clock-clock"></span>4
+                          Minute Read
+                        </p>
                       </div>
                     </div>
-                    <h3 className="blog-page__title">
-                      <a href="blog-details.html">
-                        Best free AI content generator & AI writers for 2023
-                      </a>
-                    </h3>
-                    <div className="blog-page__date">
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </div>
                   </div>
-                </div>
-
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="blog-page__single">
-                    <div className="blog-page__img-box">
-                      <div className="blog-page__img">
-                        <img src="images/blog/blog-page-1-3.jpg" alt="" />
-                      </div>
-                    </div>
-                    <h3 className="blog-page__title">
-                      <a href="blog-details.html">
-                        Best free AI content generator & AI writers for 2023
-                      </a>
-                    </h3>
-                    <div className="blog-page__date">
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="blog-page__single">
-                    <div className="blog-page__img-box">
-                      <div className="blog-page__img">
-                        <img src="images/blog/blog-page-1-4.jpg" alt="" />
-                      </div>
-                    </div>
-                    <h3 className="blog-page__title">
-                      <a href="blog-details.html">
-                        Best free AI content generator & AI writers for 2023
-                      </a>
-                    </h3>
-                    <div className="blog-page__date">
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="blog-page__single">
-                    <div className="blog-page__img-box">
-                      <div className="blog-page__img">
-                        <img src="images/blog/blog-page-1-5.jpg" alt="" />
-                      </div>
-                    </div>
-                    <h3 className="blog-page__title">
-                      <a href="blog-details.html">
-                        Best free AI content generator & AI writers for 2023
-                      </a>
-                    </h3>
-                    <div className="blog-page__date">
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="blog-page__single">
-                    <div className="blog-page__img-box">
-                      <div className="blog-page__img">
-                        <img src="images/blog/blog-page-1-6.jpg" alt="" />
-                      </div>
-                    </div>
-                    <h3 className="blog-page__title">
-                      <a href="blog-details.html">
-                        Best free AI content generator & AI writers for 2023
-                      </a>
-                    </h3>
-                    <div className="blog-page__date">
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="blog-page__single">
-                    <div className="blog-page__img-box">
-                      <div className="blog-page__img">
-                        <img src="images/blog/blog-page-1-7.jpg" alt="" />
-                      </div>
-                    </div>
-                    <h3 className="blog-page__title">
-                      <a href="blog-details.html">
-                        Best free AI content generator & AI writers for 2023
-                      </a>
-                    </h3>
-                    <div className="blog-page__date">
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="blog-page__single">
-                    <div className="blog-page__img-box">
-                      <div className="blog-page__img">
-                        <img src="images/blog/blog-page-1-8.jpg" alt="" />
-                      </div>
-                    </div>
-                    <h3 className="blog-page__title">
-                      <a href="blog-details.html">
-                        Best free AI content generator & AI writers for 2023
-                      </a>
-                    </h3>
-                    <div className="blog-page__date">
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col-xl-4 col-lg-4 col-md-6">
-                  <div className="blog-page__single">
-                    <div className="blog-page__img-box">
-                      <div className="blog-page__img">
-                        <img src="images/blog/blog-page-1-9.jpg" alt="" />
-                      </div>
-                    </div>
-                    <h3 className="blog-page__title">
-                      <a href="blog-details.html">
-                        Best free AI content generator & AI writers for 2023
-                      </a>
-                    </h3>
-                    <div className="blog-page__date">
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
+
               <div className="career-page__pagination">
                 <ul className="pg-pagination list-unstyled">
                   <li className="count">
@@ -520,7 +350,7 @@ function Blog() {
                       </div>
                       <div className="footer-widget__company-list-box">
                         <ul className="footer-widget__company-list">
-                        <li>
+                          <li>
                             <Link to="/login">Sign in</Link>
                           </li>
                           <li>

@@ -65,16 +65,7 @@ function Home() {
                         <ul className="navigation clearfix">
                           <li className="dropdown">
                             <Link to="/">Home</Link>
-                            <ul>
-                              <li>
-                                <Link to="/home1">Home 01 (AI Products)</Link>
-                              </li>
-                              <li>
-                                <Link to="/home2">
-                                  Home 02 (Content Writing)
-                                </Link>
-                              </li>
-                            </ul>
+                            
                           </li>
                           <li>
                             <Link to="/about">About</Link>
@@ -95,6 +86,9 @@ function Home() {
                               <li>
                                 <Link to="/resetpassword">Reset Password</Link>
 
+                              </li>
+                              <li>
+                                <Link to="/userservice">services</Link>
                               </li>
                             </ul>
                           </li>

@@ -21,8 +21,7 @@ import "../css/04-animate.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useFormik } from "formik";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const baseurl = "http://127.0.0.1:8000/";
@@ -31,8 +30,7 @@ function Signup() {
     baseURL: baseurl,
   });
 
-  const navigate= useNavigate()
-
+  const navigate = useNavigate();
 
   const validate = (values) => {
     const errors = {};
@@ -77,8 +75,8 @@ function Signup() {
           const res = await axioinstance.post("signup/", values);
           console.log(values, ">>>>>>>>>>>>>>>");
           if (res.status === 201) {
-            const userid=res?.data?.userid;
-            navigate("/otp",{state:{'userid':userid}});
+            const userid = res?.data?.userid;
+            navigate("/otp", { state: { userid: userid } });
             console.log("sucesss???????????????????");
           }
         } catch (error) {
@@ -132,16 +130,6 @@ function Signup() {
                           <ul class="navigation clearfix">
                             <li class="dropdown">
                               <Link to="/">Home</Link>
-                              <ul>
-                                <li>
-                                  <Link to="/home1">Home 01 (AI Products)</Link>
-                                </li>
-                                <li>
-                                  <Link to="/home2">
-                                    Home 02 (Content Writing)
-                                  </Link>
-                                </li>
-                              </ul>
                             </li>
                             <li>
                               <Link to="/about">About</Link>
@@ -152,7 +140,7 @@ function Signup() {
                                 <li>
                                   <Link to="/Career">Career</Link>
                                 </li>
-                               
+
                                 <li>
                                   <Link to="/login">Login</Link>
                                 </li>
@@ -163,6 +151,9 @@ function Signup() {
                                   <Link to="/resetpassword">
                                     Reset Password
                                   </Link>
+                                </li>
+                                <li>
+                                  <Link to="/userservice">services</Link>
                                 </li>
                               </ul>
                             </li>
@@ -338,7 +329,7 @@ function Signup() {
                       </div>
                       <div className="col-md-12">
                         <div className="register-one__form__password">
-                        <i className="icon-lock"></i>
+                          <i className="icon-lock"></i>
                           <input
                             type="password"
                             name="confirmPassword"
@@ -347,13 +338,14 @@ function Signup() {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.confirmPassword}
-                            className="form-control" 
+                            className="form-control"
                           />
-                          {errors.confirmPassword && touched.confirmPassword && (
-                            <div className="text-red-500">
-                              {errors.confirmPassword}
-                            </div>
-                          )}
+                          {errors.confirmPassword &&
+                            touched.confirmPassword && (
+                              <div className="text-red-500">
+                                {errors.confirmPassword}
+                              </div>
+                            )}
                         </div>
                       </div>
                       <div class="col-md-12">

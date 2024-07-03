@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../App.css";
 import "../css/bootstrap.css";
 import "../css/responsive.css";
@@ -19,14 +19,39 @@ import "../css/01-global.css";
 import "../css/style.css";
 import "../css/04-animate.css";
 import { Link } from "react-router-dom";
-function Blogdetail() {
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+function User_service() {
+  const [service, setService] = useState([]);
+
+  const baseurl = "http://127.0.0.1:8000/";
+
+  const axioinstance = axios.create({
+    baseURL: baseurl,
+  });
+
+  useEffect(() => {
+    axioinstance
+      .get("services/")
+      .then((response) => {
+        console.log(response, "56666666666666666666");
+        setService(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching job applications:", error);
+      });
+  }, []);
+
   return (
     <div>
       <div body className="body-bg-color">
         <div className="page-wrapper">
           <div className="preloader"></div>
+
           <div className="cursor"></div>
           <div className="cursor-follower"></div>
+
           <header className="main-header main-header-one">
             <div className="header-lower">
               <div className="main-menu__wrapper">
@@ -62,7 +87,6 @@ function Blogdetail() {
                         <ul className="navigation clearfix">
                           <li className="dropdown">
                             <Link to="/">Home</Link>
-                            
                           </li>
                           <li>
                             <Link to="/about">About</Link>
@@ -73,7 +97,7 @@ function Blogdetail() {
                               <li>
                                 <Link to="/Career">Career</Link>
                               </li>
-                              
+
                               <li>
                                 <Link to="/login">Login</Link>
                               </li>
@@ -81,7 +105,7 @@ function Blogdetail() {
                                 <Link to="/signup">Create Account</Link>
                               </li>
                               <li>
-                              <Link to="/resetpassword">Reset Password</Link>
+                                <Link to="/resetpassword">Reset Password</Link>
                               </li>
                               <li>
                                 <Link to="/userservice">services</Link>
@@ -100,7 +124,7 @@ function Blogdetail() {
                             </ul>
                           </li>
                           <li>
-                          <Link to="/contact">Contact</Link>
+                            <Link to="/contact">Contact</Link>
                           </li>
                         </ul>
                       </div>
@@ -110,7 +134,7 @@ function Blogdetail() {
                   <div className="outer-box d-flex align-items-center">
                     <ul className="main-header__login-sing-up">
                       <li>
-                      <Link to="/signup">Signup</Link>
+                        <Link to="/signup">Signup</Link>
                       </li>
                     </ul>
 
@@ -156,6 +180,7 @@ function Blogdetail() {
               </nav>
             </div>
           </header>
+
           <section className="page-title">
             <div className="container">
               <div className="page-title__inner">
@@ -168,9 +193,9 @@ function Blogdetail() {
                 ></div>
 
                 <div className="page-title__title-box">
-                  <p className="page-title__sub-title">Blog Details</p>
+                  <p className="page-title__sub-title">Blog Post</p>
                   <h3 className="page-title__title">
-                    Blog Details/Single Post
+                    Check Out our Articles it may help to start your AI Journey
                   </h3>
                 </div>
                 <p className="page-title__text">
@@ -180,163 +205,75 @@ function Blogdetail() {
               </div>
             </div>
           </section>
-          <section className="blog-details">
+
+          <section className="blog-page">
             <div className="container">
-              <div className="blog-details__top-title">
-                <h3>
-                  Artificial Intelligence For Good: How AI Is Helping Humanity
-                </h3>
-              </div>
-              <div className="blog-details__img">
-                <img src="images/blog/blog-1-1.jpg" alt="" />
-              </div>
-              <div className="blog-details__bottom">
-                <div className="blog-details__person-and-date">
-                  <div className="blog-details__person">
-                    <div className="blog-details__person-img">
-                      <img
-                        src="images/blog/blog-details-person-img.jpg"
-                        alt=""
-                      />
+              <div className="row">
+                {service.map((item) => (
+                  <div key={item.id} className="col-xl-4 col-lg-4 col-md-6">
+                    <div className="blog-page__single">
+                      <div className="blog-page__img-box">
+                        <div className="blog-page__img">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                          />
+                        </div>
+                      </div>
+                      <h3 className="blog-page__title">
+                        <a href="#">{item.title}</a>
+                      </h3>
+                      <div className="blog-page__author">
+                        <p>
+                          <span className="icon-author"></span>
+                          {item.author}
+                        </p>
+                      </div>
+                      <div className="blog-page__description">
+                        <p>{item.description}</p>
+                      </div>
+                      <div className="blog-page__content">
+                        <p>{item.content}</p>
+                      </div>
+                      <div className="blog-page__date">
+                        <p>
+                          <span className="icon-date"></span>
+                          {new Date(item.created_at).toLocaleDateString()}
+                        </p>
+                        <p>
+                          <span className="icon-three-o-clock-clock"></span>4
+                          Minute Read
+                        </p>
+                      </div>
                     </div>
-                    <p className="blog-details__person-name">Harris Petinson</p>
                   </div>
-                  <ul className="blog-details__date">
-                    <li>
-                      <p>
-                        <span className="icon-date"></span>28 Jul 2023
-                      </p>
-                    </li>
-                    <li>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </li>
-                  </ul>
-                </div>
-                <p className="blog-details__text-1">
-                  AI-enabled computers make zero errors if programmed correctly.
-                  Even the most seasoned and well-versed writers and content
-                  producers endure mental gaps. Nulla Lorem mollit cupidatat
-                  irure. Laborum magna nulla duis ullamco cillum dolor.
-                  Voluptate exercitation incididunt aliquip deserunt
-                  reprehenderit elit laborum. significant role in determining
-                  their overall well-being, including their physical and mental
-                  health, as well as their happiness and satisfaction with life.
-                  A healthy lifestyle, which includes a balanced diet, regular
-                  exercise, and a healthy sleep pattern,
-                </p>
-                <p className="blog-details__text-2">
-                  Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et.
-                  Sunt qui esse pariatur duis deserunt mollit dolore cillum
-                  minim tempor enim. Elit aute irure tempor cupidatat
-                  incididunt.
-                </p>
-                <p className="blog-details__text-3">
-                  AI-enabled computers make zero errors if programmed correctly.
-                </p>
-                <p className="blog-details__text-4">
-                  AI models are based on predictive analysis thus leaving no
-                  scope for errors, including their behaviors, habits, and daily
-                  routines. It encompasses everything from their diet, exercise
-                  routines, and sleep habits to their recreational activities,
-                  social interactions, and work habits. A person's lifestyle
-                  plays a significant role in determining their overall
-                  well-being, including their physical and mental health, as
-                  well as their happiness and satisfaction with life. A healthy
-                  lifestyle, which includes a balanced diet, regular exercise,
-                  and a healthy sleep pattern, can improve an individual's
-                  quality of life and reduce the risk of chronic diseases.
-                </p>
-                <p className="blog-details__text-5">
-                  What is SEO Writing AI and how do I use it?
-                </p>
-                <ul className="blog-details__points list-unstyled">
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      Helps to save both time and resources and helps in
-                      achieving accurate and efficient results., and a healthy
-                      sleep pattern, can improve an individual's quality of life
-                      and reduce the risk of chronic diseases. On the other
-                      hand, unhealthy lifestyle habits, such as smoking,
-                      excessive alcohol consumption, and a sedentary lifestyle,
-                      can have negative impacts on one's health and well-being.
-                    </p>
+                ))}
+              </div>
+
+              <div className="career-page__pagination">
+                <ul className="pg-pagination list-unstyled">
+                  <li className="count">
+                    <a href="#">1</a>
                   </li>
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      Lifestyle refers to an individual's habits, behaviors, and
-                      patterns of living.
-                    </p>
+                  <li className="count">
+                    <a href="#">2</a>
                   </li>
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      encompasses all aspects of a person's daily life,
-                      including their diet, exercise routine
-                    </p>
+                  <li className="count">
+                    <a href="#">3</a>
                   </li>
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      Lifestyle choices can also impact a person's financial,
-                      social, and environmental well-being.
-                    </p>
+                  <li className="count">
+                    <a href="#">4</a>
                   </li>
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      A person's lifestyle plays a major role in determining
-                      their overall health, happiness, and well-being. healthy
-                      lifestyle, which includes a balanced diet, regular
-                      physical activity.
-                    </p>
+                  <li className="next">
+                    <a href="#" aria-label="Next">
+                      <span className="icon-arrow-right"></span>
+                    </a>
                   </li>
                 </ul>
-                <div className="blog-details__text-box">
-                  <p>
-                    There are many different forms of travel, including road
-                    trips, cruises, backpacking, and more, each offering its own
-                    unique set of experiences and adventures.
-                  </p>
-                  <span>Angela B. Harris</span>
-                </div>
-                <p className="blog-details__text-6">
-                  A healthy lifestyle, which includes a balanced diet, regular
-                  exercise, and a healthy sleep pattern, can improve an
-                  individual's quality of life and reduce the risk of chronic
-                  diseases. On the other hand, unhealthy lifestyle habits, such
-                  as smoking, excessive alcohol consumption, and a sedentary
-                  lifestyle, can have negative impacts on one's health and
-                  well-being. Thus, making intentional choices about one's
-                </p>
-                <div className="blog-details__tag-and-social">
-                  <div className="blog-details__tag">
-                    <a href="#">Open AI</a>
-                    <a href="#">Copywriting</a>
-                    <a href="#">AI Assistant</a>
-                  </div>
-                  <div className="blog-details__social">
-                    <a href="#">
-                      <span className="icon-social-1"></span>
-                    </a>
-                    <a href="#">
-                      <span className="icon-social-3"></span>
-                    </a>
-                    <a href="#">
-                      <span className="icon-social-4"></span>
-                    </a>
-                    <a href="#">
-                      <span className="icon-social-5"></span>
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
           </section>
+
           <section className="free-trail">
             <div className="container">
               <div className="free-trail__wrap">
@@ -390,6 +327,7 @@ function Blogdetail() {
               </div>
             </div>
           </section>
+
           <footer className="main-footer">
             <div className="main-footer__shape-1 img-bounce"></div>
             <div className="main-footer__top">
@@ -422,7 +360,7 @@ function Blogdetail() {
                       </div>
                       <div className="footer-widget__company-list-box">
                         <ul className="footer-widget__company-list">
-                        <li>
+                          <li>
                             <Link to="/login">Sign in</Link>
                           </li>
                           <li>
@@ -530,7 +468,7 @@ function Blogdetail() {
               </div>
             </div>
           </footer>
-          /
+
           <div className="color-palate">
             <div className="color-trigger">
               <i className="fas fa-cog fa-fw"></i>
@@ -609,6 +547,7 @@ function Blogdetail() {
               </div>
             </div>
           </div>
+
           <div className="search-popup">
             <div className="color-layer"></div>
             <button className="close-search">
@@ -642,4 +581,4 @@ function Blogdetail() {
   );
 }
 
-export default Blogdetail;
+export default User_service;

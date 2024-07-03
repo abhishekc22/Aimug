@@ -9,8 +9,7 @@ import Career from "./pages/Career";
 import Carrerdetails from "./pages/Carrerdetails";
 import Blog from "./pages/Blog";
 import Blogdetail from "./pages/Blogdetail";
-import Home1 from "./pages/Home1";
-import Home2 from "./pages/Home2";
+
 import Resetpassword from "./pages/Resetpassword";
 import Adminlogin from "./pages/Adminlogin";
 import Otp from "./pages/Otp";
@@ -18,11 +17,14 @@ import Dashboard from "./pages/AdminDAshboard/Dashboard";
 import Admin_careeelist from "./pages/AdminDAshboard/Admin_careeelist";
 import Modal from "./pages/AdminDAshboard/Modal";
 import Protectrouter from "./pages/Protectrouter";
-import Editcarrer from "./Editcarrer";
 import Blogs_admin from "./pages/AdminDAshboard/Blogs_admin";
 import Service from "./pages/AdminDAshboard/Service";
 import Blog_modal from "./pages/AdminDAshboard/Blog_modal";
 import Service_modal from "./pages/AdminDAshboard/Service_modal";
+import Editcarrer from "./pages/AdminDAshboard/Editcarrer";
+import Edit_blog from "./pages/AdminDAshboard/Edit_blog";
+import Edit_service from "./pages/AdminDAshboard/Edit_service";
+import User_service from "./pages/User_service";
 
 function App() {
   return (
@@ -34,12 +36,17 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/Career" element={<Protectrouter element={<Career />} />} />
-          <Route path="/Carrerdetails/:id" element={<Protectrouter element={<Carrerdetails />} />} />
+          <Route
+            path="/Career"
+            element={<Protectrouter element={<Career />} />}
+          />
+          <Route
+            path="/Carrerdetails/:id"
+            element={<Protectrouter element={<Carrerdetails />} />}
+          />
           <Route path="/Blog" element={<Blog />} />
           <Route path="/Blogdetail" element={<Blogdetail />} />
-          <Route path="/home1" element={<Home1 />} />
-          <Route path="/home2" element={<Home2 />} />
+
           <Route path="/resetpassword" element={<Resetpassword />} />
           <Route path="/Adminlogin" element={<Adminlogin />} />
           <Route path="/otp" element={<Otp />} />
@@ -51,6 +58,10 @@ function App() {
           <Route path="/Service" element={<Service />} />
           <Route path="/blog_modal" element={<Blog_modal />} />
           <Route path="/service_modal" element={<Service_modal />} />
+          <Route path="/edit-blog/:id" element={<Edit_blog />} />
+          <Route path="/edit-service/:id" element={<Edit_service />} />
+          <Route path="/userservice" element={<User_service />} />
+
         </Routes>
       </Router>
     </div>
