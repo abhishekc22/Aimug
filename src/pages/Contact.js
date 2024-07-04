@@ -1,5 +1,5 @@
-import React from "react";
-import "../App.css";
+import "../App.css"; // Adjust the path based on its location relative to the src directory
+import React, { useState, useEffect } from "react";
 import "../css/bootstrap.css";
 import "../css/responsive.css";
 import "../css/10-jarallax.css";
@@ -19,8 +19,63 @@ import "../css/01-global.css";
 import "../css/style.css";
 import "../css/04-animate.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
+import axios from "axios";
 
 function Contact() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loginStatus = localStorage.getItem("loginStatus");
+    if (loginStatus === "loggedIn") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("loginStatus");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
+
+  const baseurl = "http://127.0.0.1:8000/";
+
+  const axioinstance = axios.create({
+    baseURL: baseurl,
+  });
+
+  const [formdata, setFormdata] = useState({
+    username: "",
+    email: "",
+    message: "",
+  });
+
+  const handlechange = (e) => {
+    const { name, value } = e.target;
+    setFormdata({
+      ...formdata,
+      [name]: value,
+    });
+    console.log(formdata);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axioinstance.post("creating_enquiry/", formdata);
+
+      if (res.status === 201) {
+        console.log("success");
+        console.log(res.data, "565566666666666666666666666666666");
+      }
+    } catch (error) {
+      console.log("error");
+    }
+  };
+
   return (
     <>
       <div body class="body-bg-color">
@@ -63,9 +118,8 @@ function Contact() {
                         id="navbarSupportedContent"
                       >
                         <ul class="navigation clearfix">
-                          <li class="dropdown">
+                          <li class="">
                             <Link to="/">Home</Link>
-                            
                           </li>
                           <li>
                             <Link to="/about">About</Link>
@@ -73,19 +127,6 @@ function Contact() {
                           <li class="dropdown">
                             <a href="#">Pages</a>
                             <ul>
-                              <li>
-                                <Link to="/Career">Career</Link>
-                              </li>
-                              
-                              <li>
-                                <Link to="/login">Login</Link>
-                              </li>
-                              <li>
-                                <Link to="/signup">Create Account</Link>
-                              </li>
-                              <li>
-                              <Link to="/resetpassword">Reset Password</Link>
-                              </li>
                               <li>
                                 <Link to="/userservice">services</Link>
                               </li>
@@ -97,9 +138,7 @@ function Contact() {
                               <li>
                                 <Link to="/Blog">Blog</Link>
                               </li>
-                              <li>
-                                <Link to="/Blogdetail">Blog Detail</Link>
-                              </li>
+                          
                             </ul>
                           </li>
                           <li>
@@ -111,10 +150,16 @@ function Contact() {
                   </div>
 
                   <div class="outer-box d-flex align-items-center">
-                    <ul class="main-header__login-sing-up">
-                      <li>
-                        <Link to="/signup">Sign up</Link>
-                      </li>
+                    <ul className="main-header__login-sing-up">
+                      {isLoggedIn ? (
+                        <li>
+                          <Link onClick={handleLogout}>Logout</Link>
+                        </li>
+                      ) : (
+                        <li>
+                          <Link to="/login">Login</Link>
+                        </li>
+                      )}
                     </ul>
 
                     <div class="mobile-nav-toggler">
@@ -137,21 +182,61 @@ function Contact() {
                   </a>
                 </div>
                 <div class="search-box">
-                  <form
-                    method="post"
-                    action="https://marveltheme.com/tf/html/aimug/contact.html"
-                  >
-                    <div class="form-group">
+                  <form method="POST" id="contact-form" onSubmit={handleSubmit}>
+                    <div className="form-group relative">
+                      <p className="contact-one__form-label">Name*</p>
                       <input
-                        type="search"
-                        name="search-field"
-                        value=""
-                        placeholder="SEARCH HERE"
+                        type="text"
+                        name="username"
+                        placeholder="John Smith"
                         required
+                        value={formdata.username}
+                        onChange={handlechange}
+                        className="form-control pl-10"
                       />
-                      <button type="submit">
-                        <span class="icon far fa-search fa-fw"></span>
-                      </button>
+                      <div className="contact-one__form-icon absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                        <i className="fas fa-user"></i>
+                      </div>
+                    </div>
+
+                    <div className="form-group relative">
+                      <p className="contact-one__form-label">Email*</p>
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="marveltheme@gmail.com"
+                        required
+                        value={formdata.email}
+                        onChange={handlechange}
+                        className="form-control pl-10"
+                      />
+                      <div className="contact-one__form-icon absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                        <i className="far fa-envelope"></i>
+                      </div>
+                    </div>
+
+                    <div className="form-group text-message-box">
+                      <p className="contact-one__form-label">
+                        How can we help?
+                      </p>
+                      <textarea
+                        name="message"
+                        placeholder="Enter your message here"
+                        value={formdata.message}
+                        onChange={handlechange}
+                        className="form-control"
+                      ></textarea>
+                    </div>
+
+                    <div className="form-group">
+                      <div className="button-box">
+                        <button
+                          type="submit"
+                          className="thm-btn contact-one__btn"
+                        >
+                          Submit Request
+                        </button>
+                      </div>
                     </div>
                   </form>
                 </div>
@@ -259,51 +344,59 @@ function Contact() {
                       <h3 class="contact-one__form-title">Send us a message</h3>
                       <form
                         method="POST"
-                        action="https://marveltheme.com/tf/html/aimug/inc/mail.php"
                         id="contact-form"
+                        onSubmit={handleSubmit}
                       >
-                        <div class="form-group">
-                          <p class="contact-one__form-label">Name*</p>
+                        <div className="form-group relative">
+                          <p className="contact-one__form-label">Name*</p>
                           <input
                             type="text"
-                            name="name"
+                            name="username"
                             placeholder="John Smith"
-                            required=""
+                            required
+                            value={formdata.username}
+                            onChange={handlechange}
+                            className="form-control pl-10"
                           />
-                          <div class="contact-one__form-icon">
-                            <i class="fas fa-user"></i>
+                          <div className="contact-one__form-icon absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i className="fas fa-user"></i>
                           </div>
                         </div>
 
-                        <div class="form-group">
-                          <p class="contact-one__form-label">Email*</p>
+                        <div className="form-group relative">
+                          <p className="contact-one__form-label">Email*</p>
                           <input
                             type="email"
                             name="email"
-                            placeholder="marveltheme@gmail.com|"
-                            required=""
+                            placeholder="marveltheme@gmail.com"
+                            required
+                            value={formdata.email}
+                            onChange={handlechange}
+                            className="form-control pl-10"
                           />
-                          <div class="contact-one__form-icon">
-                            <i class="far fa-envelope"></i>
+                          <div className="contact-one__form-icon absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                            <i className="far fa-envelope"></i>
                           </div>
                         </div>
 
-                        <div class="form-group text-message-box">
-                          <p class="contact-one__form-label">
+                        <div className="form-group text-message-box">
+                          <p className="contact-one__form-label">
                             How can we help?
                           </p>
                           <textarea
                             name="message"
                             placeholder="Enter your message here"
+                            value={formdata.message}
+                            onChange={handlechange}
+                            className="form-control"
                           ></textarea>
                         </div>
 
-                        <div class="form-group">
-                          <div class="button-box">
+                        <div className="form-group">
+                          <div className="button-box">
                             <button
                               type="submit"
-                              class="thm-btn contact-one__btn"
-                              data-loading-text="Please wait..."
+                              className="thm-btn contact-one__btn"
                             >
                               Submit Request
                             </button>
@@ -506,146 +599,7 @@ function Contact() {
             </div>
           </section>
 
-          <footer class="main-footer">
-            <div class="main-footer__shape-1 img-bounce"></div>
-            <div class="main-footer__top">
-              <div class="container">
-                <div class="row">
-                  <div
-                    class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp"
-                    data-wow-delay="100ms"
-                  >
-                    <div class="footer-widget__column footer-widget__about">
-                      <div class="footer-widget__logo">
-                        <a href="index.html">
-                          <img src="images/resource/footer-logo-1.png" alt="" />
-                        </a>
-                      </div>
-                      <p class="footer-widget__about-text">
-                        A Magical Tool to Optimize you content for the first
-                        know who you're targeting. Identify your target
-                        audience.
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp"
-                    data-wow-delay="200ms"
-                  >
-                    <div class="footer-widget__column footer-widget__company">
-                      <div class="footer-widget__title-box">
-                        <h3 class="footer-widget__title">Company</h3>
-                      </div>
-                      <div class="footer-widget__company-list-box">
-                        <ul class="footer-widget__company-list">
-                        <li>
-                            <Link to="/login">Sign in</Link>
-                          </li>
-                          <li>
-                            <Link to="/signup">Register</Link>
-                          </li>
-                          <li>
-                            <a href="about.html">Pricing</a>
-                          </li>
-                          <li>
-                            <Link to="/Adminlogin">Admindashboard</Link>
-                          </li>
-                          <li>
-                            <a href="about.html">Privacy Policy</a>
-                          </li>
-                          <li>
-                            <a href="career.html">Career</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="col-xl-2 col-lg-6 col-md-6 wow fadeInUp"
-                    data-wow-delay="300ms"
-                  >
-                    <div class="footer-widget__column footer-widget__resources">
-                      <div class="footer-widget__title-box">
-                        <h3 class="footer-widget__title">Resources</h3>
-                      </div>
-                      <div class="footer-widget__resources-list-box">
-                        <ul class="footer-widget__resources-list">
-                          <li>
-                            <a href="about.html">AI writer</a>
-                          </li>
-                          <li>
-                            <a href="about.html">Businesses AI</a>
-                          </li>
-                          <li>
-                            <a href="about.html">AI Blog writer</a>
-                          </li>
-                          <li>
-                            <a href="about.html">AI Content Creator</a>
-                          </li>
-                          <li>
-                            <a href="about.html">AI Copy</a>
-                          </li>
-                          <li>
-                            <a href="blog.html">Article write</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp"
-                    data-wow-delay="400ms"
-                  >
-                    <div class="footer-widget__column footer-widget__newsletter">
-                      <div class="footer-widget__title-box">
-                        <h3 class="footer-widget__title">Resources</h3>
-                      </div>
-                      <div class="footer-widget__email-form">
-                        <form class="footer-widget__email-box">
-                          <div class="footer-widget__email-input-box">
-                            <input
-                              type="email"
-                              placeholder="Inter Your Email"
-                              name="email"
-                            />
-                          </div>
-                          <button type="submit" class="footer-widget__btn">
-                            <i class="fas fa-paper-plane"></i>
-                          </button>
-                        </form>
-                      </div>
-                      <div class="site-footer__social">
-                        <a href="#">
-                          <i class="icon-social-1"></i>
-                        </a>
-                        <a href="#">
-                          <i class="icon-social-2"></i>
-                        </a>
-                        <a href="#">
-                          <i class="icon-social-3"></i>
-                        </a>
-                        <a href="#">
-                          <i class="icon-social-4"></i>
-                        </a>
-                        <a href="#">
-                          <i class="icon-social-5"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="main-footer__bottom">
-              <div class="container">
-                <div class="main-footer__bottom-inner">
-                  <p class="main-footer__bottom-text">
-                    Copyright © 2023. All Rights Reserved.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </footer>
+          <Footer />
 
           <div class="color-palate">
             <div class="color-trigger">
@@ -731,23 +685,6 @@ function Contact() {
             <button class="close-search">
               <span class="far fa-times fa-fw"></span>
             </button>
-            <form
-              method="post"
-              action="https://marveltheme.com/tf/html/aimug/blog.html"
-            >
-              <div class="form-group">
-                <input
-                  type="search"
-                  name="search-field"
-                  value=""
-                  placeholder="Search Here"
-                  required=""
-                />
-                <button type="submit">
-                  <i class="far fa-search fa-fw"></i>
-                </button>
-              </div>
-            </form>
           </div>
         </div>
 

@@ -22,15 +22,15 @@ body {
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
-    background-color: #f9fafb;
+    background-color: #d34abc;
     padding: 3rem;
   }
   
   .otp-box {
     position: relative;
-    background-color: #ffffff;
+    background-color: #080808;
     padding: 2.5rem 1.5rem 2.25rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(51, 219, 116, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     width: 100%;
     max-width: 28rem;
@@ -60,14 +60,14 @@ body {
     padding: 1.25rem;
     outline: none;
     border-radius: 0.75rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #2e67d8;
     font-size: 1.125rem;
     background-color: #ffffff;
     transition: background-color 0.3s, box-shadow 0.3s;
   }
   
   .otp-input:focus {
-    background-color: #f3f4f6;
+    background-color: #e2e6ec;
     box-shadow: 0 0 0 1px #1d4ed8;
   }
   
@@ -79,7 +79,7 @@ body {
     width: 100%;
     padding: 1.25rem;
     border-radius: 0.75rem;
-    background-color: #1d4ed8;
+    background-color: #181c27;
     color: #ffffff;
     font-size: 0.875rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -89,7 +89,7 @@ body {
   }
   
   .otp-button:hover {
-    background-color: #2563eb;
+    background-color: #151922;
   }
   
   .otp-resend {

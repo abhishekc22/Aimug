@@ -83,12 +83,15 @@ AUTH_USER_MODEL ='myapi.CustomUser'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'innovyxtechlab',
+       'USER': 'postgres',
+       'PASSWORD': '234264',
+       'HOST': 'localhost',
+       'PORT': '5432',
+   }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -142,6 +145,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST ='smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER ='abhishek234264@gmail.com'
-EMAIL_HOST_PASSWORD ='hetzdoydyemqqbsb'
+EMAIL_HOST_USER ='servicescc.002@gmail.com'
+EMAIL_HOST_PASSWORD ='pobtshsdfqdehswu'
 EMAIL_USE_TLS =True

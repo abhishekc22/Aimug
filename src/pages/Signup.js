@@ -1,5 +1,5 @@
 import "../App.css"; // Adjust the path based on its location relative to the src directory
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/bootstrap.css";
 import "../css/responsive.css";
 import "../css/10-jarallax.css";
@@ -22,15 +22,30 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 function Signup() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const loginStatus = localStorage.getItem("loginStatus");
+    if (loginStatus === "loggedIn") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("loginStatus");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
   const baseurl = "http://127.0.0.1:8000/";
 
   const axioinstance = axios.create({
     baseURL: baseurl,
   });
-
-  const navigate = useNavigate();
 
   const validate = (values) => {
     const errors = {};
@@ -128,7 +143,7 @@ function Signup() {
                           id="navbarSupportedContent"
                         >
                           <ul class="navigation clearfix">
-                            <li class="dropdown">
+                            <li class="">
                               <Link to="/">Home</Link>
                             </li>
                             <li>
@@ -137,21 +152,6 @@ function Signup() {
                             <li class="dropdown">
                               <a href="#">Pages</a>
                               <ul>
-                                <li>
-                                  <Link to="/Career">Career</Link>
-                                </li>
-
-                                <li>
-                                  <Link to="/login">Login</Link>
-                                </li>
-                                <li>
-                                  <Link to="/signup">Create Account</Link>
-                                </li>
-                                <li>
-                                  <Link to="/resetpassword">
-                                    Reset Password
-                                  </Link>
-                                </li>
                                 <li>
                                   <Link to="/userservice">services</Link>
                                 </li>
@@ -162,9 +162,6 @@ function Signup() {
                               <ul>
                                 <li>
                                   <Link to="/Blog">Blog</Link>
-                                </li>
-                                <li>
-                                  <Link to="/Blogdetail">Blog Detail</Link>
                                 </li>
                               </ul>
                             </li>
@@ -177,10 +174,16 @@ function Signup() {
                     </div>
 
                     <div class="outer-box d-flex align-items-center">
-                      <ul class="main-header__login-sing-up">
-                        <li>
-                          <Link to="/signup">Signup</Link>
-                        </li>
+                      <ul className="main-header__login-sing-up">
+                        {isLoggedIn ? (
+                          <li>
+                            <Link onClick={handleLogout}>Logout</Link>
+                          </li>
+                        ) : (
+                          <li>
+                            <Link to="/login">Login</Link>
+                          </li>
+                        )}
                       </ul>
 
                       <div class="mobile-nav-toggler">
@@ -247,21 +250,6 @@ function Signup() {
                         <img src="images/resource/login-page-logo.png" alt="" />
                       </a>
                     </div>
-                    <div class="login-page__sign-option-box">
-                      <a href="#" class="login-page__sign-option">
-                        {" "}
-                        <img src="images/icons/google-icon.png" alt="" />
-                        Continue With Google
-                      </a>
-                      <a href="#" class="login-page__sign-option">
-                        {" "}
-                        <img src="images/icons/apple-icon.png" alt="" />
-                        Continue With Apple
-                      </a>
-                      <a href="#" class="sign-in-email">
-                        Or sign in with your email
-                      </a>
-                    </div>
                   </div>
                   <form
                     action="#"
@@ -288,7 +276,7 @@ function Signup() {
                         </div>
                       </div>
                       <div className="col-md-12">
-                        <div className="register-one__form__email">
+                        <div className="register-one__form__email relative">
                           <input
                             type="text"
                             name="username"
@@ -297,12 +285,12 @@ function Signup() {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             value={values.username}
-                            className="form-control"
+                            className="form-control pl-10"
                           />
+                          <i className="fa fa-user absolute left-2  transform -translate-y-1/2"></i>
                           {errors.username && touched.username && (
-                            <div className="text-red-500">
+                            <div className="text-red-500 mt-1">
                               {errors.username}
-                              <i className="fas fa-user"></i>
                             </div>
                           )}
                         </div>

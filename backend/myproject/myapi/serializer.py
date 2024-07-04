@@ -36,3 +36,8 @@ class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = '__all__'
+
+class Enquieyserializer(serializers.ModelSerializer):
+    class Meta:
+        model = EnquiryUser
+        fields = '__all__'

@@ -169,7 +169,9 @@ class CustomUserListView(generics.ListAPIView):
     queryset = CustomUser.objects.filter(is_verified = True)
     serializer_class = UserSerializer
 
-
+class Cutomerupdate_delete(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CustomUser.objects.filter(is_verified = True)
+    serializer_class = UserSerializer
 
 class ApplyForJobView(APIView):
     def post(self, request, job_id):
@@ -216,3 +218,8 @@ class ServiceListCreateAPIView(generics.ListCreateAPIView):
 class ServiceRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
+
+
+class Enquiry_userListCreateAPIView(generics.ListCreateAPIView):
+    queryset = EnquiryUser.objects.all()
+    serializer_class = Enquieyserializer

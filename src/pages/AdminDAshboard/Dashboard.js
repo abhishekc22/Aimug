@@ -33,15 +33,17 @@ function Dashboard() {
                     <span className="nxl-micon">
                       <i className="feather-airplay"></i>
                     </span>
-                    <span className="nxl-item">Dashboards</span>
+                    <span className="nxl-item font-bold">Aimug</span>
                     <span className="nxl-item">
                       <i className="feather-chevron-right"></i>
                     </span>
                   </a>
                   <ul className="nxl-item">
                     <li className="nxl-item">
+                      <Link to="/Dashboard" className="nxl-link">
+                        carrer Dashboards
+                      </Link>
                       <Link to="/carrirer_list" className="nxl-link">
-                        {" "}
                         carrer list
                       </Link>
                     </li>
@@ -49,6 +51,16 @@ function Dashboard() {
                       <li className="nxl-item">
                         <Link to="/Service" className="nxl-link">
                           service
+                        </Link>
+                      </li>
+                      <li className="nxl-item">
+                        <Link to="/Login_userlist" className="nxl-link">
+                          Login_userlist
+                        </Link>
+                      </li>
+                      <li className="nxl-item">
+                        <Link to="/Enquiry_list" className="nxl-link">
+                          Enquired user list
                         </Link>
                       </li>
                     </li>
@@ -62,7 +74,7 @@ function Dashboard() {
                     <li className="nxl-item">
                       <Link to="/" className="nxl-link">
                         {" "}
-                       Logout
+                        Logout
                       </Link>
                     </li>
                   </ul>
@@ -72,6 +84,9 @@ function Dashboard() {
           </div>
         </nav>
       </div>
+      <header className="nxl-header">
+        <div className="header-wrapper"></div>
+      </header>
     </div>
   );
 }

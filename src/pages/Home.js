@@ -1,5 +1,5 @@
 import "../App.css"; // Adjust the path based on its location relative to the src directory
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../css/bootstrap.css";
 import "../css/responsive.css";
 import "../css/10-jarallax.css";
@@ -19,8 +19,25 @@ import "../css/01-global.css";
 import "../css/style.css";
 import "../css/04-animate.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const loginStatus = localStorage.getItem("loginStatus");
+    if (loginStatus === "loggedIn") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("loginStatus");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
   return (
     <>
       <body className="body-bg-color">
@@ -63,9 +80,8 @@ function Home() {
                         id="navbarSupportedContent"
                       >
                         <ul className="navigation clearfix">
-                          <li className="dropdown">
+                          <li className="">
                             <Link to="/">Home</Link>
-                            
                           </li>
                           <li>
                             <Link to="/about">About</Link>
@@ -73,20 +89,6 @@ function Home() {
                           <li className="dropdown">
                             <a href="#">Pages</a>
                             <ul>
-                              <li>
-                                <Link to="/Career">Career</Link>
-                              </li>
-                              
-                              <li>
-                                <Link to="/login">Login</Link>
-                              </li>
-                              <li>
-                                <Link to="/signup">Create Account</Link>
-                              </li>
-                              <li>
-                                <Link to="/resetpassword">Reset Password</Link>
-
-                              </li>
                               <li>
                                 <Link to="/userservice">services</Link>
                               </li>
@@ -113,9 +115,15 @@ function Home() {
 
                   <div className="outer-box d-flex align-items-center">
                     <ul className="main-header__login-sing-up">
-                      <li>
-                        <Link to="/signup">Signup</Link>
-                      </li>
+                      {isLoggedIn ? (
+                        <li>
+                          <Link onClick={handleLogout}>Logout</Link>
+                        </li>
+                      ) : (
+                        <li>
+                          <Link to="/login">Login</Link>
+                        </li>
+                      )}
                     </ul>
 
                     <div className="mobile-nav-toggler">
@@ -2148,147 +2156,9 @@ function Home() {
               </div>
             </div>
           </section>
+          <Footer/>
 
-          <footer className="main-footer">
-            <div className="main-footer__shape-1 img-bounce"></div>
-            <div className="main-footer__top">
-              <div className="container">
-                <div className="row">
-                  <div
-                    className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp"
-                    data-wow-delay="100ms"
-                  >
-                    <div className="footer-widget__column footer-widget__about">
-                      <div className="footer-widget__logo">
-                        <a href="index.html">
-                          <img src="images/resource/footer-logo-1.png" alt="" />
-                        </a>
-                      </div>
-                      <p className="footer-widget__about-text">
-                        A Magical Tool to Optimize you content for the first
-                        know who you're targeting. Identify your target
-                        audience.
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className="col-xl-2 col-lg-6 col-md-6 wow fadeInUp"
-                    data-wow-delay="200ms"
-                  >
-                    <div className="footer-widget__column footer-widget__company">
-                      <div className="footer-widget__title-box">
-                        <h3 className="footer-widget__title">Company</h3>
-                      </div>
-                      <div className="footer-widget__company-list-box">
-                        <ul className="footer-widget__company-list">
-                        <li>
-                            <Link to="/login">Sign in</Link>
-                          </li>
-                          <li>
-                            <Link to="/signup">Register</Link>
-                          </li>
-                          <li>
-                            <a href="about.html">Pricing</a>
-                          </li>
-                          <li>
-                            <Link to="/Adminlogin">Admindashboard</Link>
-                          </li>
-                          <li>
-                            <a href="about.html">Privacy Policy</a>
-                          </li>
-                          <li>
-                            <a href="career.html">Career</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="col-xl-2 col-lg-6 col-md-6 wow fadeInUp"
-                    data-wow-delay="300ms"
-                  >
-                    <div className="footer-widget__column footer-widget__resources">
-                      <div className="footer-widget__title-box">
-                        <h3 className="footer-widget__title">Resources</h3>
-                      </div>
-                      <div className="footer-widget__resources-list-box">
-                        <ul className="footer-widget__resources-list">
-                          <li>
-                            <a href="about.html">AI writer</a>
-                          </li>
-                          <li>
-                            <a href="about.html">Businesses AI</a>
-                          </li>
-                          <li>
-                            <a href="about.html">AI Blog writer</a>
-                          </li>
-                          <li>
-                            <a href="about.html">AI Content Creator</a>
-                          </li>
-                          <li>
-                            <a href="about.html">AI Copy</a>
-                          </li>
-                          <li>
-                            <a href="blog.html">Article write</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="col-xl-4 col-lg-6 col-md-6 wow fadeInUp"
-                    data-wow-delay="400ms"
-                  >
-                    <div className="footer-widget__column footer-widget__newsletter">
-                      <div className="footer-widget__title-box">
-                        <h3 className="footer-widget__title">Resources</h3>
-                      </div>
-                      <div className="footer-widget__email-form">
-                        <form className="footer-widget__email-box">
-                          <div className="footer-widget__email-input-box">
-                            <input
-                              type="email"
-                              placeholder="Inter Your Email"
-                              name="email"
-                            />
-                          </div>
-                          <button type="submit" className="footer-widget__btn">
-                            <i className="fas fa-paper-plane"></i>
-                          </button>
-                        </form>
-                      </div>
-                      <div className="site-footer__social">
-                        <a href="#">
-                          <i className="icon-social-1"></i>
-                        </a>
-                        <a href="#">
-                          <i className="icon-social-2"></i>
-                        </a>
-                        <a href="#">
-                          <i className="icon-social-3"></i>
-                        </a>
-                        <a href="#">
-                          <i className="icon-social-4"></i>
-                        </a>
-                        <a href="#">
-                          <i className="icon-social-5"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="main-footer__bottom">
-              <div className="container">
-                <div className="main-footer__bottom-inner">
-                  <p className="main-footer__bottom-text">
-                    Copyright © 2023. All Rights Reserved.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </footer>
+         
 
           <div className="color-palate">
             <div className="color-trigger">

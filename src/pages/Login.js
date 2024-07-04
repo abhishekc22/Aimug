@@ -1,5 +1,5 @@
 import "../App.css"; // Adjust the path based on its location relative to the src directory
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/bootstrap.css";
 import "../css/responsive.css";
 import "../css/10-jarallax.css";
@@ -23,15 +23,27 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
-  const basurl = "http://127.0.0.1:8000";
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const loginStatus = localStorage.getItem("loginStatus");
+    if (loginStatus === "loggedIn") {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
-  
+  const handleLogout = () => {
+    localStorage.removeItem("loginStatus");
+    localStorage.removeItem("userId");
+    setIsLoggedIn(false);
+    navigate("/login");
+  };
+  const basurl = "http://127.0.0.1:8000";
 
   const axioinstamce = axios.create({
     baseURL: basurl,
   });
 
-  const navigate = useNavigate();
   const [formdata, setFormdata] = useState({
     email: "",
     password: "",
@@ -53,9 +65,8 @@ function Login() {
       if (res.status === 200) {
         console.log("success");
         console.log(res.data, "565566666666666666666666666666666");
-        localStorage.setItem('loginStatus', 'loggedIn');
-        localStorage.setItem('userId', res.data.user_id);
-       
+        localStorage.setItem("loginStatus", "loggedIn");
+        localStorage.setItem("userId", res.data.user_id);
       }
     } catch (error) {
       console.log("error");
@@ -104,9 +115,8 @@ function Login() {
                         id="navbarSupportedContent"
                       >
                         <ul class="navigation clearfix">
-                          <li class="dropdown">
+                          <li class="">
                             <Link to="/">Home</Link>
-                            
                           </li>
                           <li>
                             <Link to="/about">About</Link>
@@ -114,19 +124,6 @@ function Login() {
                           <li class="dropdown">
                             <a href="#">Pages</a>
                             <ul>
-                              <li>
-                                <Link to="/Career">Career</Link>
-                              </li>
-                              
-                              <li>
-                                <Link to="/login">Login</Link>{" "}
-                              </li>
-                              <li>
-                                <Link to="/signup">Create Account</Link>
-                              </li>
-                              <li>
-                                <Link to="/resetpassword">Reset Password</Link>
-                              </li>
                               <li>
                                 <Link to="/userservice">services</Link>
                               </li>
@@ -138,9 +135,7 @@ function Login() {
                               <li>
                                 <Link to="/Blog">Blog</Link>
                               </li>
-                              <li>
-                                <Link to="/Blogdetail">Blog Detail</Link>
-                              </li>
+                           
                             </ul>
                           </li>
                           <li>
@@ -152,10 +147,16 @@ function Login() {
                   </div>
 
                   <div class="outer-box d-flex align-items-center">
-                    <ul class="main-header__login-sing-up">
-                      <li>
-                        <Link to="/signup">Sign Up</Link>
-                      </li>
+                    <ul className="main-header__login-sing-up">
+                      {isLoggedIn ? (
+                        <li>
+                          <Link onClick={handleLogout}>Logout</Link>
+                        </li>
+                      ) : (
+                        <li>
+                          <Link to="/login">Login</Link>
+                        </li>
+                      )}
                     </ul>
 
                     <div class="mobile-nav-toggler">
@@ -222,23 +223,12 @@ function Login() {
                       <img src="images/resource/login-page-logo.png" alt="" />
                     </a>
                   </div>
-                  <div class="login-page__sign-option-box">
-                    <a href="#" class="login-page__sign-option">
-                      {" "}
-                      <img src="images/icons/google-icon.png" alt="" />
-                      Continue With Google
-                    </a>
-                    <a href="#" class="login-page__sign-option">
-                      {" "}
-                      <img src="images/icons/apple-icon.png" alt="" />
-                      Continue With Apple
-                    </a>
-                    <a href="#" class="sign-in-email">
-                      Or sign in with your email
-                    </a>
-                  </div>
                 </div>
-                <form action="#"  onSubmit={handlesubmit}  class="register-one__form">
+                <form
+                  action="#"
+                  onSubmit={handlesubmit}
+                  class="register-one__form"
+                >
                   <div class="row">
                     <div class="col-md-12">
                       <div class="register-one__form__email">

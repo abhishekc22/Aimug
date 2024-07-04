@@ -63,7 +63,7 @@ function Resetpassword() {
                         id="navbarSupportedContent"
                       >
                         <ul className="navigation clearfix">
-                          <li className="dropdown">
+                          <li className="">
                           <Link to="/">Home</Link>
                           
                           </li>
@@ -73,21 +73,7 @@ function Resetpassword() {
                           <li className="dropdown">
                             <a href="#">Pages</a>
                             <ul>
-                              <li>
-                              <Link to="/Career">Career</Link>
-                              </li>
-                              <li>
-                              <Link to="/Carrerdetails">Career Details</Link>
-                              </li>
-                              <li>
-                              <Link to="/login">Login</Link>
-                              </li>
-                              <li>
-                              <Link to="/signup">Create Account</Link>
-                              </li>
-                              <li>
-                                <Link to="/resetpassword">Reset Password</Link>
-                              </li>
+                              
                               <li>
                                 <Link to="/userservice">services</Link>
                               </li>

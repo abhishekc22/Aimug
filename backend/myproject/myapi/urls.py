@@ -16,6 +16,8 @@ urlpatterns = [
     path('blogs/<int:pk>/', BlogRetrieveUpdateDestroy.as_view(), name='blog-detail'),
     path('services/', ServiceListCreateAPIView.as_view(), name='service-list-create'),
     path('services/<int:pk>/', ServiceRetrieveUpdateDestroyAPIView.as_view(), name='service-detail'),
+    path('creating_enquiry/', Enquiry_userListCreateAPIView.as_view(), name='creating_enquiry'),
+    path('user_delete/<int:pk>/', Cutomerupdate_delete.as_view(), name='user_delete'),
 
 
 

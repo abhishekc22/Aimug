@@ -100,6 +100,9 @@ function Service() {
             </div>
           </div>
         </div>
+         <header className="nxl-header">
+        <div className="header-wrapper"></div>
+      </header>
         <main className="nxl-container apps-container apps-notes">
           <div className="nxl-content without-header nxl-full-content">
             <div className="main-content d-flex">

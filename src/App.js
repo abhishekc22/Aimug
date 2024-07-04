@@ -9,7 +9,6 @@ import Career from "./pages/Career";
 import Carrerdetails from "./pages/Carrerdetails";
 import Blog from "./pages/Blog";
 import Blogdetail from "./pages/Blogdetail";
-
 import Resetpassword from "./pages/Resetpassword";
 import Adminlogin from "./pages/Adminlogin";
 import Otp from "./pages/Otp";
@@ -25,6 +24,12 @@ import Editcarrer from "./pages/AdminDAshboard/Editcarrer";
 import Edit_blog from "./pages/AdminDAshboard/Edit_blog";
 import Edit_service from "./pages/AdminDAshboard/Edit_service";
 import User_service from "./pages/User_service";
+import Footer from "./pages/Footer";
+import Faq from "./pages/Faq";
+import Enquiry_list from "./pages/AdminDAshboard/Enquiry_list";
+import Login_userlist from "./pages/AdminDAshboard/Login_userlist";
+import Forgotpassword from "./pages/Forgotpassword";
+
 
 function App() {
   return (
@@ -45,7 +50,7 @@ function App() {
             element={<Protectrouter element={<Carrerdetails />} />}
           />
           <Route path="/Blog" element={<Blog />} />
-          <Route path="/Blogdetail" element={<Blogdetail />} />
+          <Route path="/Blogdetail/:id" element={<Blogdetail />} />
 
           <Route path="/resetpassword" element={<Resetpassword />} />
           <Route path="/Adminlogin" element={<Adminlogin />} />
@@ -61,6 +66,10 @@ function App() {
           <Route path="/edit-blog/:id" element={<Edit_blog />} />
           <Route path="/edit-service/:id" element={<Edit_service />} />
           <Route path="/userservice" element={<User_service />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/Enquiry_list" element={<Enquiry_list />} />
+          <Route path="/Login_userlist" element={<Login_userlist />} />
+          <Route path="/forgotpassword" element={<Forgotpassword />} />
 
         </Routes>
       </Router>

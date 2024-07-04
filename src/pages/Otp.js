@@ -1,7 +1,26 @@
-import React, { useState } from 'react';
 import "../css/otp.css";
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import "../App.css"; 
+import React, { useState } from "react";
+import "../css/bootstrap.css";
+import "../css/responsive.css";
+import "../css/10-jarallax.css";
+import "../css/03-owl.css";
+import "../css/06-custom-animate.css";
+import "../css/07-dark-body.css";
+import "../css/color-switcher-design.css";
+import "../css/15-magnific-popup.css";
+import "../css/14-jquery-ui.css";
+import "../css/13-odometer-theme-default.css";
+import "../css/05-rtl.css";
+import "../css/11-preloader.css";
+import "../css/12-swiper.min.css";
+import "../css/13-odometer-theme-default.css";
+import "../css/08-font-awesome.css";
+import "../css/01-global.css";
+import "../css/style.css";
+import "../css/04-animate.css";
 
 function Otp() {
   const baseurl = "http://127.0.0.1:8000/";
@@ -75,12 +94,7 @@ function Otp() {
                 </button>
               </div>
 
-              <div className="otp-resend">
-                <p>Didn't receive code?</p>
-                <a href="http://" target="_blank" rel="noopener noreferrer">
-                  Resend
-                </a>
-              </div>
+             
             </form>
           </div>
         </div>

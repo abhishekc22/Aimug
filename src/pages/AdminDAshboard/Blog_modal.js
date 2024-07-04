@@ -8,6 +8,7 @@ function Blog_modal() {
     title: "",
     content: "",
     author: "",
+    image: null,
   });
   const navigate = useNavigate();
 
@@ -18,18 +19,26 @@ function Blog_modal() {
   });
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
+    const { id, value, files } = e.target;
     setFormData({
       ...formData,
-      [id]: value,
+      [id]: files ? files[0] : value,
     });
   };
-  console.log(formData, "??????????????????/");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = new FormData();
+    for (const key in formData) {
+      form.append(key, formData[key]);
+    }
+
     try {
-      const response = await axiosInstance.post("blogs/", formData);
+      const response = await axiosInstance.post("blogs/", form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (response.status === 201) {
         navigate("/blogs_admin");
         console.log("Form submitted successfully:", response.data);
@@ -64,9 +73,8 @@ function Blog_modal() {
           onChange={handleChange}
         />
       </div>
-      position_name
       <div className="mb-5">
-        <label htmlFor="content"> Content</label>
+        <label htmlFor="content">Content</label>
         <textarea
           id="content"
           value={formData.content}
@@ -79,6 +87,15 @@ function Blog_modal() {
           type="text"
           id="author"
           value={formData.author}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="mb-5">
+        <label htmlFor="image">Image</label>
+        <input
+          type="file"
+          id="image"
+          accept="image/*"
           onChange={handleChange}
         />
       </div>

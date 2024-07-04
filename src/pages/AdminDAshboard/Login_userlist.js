@@ -5,19 +5,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BiTrash, BiPlus, BiPencil } from "react-icons/bi";
 
-function Blogs_admin() {
-  const [blog, setBlog] = useState([]);
+function Login_userlist() {
+  const [userlist, setUserlist] = useState([]);
   const [render, setRender] = useState(false);
 
   const basurl = "http://127.0.0.1:8000/";
-
   const axiosInstance = axios.create({
     baseURL: basurl,
   });
 
   const handleDelete = (id) => {
     axiosInstance
-      .delete(`blogs/${id}`)
+      .delete(`user_delete/${id}`)
       .then((response) => {
         console.log(response.status, "56666666666666666666666666666");
         if (response.status === 204) {
@@ -34,13 +33,11 @@ function Blogs_admin() {
         console.error("Error deleting job:", error);
       });
   };
-
   useEffect(() => {
     axiosInstance
-      .get(`blogs/`)
+      .get(`userslist/`)
       .then((response) => {
-        setBlog(response.data);
-        console.log(response.data,'***************')
+        setUserlist(response.data);
       })
       .catch((error) => {
         console.error(
@@ -49,8 +46,9 @@ function Blogs_admin() {
         );
       });
   }, [render]);
+
   return (
-    <>
+    <div>
       <div>
         <div nav className="nxl-navigation">
           <div className="navbar-wrapper">
@@ -82,16 +80,17 @@ function Blogs_admin() {
                     <Link to="/Dashboard" className="nxl-link">
                       {" "}
                       <span className="nxl-mtext">Dashboards</span>
-                    </Link>{" "}
+                    </Link>
+
                     <span className="nxl-arrow">
                       <i className="feather-chevron-right"></i>
                     </span>
                   </a>
                   <ul className="nxl-submenu">
                     <li className="nxl-item">
-                      <Link to="/blogs_admin" className="nxl-link">
+                      <Link to="/Login_userlist" className="nxl-link">
                         {" "}
-                        blogs
+                        Login_userlis
                       </Link>
                     </li>
                   </ul>
@@ -101,9 +100,8 @@ function Blogs_admin() {
           </div>
         </div>
         <header className="nxl-header">
-        <div className="header-wrapper"></div>
-      </header>
-
+          <div className="header-wrapper"></div>
+        </header>
         <main className="nxl-container apps-container apps-notes">
           <div className="nxl-content without-header nxl-full-content">
             <div className="main-content d-flex">
@@ -120,18 +118,7 @@ function Blogs_admin() {
                     <i className="feather-x"></i>
                   </a>
                 </div>
-                <div className="content-sidebar-header">
-                  <a
-                    href="javascript:void(0);"
-                    className="btn btn-primary w-100"
-                    id="add-notes"
-                  >
-                    <i className="feather-plus me-2"></i>
-                    <span>
-                      <Link to="/blog_modal">Add blog</Link>
-                    </span>
-                  </a>
-                </div>
+                <div className="content-sidebar-header"></div>
               </div>
 
               <div
@@ -140,7 +127,7 @@ function Blogs_admin() {
               >
                 <div className="content-area-body pb-0">
                   <div className="row note-has-grid" id="note-full-container">
-                    {blog.map((i) => (
+                    {userlist.map((i) => (
                       <div
                         className="col-xxl-4 col-xl-6 col-lg-4 col-sm-6 single-note-item all-category note-important note-tasks"
                         key={i.id}
@@ -148,31 +135,14 @@ function Blogs_admin() {
                         <div className="card card-body mb-4 stretch stretch-full">
                           <span className="side-stick"></span>
                           <h5 className="note-title text-truncate w-75 mb-1">
-                            {i.title}
+                            usernam: {i.username}
                             <i className="point bi bi-circle-fill ms-1 fs-7"></i>
                           </h5>
-
-                          {i.image && (
-                            <img
-                              src={i.image}
-                              alt={i.title}
-                              className="img-fluid mb-3"
-                            />
-                          )}
-
                           <div className="note-content flex-grow-1">
                             <p className="text-muted note-inner-content">
-                              <strong>Author:</strong> {i.author}
-                            </p>
-
-                            <p className="text-muted note-inner-content">
-                              <strong>Content:</strong> {i.content}
-                            </p>
-                            <p className="text-muted note-inner-content">
-                              <strong>Created at:</strong> {i.created_at}
+                              <strong>email:</strong> {i.email}
                             </p>
                           </div>
-
                           <div className="d-flex justify-content-end">
                             <button
                               className="btn btn-sm btn-outline-danger me-2"
@@ -180,17 +150,6 @@ function Blogs_admin() {
                             >
                               <BiTrash /> Delete
                             </button>
-                            {i.canAdd && (
-                              <button className="btn btn-sm btn-outline-primary me-2">
-                                <BiPlus /> Add
-                              </button>
-                            )}
-                            <Link
-                              to={`/edit-blog/${i.id}`}
-                              className="btn btn-sm btn-outline-secondary me-2"
-                            >
-                              <BiPencil /> Update
-                            </Link>
                           </div>
                         </div>
                       </div>
@@ -201,9 +160,20 @@ function Blogs_admin() {
             </div>
           </div>
         </main>
+
+        <div className="theme-customizer">
+          <div className="customizer-handle">
+            <a
+              href="javascript:void(0);"
+              className="cutomizer-open-trigger bg-primary"
+            >
+              <i className="feather-settings"></i>
+            </a>
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
-export default Blogs_admin;
+export default Login_userlist;
