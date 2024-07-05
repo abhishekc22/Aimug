@@ -29,7 +29,7 @@ import Faq from "./pages/Faq";
 import Enquiry_list from "./pages/AdminDAshboard/Enquiry_list";
 import Login_userlist from "./pages/AdminDAshboard/Login_userlist";
 import Forgotpassword from "./pages/Forgotpassword";
-
+import Newpassword from "./pages/Newpassword";
 
 function App() {
   return (
@@ -70,7 +70,7 @@ function App() {
           <Route path="/Enquiry_list" element={<Enquiry_list />} />
           <Route path="/Login_userlist" element={<Login_userlist />} />
           <Route path="/forgotpassword" element={<Forgotpassword />} />
-
+          <Route path="/newpassword" element={<Newpassword/>} />
         </Routes>
       </Router>
     </div>

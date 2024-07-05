@@ -29,7 +29,7 @@ function Forgotpassword() {
     baseURL: basurl,
   });
 
-   const navigate = useNavigate
+   const navigate = useNavigate()
 
 
   const [formdata, setFormdata] = useState({
@@ -46,13 +46,15 @@ function Forgotpassword() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axioinstamce.post("login/", formdata);
+      const res = await axioinstamce.post("requestotp/", formdata);
 
       if (res.status === 200) {
-          navigate("/otp");
-
-        console.log("success");
-        console.log(res.data, "565566666666666666666666666666666");
+          console.log(res.status,'>>>>>>>>>>>>>>>>')
+          console.log("success");
+          navigate('/newpassword');
+        
+      }else{
+        console.log("error");
       }
     } catch (error) {
       console.log("error");

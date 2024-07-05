@@ -34,7 +34,7 @@ class SignupView(APIView):
     def send_otp_email(self, email, otp):
         subject = 'OTP Verification'
         message = f'Your OTP for verification is: {otp}'
-        from_email ='abhishek234264@gmail.com'  
+        from_email ='servicescc.002@gmail.com'  
         recipient_list = [email]
         send_mail(subject, message, from_email, recipient_list)
 
@@ -223,3 +223,75 @@ class ServiceRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
 class Enquiry_userListCreateAPIView(generics.ListCreateAPIView):
     queryset = EnquiryUser.objects.all()
     serializer_class = Enquieyserializer
+
+
+
+
+class RequestPasswordResetView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = EmailSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            try:
+                user = CustomUser.objects.get(email=email)
+                
+                otp = ''.join(random.choices('0123456789', k=4))
+                
+                verified_user, created = VerifiedUser.objects.update_or_create(
+                    user=user,
+                    defaults={'otp': otp, 'is_verified': False}
+                )
+
+                # Send the OTP email
+                self.send_otp_email(user.email, otp)
+                
+                return Response({'message': 'OTP sent to your email.'},status=status.HTTP_200_OK)
+            except CustomUser.DoesNotExist:
+                return Response({'error': 'Email does not exist.'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+    def send_otp_email(self, email, otp):
+        subject = 'OTP Verification'
+        message = f'Your OTP for verification is: {otp}'
+        from_email = 'servicescc.002@gmail.com'
+        recipient_list = [email]
+        send_mail(subject, message, from_email, recipient_list)
+
+
+
+
+class OTPPasswordSetView(APIView):
+    def post(self, request, *args, **kwargs):
+        serializer = OTPPasswordSetSerializer(data=request.data)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            otp = serializer.validated_data['otp']
+            new_password = serializer.validated_data['new_password']
+
+
+            try:
+                user = CustomUser.objects.get(email=email)
+                verified_user = VerifiedUser.objects.get(user=user)
+
+
+                if verified_user.otp == otp:
+                    user.password = make_password(new_password)
+                    user.is_verified = True  
+                    user.save()
+
+                    verified_user.is_verified = True
+                    verified_user.save()
+
+
+                    return Response({'message': 'Password updated successfully.'})
+                else:
+                    return Response({'error': 'Invalid OTP.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            except CustomUser.DoesNotExist:
+                return Response({'error': 'User not found.'}, status=status.HTTP_400_BAD_REQUEST)
+            except VerifiedUser.DoesNotExist:
+                return Response({'error': 'OTP verification record not found.'}, status=status.HTTP_400_BAD_REQUEST)
+        print(serializer.errors)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
