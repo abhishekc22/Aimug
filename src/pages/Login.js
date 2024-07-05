@@ -258,7 +258,7 @@ function Login() {
                     </div>
                     <div class="col-md-12">
                       <div class="register-one__form__forgot">
-                        <a href="#">Forgot Password?</a>
+                        <Link to="/forgotpassword">Forgot Password?</Link>
                       </div>
                     </div>
                     <div class="col-md-12">
