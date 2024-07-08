@@ -64,34 +64,19 @@ function Resetpassword() {
                       >
                         <ul className="navigation clearfix">
                           <li className="">
-                          <Link to="/">Home</Link>
-                          
+                            <Link to="/">Home</Link>
                           </li>
                           <li>
-                          <Link to="/about">About</Link>
+                            <Link to="/about">About</Link>
                           </li>
-                          <li className="dropdown">
-                            <a href="#">Pages</a>
-                            <ul>
-                              
-                              <li>
-                                <Link to="/userservice">services</Link>
-                              </li>
-                            </ul>
+                          <li className="">
+                            <Link to="/userservice">services</Link>
                           </li>
-                          <li className="dropdown">
-                            <a href="#">Blog</a>
-                            <ul>
-                              <li>
-                              <Link to="/Blog">Blog</Link>
-                              </li>
-                              <li>
-                              <Link to="/Blogdetail">Blog Detail</Link>
-                              </li>
-                            </ul>
+                          <li className="">
+                            <Link to="/Blog">Blog</Link>
                           </li>
                           <li>
-                          <Link to="/contact">Contact</Link>
+                            <Link to="/contact">Contact</Link>
                           </li>
                         </ul>
                       </div>
@@ -101,7 +86,7 @@ function Resetpassword() {
                   <div className="outer-box d-flex align-items-center">
                     <ul className="main-header__login-sing-up">
                       <li>
-                      <Link to="/signup">Signup</Link>
+                        <Link to="/signup">Signup</Link>
                       </li>
                     </ul>
 

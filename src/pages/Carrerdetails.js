@@ -1,4 +1,4 @@
-import "../App.css"; 
+import "../App.css";
 import React, { useState, useEffect } from "react";
 import "../css/bootstrap.css";
 import "../css/responsive.css";
@@ -20,7 +20,7 @@ import "../css/style.css";
 import "../css/04-animate.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import Footer from "./Footer";
 import axios from "axios";
 
@@ -143,21 +143,10 @@ function Carrerdetails() {
                             <Link to="/about">About</Link>
                           </li>
                           <li className="">
-                            <a href="#">Pages</a>
-                            <ul>
-                              <li>
-                                <Link to="/userservice">services</Link>
-                              </li>
-                            </ul>
+                            <Link to="/userservice">services</Link>
                           </li>
                           <li className="dropdown">
-                            <a href="#">Blog</a>
-                            <ul>
-                              <li>
-                                <Link to="/Blog">Blog</Link>
-                              </li>
-                          
-                            </ul>
+                            <Link to="/Blog">Blog</Link>
                           </li>
                           <li>
                             <Link to="/contact">Contact</Link>
@@ -168,7 +157,7 @@ function Carrerdetails() {
                   </div>
 
                   <div className="outer-box d-flex align-items-center">
-                  <ul className="main-header__login-sing-up">
+                    <ul className="main-header__login-sing-up">
                       {isLoggedIn ? (
                         <li>
                           <Link onClick={handleLogout}>Logout</Link>
@@ -179,7 +168,6 @@ function Carrerdetails() {
                         </li>
                       )}
                     </ul>
-
 
                     <div className="mobile-nav-toggler">
                       <span className="icon-menu"></span>

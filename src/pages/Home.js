@@ -52,9 +52,13 @@ function Home() {
               <div className="main-menu__wrapper">
                 <div className="inner-container d-flex align-items-center justify-content-between">
                   <div className="main-header-one__logo-box">
-                    <a href="index.html">
-                      <img src="images/resource/logo-1.png" alt="" />
-                    </a>
+                  <Link to="/">
+                      <img
+                        src="/images/resource/MicrosoftTeams-image.png"
+                        alt=""
+                        style={{ width: "110px", height: "90px" }}
+                      />
+                      </Link>
                   </div>
 
                   <div className="nav-outer">
@@ -86,24 +90,11 @@ function Home() {
                           <li>
                             <Link to="/about">About</Link>
                           </li>
-                          <li className="dropdown">
-                            <a href="#">Pages</a>
-                            <ul>
-                              <li>
-                                <Link to="/userservice">services</Link>
-                              </li>
-                            </ul>
+                          <li className="">
+                            <Link to="/userservice">services</Link>
                           </li>
-                          <li className="dropdown">
-                            <a href="#">Blog</a>
-                            <ul>
-                              <li>
-                                <Link to="/Blog">Blog</Link>
-                              </li>
-                              <li>
-                                <Link to="/Blogdetail">Blog Detail</Link>
-                              </li>
-                            </ul>
+                          <li className="">
+                            <Link to="/Blog">Blog</Link>
                           </li>
                           <li>
                             <Link to="/contact">Contact</Link>
@@ -2156,9 +2147,7 @@ function Home() {
               </div>
             </div>
           </section>
-          <Footer/>
-
-         
+          <Footer />
 
           <div className="color-palate">
             <div className="color-trigger">

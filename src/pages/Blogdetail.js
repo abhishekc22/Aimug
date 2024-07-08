@@ -21,9 +21,8 @@ import "../css/04-animate.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import axios from "axios";
-
 
 function Blogdetail() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -67,7 +66,6 @@ function Blogdetail() {
         console.error("Error fetching job details:", error);
       });
   }, [id]);
-
 
   if (!blog) {
     return <div>Loading...</div>;
@@ -119,24 +117,11 @@ function Blogdetail() {
                           <li>
                             <Link to="/about">About</Link>
                           </li>
-                          <li className="dropdown">
-                            <a href="#">Pages</a>
-                            <ul>
-                              <li>
-                                <Link to="/userservice">services</Link>
-                              </li>
-                            </ul>
+                          <li className="">
+                            <Link to="/userservice">services</Link>
                           </li>
-                          <li className="dropdown">
-                            <a href="#">Blog</a>
-                            <ul>
-                              <li>
-                                <Link to="/Blog">Blog</Link>
-                              </li>
-                              <li>
-                                <Link to="/Blogdetail">Blog Detail</Link>
-                              </li>
-                            </ul>
+                          <li className="">
+                            <Link to="/Blog">Blog</Link>
                           </li>
                           <li>
                             <Link to="/contact">Contact</Link>
@@ -147,7 +132,7 @@ function Blogdetail() {
                   </div>
 
                   <div className="outer-box d-flex align-items-center">
-                  <ul className="main-header__login-sing-up">
+                    <ul className="main-header__login-sing-up">
                       {isLoggedIn ? (
                         <li>
                           <Link onClick={handleLogout}>Logout</Link>
@@ -158,7 +143,6 @@ function Blogdetail() {
                         </li>
                       )}
                     </ul>
-
 
                     <div className="mobile-nav-toggler">
                       <span className="icon-menu"></span>
@@ -229,15 +213,15 @@ function Blogdetail() {
           <section className="blog-details">
             <div className="container">
               <div className="blog-details__top-title">
-                <h3>
-                {blog.title}
-                </h3>
+                <h3>{blog.title}</h3>
               </div>
               <div className="blog-details__img">
                 <img src={blog.image} alt="" />
               </div>
               <div className="blog-details__bottom">
-              <p className="blog-details__person-name">content: {blog.content}</p>
+                <p className="blog-details__person-name">
+                  content: {blog.content}
+                </p>
 
                 <div className="blog-details__person-and-date">
                   <div className="blog-details__person">
@@ -247,14 +231,17 @@ function Blogdetail() {
                         alt=""
                       />
                     </div>
-                    <p className="blog-details__person-name"> Author:{blog.author}</p>
-                    <br/>
-
+                    <p className="blog-details__person-name">
+                      {" "}
+                      Author:{blog.author}
+                    </p>
+                    <br />
                   </div>
                   <ul className="blog-details__date">
                     <li>
                       <p>
-                        <span className="icon-date"></span>{blog.created_at}
+                        <span className="icon-date"></span>
+                        {blog.created_at}
                       </p>
                     </li>
                     <li>

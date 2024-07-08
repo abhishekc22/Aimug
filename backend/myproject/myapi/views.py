@@ -117,7 +117,11 @@ class SuperuserLoginView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
-        return Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+        return Response({
+            "message": "Login successful",
+            "username": user.username,
+            "email": user.email
+        }, status=status.HTTP_200_OK)
 
 
 

@@ -107,21 +107,10 @@ function Career() {
                             <Link to="/about">About</Link>
                           </li>
                           <li className="dropdown">
-                            <a href="#">Pages</a>
-                            <ul>
-                              <li>
-                                <Link to="/userservice">services</Link>
-                              </li>
-                            </ul>
+                            <Link to="/userservice">services</Link>
                           </li>
                           <li className="dropdown">
-                            <a href="#">Blog</a>
-                            <ul>
-                              <li>
-                                <Link to="/Blog">Blog</Link>
-                              </li>
-                              
-                            </ul>
+                            <Link to="/Blog">Blog</Link>
                           </li>
                           <li>
                             <Link to="/contact">Contact</Link>

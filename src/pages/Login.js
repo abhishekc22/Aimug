@@ -24,6 +24,8 @@ import axios from "axios";
 
 function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [errors, setErrors] = useState({});
+
   const navigate = useNavigate();
   useEffect(() => {
     const loginStatus = localStorage.getItem("loginStatus");
@@ -57,22 +59,41 @@ function Login() {
     });
     console.log(formdata);
   };
+
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    if (!formdata.email) {
+      errors.email = "Email is required";
+      isValid = false;
+    }
+
+    if (!formdata.password) {
+      errors.password = "Password is required";
+      isValid = false;
+    }
+
+    setErrors(errors);
+    return isValid;
+  };
   const handlesubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await axioinstamce.post("login/", formdata);
+    if (validateForm()) {
+      try {
+        const res = await axioinstamce.post("login/", formdata);
 
-      if (res.status === 200) {
-        console.log("success");
-        console.log(res.data, "565566666666666666666666666666666");
-        localStorage.setItem("loginStatus", "loggedIn");
-        localStorage.setItem("userId", res.data.user_id);
+        if (res.status === 200) {
+          console.log("success");
+          console.log(res.data, "565566666666666666666666666666666");
+          localStorage.setItem("loginStatus", "loggedIn");
+          localStorage.setItem("userId", res.data.user_id);
+        }
+      } catch (error) {
+        console.log("error");
       }
-    } catch (error) {
-      console.log("error");
     }
   };
-
   return (
     <>
       <div body class="body-bg-color">
@@ -121,22 +142,11 @@ function Login() {
                           <li>
                             <Link to="/about">About</Link>
                           </li>
-                          <li class="dropdown">
-                            <a href="#">Pages</a>
-                            <ul>
-                              <li>
-                                <Link to="/userservice">services</Link>
-                              </li>
-                            </ul>
+                          <li class="">
+                            <Link to="/userservice">services</Link>
                           </li>
-                          <li class="dropdown">
-                            <a href="#">Blog</a>
-                            <ul>
-                              <li>
-                                <Link to="/Blog">Blog</Link>
-                              </li>
-                           
-                            </ul>
+                          <li class="">
+                            <Link to="/Blog">Blog</Link>
                           </li>
                           <li>
                             <Link to="/contact">Contact</Link>
@@ -240,6 +250,9 @@ function Login() {
                           placeholder="Enter  the  email"
                           required
                         />
+                        {errors.email && (
+                          <span style={{ color: "red" }}>{errors.email}</span>
+                        )}
                         <i class="icon-envelope"></i>
                       </div>
                     </div>
@@ -253,6 +266,11 @@ function Login() {
                           onChange={handlechange}
                           required
                         />
+                        {errors.password && (
+                          <span style={{ color: "red" }}>
+                            {errors.password}
+                          </span>
+                        )}
                         <i class="icon-lock"></i>
                       </div>
                     </div>

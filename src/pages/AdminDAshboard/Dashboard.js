@@ -2,8 +2,19 @@ import React from "react";
 import "../../assets/css/bootstrap.min.css";
 import "../../assets/css/theme.min.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
+const username = localStorage.getItem("username");
+const email = localStorage.getItem("email");
+console.log(username,email,'>>>>>>>>>>>>>>>>>>>')
+const navigate=useNavigate()
+
+const handleLogout = () => {
+  localStorage.removeItem("username");
+  localStorage.removeItem("email");
+  navigate("/login");
+};
   return (
     <div>
       <div body>
@@ -33,7 +44,7 @@ function Dashboard() {
                     <span className="nxl-micon">
                       <i className="feather-airplay"></i>
                     </span>
-                    <span className="nxl-item font-bold">Aimug</span>
+                    <h4 className="nxl-item font-bold">Innvoyx tech lab</h4>
                     <span className="nxl-item">
                       <i className="feather-chevron-right"></i>
                     </span>
@@ -41,7 +52,7 @@ function Dashboard() {
                   <ul className="nxl-item">
                     <li className="nxl-item">
                       <Link to="/Dashboard" className="nxl-link">
-                        carrer Dashboards
+                         Dashboards
                       </Link>
                       <Link to="/carrirer_list" className="nxl-link">
                         carrer list
@@ -85,7 +96,7 @@ function Dashboard() {
               <div className="d-flex align-items-center">
                 <div className="dropdown nxl-h-item nxl-header-search">
                   <li className="nxl-item">
-                    <Link to="/" classNameNam="nxl-link">
+                    <Link to="/" classNameNam="nxl-link" onClick={handleLogout}>
                       {" "}
                       Logout
                     </Link>
@@ -125,18 +136,13 @@ function Dashboard() {
                       id="reportrange"
                       className="reportrange-picker d-flex align-items-center"
                     >
-                      <span className="reportrange-picker-field"></span>
+                     
                     </div>
                     <div className="dropdown filter-dropdown">
-                      <a
-                        className="btn btn-md btn-light-brand"
-                        data-bs-toggle="dropdown"
-                        data-bs-offset="0, 10"
-                        data-bs-auto-close="outside"
-                      >
-                        <i className="feather-filter me-2"></i>
-                        <span>Filter</span>
-                      </a>
+                     
+                        
+                        <h6>username:{username}</h6>
+                        <h6>useremail:{email}</h6>
                       <div className="dropdown-menu dropdown-menu-end">
                         <div className="dropdown-item">
                           <div className="custom-control custom-checkbox">

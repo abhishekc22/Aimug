@@ -36,9 +36,13 @@ function Footer() {
               >
                 <div className="footer-widget__column footer-widget__about">
                   <div className="footer-widget__logo">
-                    <a href="index.html">
-                      <img src="images/resource/footer-logo-1.png" alt="" />
-                    </a>
+                    <Link to="/">
+                      <img
+                        src="/images/resource/MicrosoftTeams-image.png"
+                        alt=""
+                        style={{ width: "110px", height: "90px" }}
+                      />
+                    </Link>
                   </div>
                   <p className="footer-widget__about-text">
                     A Magical Tool to Optimize you content for the first know
@@ -72,6 +76,12 @@ function Footer() {
                       <li>
                         <Link to="/faq">Faq</Link>
                       </li>
+                      <li>
+                        <Link to="/Policy">Privacy&policy</Link>
+                      </li>
+                      <li>
+                        <Link to="/terms_and_condition">Terms&condition</Link>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -88,7 +98,9 @@ function Footer() {
                     <div className="footer-widget__resources-list-box">
                       <ul className="footer-widget__resources-list">
                         <li>
-                        <Link to="/userservice"><a href="about.html">{item.title}</a></Link>
+                          <Link to="/userservice">
+                            <a href="about.html">{item.title}</a>
+                          </Link>
                         </li>
                       </ul>
                     </div>

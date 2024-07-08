@@ -63,7 +63,9 @@ function Adminlogin() {
       const res = await axioinstamce.post("superuser/", formdata);
 
       if (res.status === 200) {
-        console.log("success");
+
+        localStorage.setItem("username", res.data.username);
+        localStorage.setItem("email", res.data.email);
         navigate("/Dashboard");
         console.log(res.data, "565566666666666666666666666666666");
       }
@@ -120,22 +122,11 @@ function Adminlogin() {
                           <li>
                             <Link to="/about">About</Link>
                           </li>
-                          <li class="dropdown">
-                            <a href="#">Pages</a>
-                            <ul>
-                              <li>
-                                <Link to="/userservice">services</Link>
-                              </li>
-                            </ul>
+                          <li class="">
+                            <Link to="/userservice">services</Link>
                           </li>
-                          <li class="dropdown">
-                            <a href="#">Blog</a>
-                            <ul>
-                              <li>
-                                <Link to="/Blog">Blog</Link>
-                              </li>
-                             
-                            </ul>
+                          <li class="">
+                            <Link to="/Blog">Blog</Link>
                           </li>
                           <li>
                             <Link to="/contact">Contact</Link>

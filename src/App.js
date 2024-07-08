@@ -30,6 +30,9 @@ import Enquiry_list from "./pages/AdminDAshboard/Enquiry_list";
 import Login_userlist from "./pages/AdminDAshboard/Login_userlist";
 import Forgotpassword from "./pages/Forgotpassword";
 import Newpassword from "./pages/Newpassword";
+import Terms from "./pages/Terms";
+import Policy from "./pages/Policy";
+import Trial from "./pages/Trial";
 
 function App() {
   return (
@@ -71,6 +74,12 @@ function App() {
           <Route path="/Login_userlist" element={<Login_userlist />} />
           <Route path="/forgotpassword" element={<Forgotpassword />} />
           <Route path="/newpassword" element={<Newpassword/>} />
+          <Route path="/terms_and_condition" element={<Terms/>} />
+          <Route path="/Policy" element={<Policy/>} />
+          <Route path="/trial" element={<Trial/>} />
+
+
+
         </Routes>
       </Router>
     </div>
