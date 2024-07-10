@@ -224,10 +224,22 @@ class ServiceRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView)
     serializer_class = ServiceSerializer
 
 
-class Enquiry_userListCreateAPIView(generics.ListCreateAPIView):
-    queryset = EnquiryUser.objects.all()
-    serializer_class = Enquieyserializer
-
+class EnquiryUserListCreateAPIView(APIView):
+    def get(self, request, format=None):
+        queryset = EnquiryUser.objects.all()
+        serializer = Enquieyserializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, format=None):
+        serializer = Enquieyserializer(data=request.data)
+        if serializer.is_valid():
+            instance = serializer.save()
+            subject = 'New Enquiry'
+            message = f'New enquiry from {instance.username}. Email: {instance.email}'
+            from_email = request.data.get('email', settings.DEFAULT_FROM_EMAIL)
+            send_mail(subject, message, from_email, ['servicescc.002@gmail.com'])
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
@@ -299,3 +311,41 @@ class OTPPasswordSetView(APIView):
         print(serializer.errors)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+    
+class AdminSignupView(APIView):
+    def post(self, request, *args, **kwargs):
+        print(request.data,'******************')
+        serializer = AdminSignupSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print(serializer.errors,'??????????????')
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class AdminloginView(APIView):
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email')
+        password = request.data.get('password')
+        user = authenticate(request, email=email, password=password)
+        
+        if user is not None:
+            if Admin.objects.filter(user=user).exists():
+                return Response({
+                    "message": "Login successful",
+                    "username": user.username,
+                    "email": user.email
+                    
+                })
+            else:
+                return Response({'detail': 'Not an admin'}, status=status.HTTP_401_UNAUTHORIZED)
+        return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+    
+
+
+class AdminExistsView(APIView):
+    def get(self, request, *args, **kwargs):
+        admin_exists = Admin.objects.filter(user_role='admin').exists()
+        return Response({'admin_exists': admin_exists}, status=status.HTTP_200_OK)

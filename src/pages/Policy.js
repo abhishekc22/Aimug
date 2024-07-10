@@ -50,16 +50,15 @@ function Policy() {
           <div className="header-lower">
             <div className="main-menu__wrapper">
               <div className="inner-container d-flex align-items-center justify-content-between">
-                <div className="main-header-one__logo-box">
+              <div className="main-header-one__logo-box">
                   <Link to="/">
-                    <img
-                      src="/images/resource/MicrosoftTeams-image.png"
-                      alt=""
-                      style={{ width: "110px", height: "90px" }}
-                    />
-                  </Link>
-                </div>
-
+                      <img
+                        src="/images/resource/ITL-WHITE-LOGO.png"
+                        alt=""
+                        style={{ width: "110px", height: "100px" }}
+                      />
+                      </Link>
+                  </div>
                 <div className="nav-outer">
                   <nav className="main-menu show navbar-expand-md">
                     <div className="navbar-header">

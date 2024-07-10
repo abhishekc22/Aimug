@@ -16,10 +16,13 @@ urlpatterns = [
     path('blogs/<int:pk>/', BlogRetrieveUpdateDestroy.as_view(), name='blog-detail'),
     path('services/', ServiceListCreateAPIView.as_view(), name='service-list-create'),
     path('services/<int:pk>/', ServiceRetrieveUpdateDestroyAPIView.as_view(), name='service-detail'),
-    path('creating_enquiry/', Enquiry_userListCreateAPIView.as_view(), name='creating_enquiry'),
+    path('creating_enquiry/', EnquiryUserListCreateAPIView.as_view(), name='creating_enquiry'),
     path('user_delete/<int:pk>/', Cutomerupdate_delete.as_view(), name='user_delete'),
     path('requestotp/', RequestPasswordResetView.as_view(), name='requestotp'),
     path('passwordsetview/', OTPPasswordSetView.as_view(), name='passwordsetview'),
+    path('signup_admin/', AdminSignupView.as_view(), name='admin-signup'),
+    path('login_admin/', AdminloginView.as_view(), name='login'),
+    path('admin-exists/', AdminExistsView.as_view(), name='admin-exists'),
 
 
 

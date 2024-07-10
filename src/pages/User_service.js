@@ -72,10 +72,14 @@ function User_service() {
             <div className="header-lower">
               <div className="main-menu__wrapper">
                 <div className="inner-container d-flex align-items-center justify-content-between">
-                  <div className="main-header-one__logo-box">
-                    <a href="index.html">
-                      <img src="images/resource/logo-1.png" alt="" />
-                    </a>
+                <div className="main-header-one__logo-box">
+                  <Link to="/">
+                      <img
+                        src="/images/resource/ITL-WHITE-LOGO.png"
+                        alt=""
+                        style={{ width: "110px", height: "100px" }}
+                      />
+                      </Link>
                   </div>
 
                   <div className="nav-outer">
@@ -115,6 +119,9 @@ function User_service() {
                           </li>
                           <li>
                             <Link to="/contact">Contact</Link>
+                          </li>
+                          <li>
+                            <Link to="/Pricing">pricing</Link>
                           </li>
                         </ul>
                       </div>

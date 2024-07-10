@@ -69,3 +69,15 @@ class OTPPasswordSetSerializer(serializers.Serializer):
             raise serializers.ValidationError('OTP verification record not found.')
 
         return data
+    
+
+class AdminSignupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'username', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        user = CustomUser.objects.create_user(**validated_data)
+        Admin.objects.create(user=user, user_role='admin')
+        return user

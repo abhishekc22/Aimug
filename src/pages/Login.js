@@ -107,14 +107,14 @@ function Login() {
             <div class="header-lower">
               <div class="main-menu__wrapper">
                 <div class="inner-container d-flex align-items-center justify-content-between">
-                  <div class="main-header-one__logo-box">
-                    <Link to="/">
+                <div className="main-header-one__logo-box">
+                  <Link to="/">
                       <img
-                        src="/images/resource/MicrosoftTeams-image.png"
+                        src="/images/resource/ITL-WHITE-LOGO.png"
                         alt=""
-                        style={{ width: "110px", height: "90px" }}
+                        style={{ width: "110px", height: "100px" }}
                       />
-                    </Link>
+                      </Link>
                   </div>
 
                   <div class="nav-outer">
