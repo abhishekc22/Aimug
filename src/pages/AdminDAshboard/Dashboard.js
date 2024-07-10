@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-const username = localStorage.getItem("username");
-const email = localStorage.getItem("email");
-console.log(username,email,'>>>>>>>>>>>>>>>>>>>')
-const navigate=useNavigate()
+  const username = localStorage.getItem("username");
+  const email = localStorage.getItem("email");
+  console.log(username, email, ">>>>>>>>>>>>>>>>>>>");
+  const navigate = useNavigate();
 
-const handleLogout = () => {
-  localStorage.removeItem("username");
-  localStorage.removeItem("email");
-  navigate("/login");
-};
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
+    navigate("/login");
+  };
   return (
     <div>
       <div body>
@@ -22,16 +22,7 @@ const handleLogout = () => {
           <div className="navbar-wrapper">
             <div className="m-header">
               <a href="index.html" className="b-brand">
-                <img
-                  src="assets/images/logo-full.png"
-                  alt=""
-                  className="logo logo-lg"
-                />
-                <img
-                  src="assets/images/logo-abbr.png"
-                  alt=""
-                  className="logo logo-sm"
-                />
+                <h3>Innvoyx Tech</h3>
               </a>
             </div>
             <div className="navbar-content">
@@ -40,49 +31,54 @@ const handleLogout = () => {
                   <label>Navigation</label>
                 </li>
                 <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
-                    <span className="nxl-micon">
-                      <i className="feather-airplay"></i>
-                    </span>
-                    <h4 className="nxl-item font-bold">Innvoyx tech lab</h4>
-                    <span className="nxl-item">
-                      <i className="feather-chevron-right"></i>
-                    </span>
-                  </a>
-                  <ul className="nxl-item">
-                    <li className="nxl-item">
-                      <Link to="/Dashboard" className="nxl-link">
-                         Dashboards
-                      </Link>
-                      <Link to="/carrirer_list" className="nxl-link">
-                        carrer list
-                      </Link>
-                    </li>
-                    <li className="nxl-item">
-                      <li className="nxl-item">
-                        <Link to="/Service" className="nxl-link">
-                          service
-                        </Link>
-                      </li>
-                      <li className="nxl-item">
-                        <Link to="/Login_userlist" className="nxl-link">
-                          Login_userlist
-                        </Link>
-                      </li>
-                      <li className="nxl-item">
-                        <Link to="/Enquiry_list" className="nxl-link">
-                          Enquired user list
-                        </Link>
-                      </li>
-                    </li>
+                <Link to="/Dashboard  " className="nxl-link">
+                  <span className="nxl-micon">
+                    <i className="fas fa-comments"></i>
+                  </span>
 
-                    <li className="nxl-item">
-                      <Link to="/blogs_admin" className="nxl-link">
-                        {" "}
-                        blog
-                      </Link>
-                    </li>
-                  </ul>
+                  <span className="nxl-mtext">Dashboard</span>
+                </Link>
+              </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/carrirer_list" className="nxl-link">
+                    <span className="nxl-micon">
+                      <i className="fas fa-handshake"></i>
+                    </span>
+                    <span className="nxl-mtext"> carrer list</span>
+                  </Link>
+                </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/Service" className="nxl-link">
+                    <span className="nxl-micon">
+                      <i className="fas fa-graduation-cap"></i>
+                    </span>
+                    <span className="nxl-mtext">service</span>
+                  </Link>
+                </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/Login_userlist" className="nxl-link">
+                    <span className="nxl-micon">
+                      <i className="fas fa-clipboard-list"></i>
+                    </span>
+                    <span className="nxl-mtext">Login userlist</span>
+                  </Link>
+                </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/Enquiry_list" className="nxl-link">
+                    <span className="nxl-micon">
+                      <i className="fas fa-comments"></i>
+                    </span>
+                    <span className="nxl-mtext"> Enquired user list</span>
+                  </Link>
+                </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/blogs_admin" className="nxl-link">
+                    {" "}
+                    <span className="nxl-micon">
+                      <i className="fas fa-file-image"></i>
+                    </span>
+                    <span className="nxl-mtext">blog</span>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -135,14 +131,10 @@ const handleLogout = () => {
                     <div
                       id="reportrange"
                       className="reportrange-picker d-flex align-items-center"
-                    >
-                     
-                    </div>
+                    ></div>
                     <div className="dropdown filter-dropdown">
-                     
-                        
-                        <h6>username:{username}</h6>
-                        <h6>useremail:{email}</h6>
+                      <h6>username:{username}</h6>
+                      <h6>useremail:{email}</h6>
                       <div className="dropdown-menu dropdown-menu-end">
                         <div className="dropdown-item">
                           <div className="custom-control custom-checkbox">

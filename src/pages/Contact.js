@@ -50,6 +50,7 @@ function Contact() {
   const [formdata, setFormdata] = useState({
     username: "",
     email: "",
+    phonenumber: "",
     message: "",
   });
 
@@ -133,6 +134,9 @@ function Contact() {
                           <li>
                             <Link to="/contact">Contact</Link>
                           </li>
+                          <li>
+                            <Link to="/Pricing">pricing</Link>
+                          </li>
                         </ul>
                       </div>
                     </nav>
@@ -170,65 +174,7 @@ function Contact() {
                     <img src="images/logo-2.png" alt="" title="" />
                   </a>
                 </div>
-                <div class="search-box">
-                  <form method="POST" id="contact-form" onSubmit={handleSubmit}>
-                    <div className="form-group relative">
-                      <p className="contact-one__form-label">Name*</p>
-                      <input
-                        type="text"
-                        name="username"
-                        placeholder="John Smith"
-                        required
-                        value={formdata.username}
-                        onChange={handlechange}
-                        className="form-control pl-10"
-                      />
-                      <div className="contact-one__form-icon absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                        <i className="fas fa-user"></i>
-                      </div>
-                    </div>
 
-                    <div className="form-group relative">
-                      <p className="contact-one__form-label">Email*</p>
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="marveltheme@gmail.com"
-                        required
-                        value={formdata.email}
-                        onChange={handlechange}
-                        className="form-control pl-10"
-                      />
-                      <div className="contact-one__form-icon absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                        <i className="far fa-envelope"></i>
-                      </div>
-                    </div>
-
-                    <div className="form-group text-message-box">
-                      <p className="contact-one__form-label">
-                        How can we help?
-                      </p>
-                      <textarea
-                        name="message"
-                        placeholder="Enter your message here"
-                        value={formdata.message}
-                        onChange={handlechange}
-                        className="form-control"
-                      ></textarea>
-                    </div>
-
-                    <div className="form-group">
-                      <div className="button-box">
-                        <button
-                          type="submit"
-                          className="thm-btn contact-one__btn"
-                        >
-                          Submit Request
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
                 <div class="menu-outer"></div>
               </nav>
             </div>
@@ -368,6 +314,23 @@ function Contact() {
                           </div>
                         </div>
 
+                        <div className="form-group relative">
+                          <p className="contact-one__form-label">
+                            Phone Number*
+                          </p>
+                          <input
+                            type="tel" // Use type="tel" for phone numbers
+                            name="phonenumber"
+                            placeholder="123-456-7890"
+                            required
+                            value={formdata.phonenumber}
+                            onChange={handlechange}
+                            className="form-control" // Remove unnecessary pl-10 class
+                          />
+                          <div className="contact-one__form-icon absolute left-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                          </div>
+                        </div>
+
                         <div className="form-group text-message-box">
                           <p className="contact-one__form-label">
                             How can we help?
@@ -392,6 +355,7 @@ function Contact() {
                           </div>
                         </div>
                       </form>
+
                       <p class="ajax-response mb-0"></p>
                     </div>
                   </div>
@@ -400,10 +364,10 @@ function Contact() {
             </div>
           </section>
 
-          <section class="goolge-map">
-            <div class="goolge-map__outer">
+          <section class="google-map">
+            <div class="google-map__outer">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d805184.6331292129!2d144.49266890254142!3d-37.97123689954809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad646b5d2ba4df7%3A0x4045675218ccd90!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2s!4v1574408946759!5m2!1sen!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15551.956545582045!2d77.61890831678788!3d12.950298751849447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670d2f395b3%3A0xc2ff13f37b2f2d2!2sHSR%20Layout%2C%20Bengaluru%2C%20Karnataka%2C%20India!5e0!3m2!1sen!2sus!4v1625822341247!5m2!1sen!2sus"
                 allowfullscreen=""
                 class="google-map__one"
               ></iframe>

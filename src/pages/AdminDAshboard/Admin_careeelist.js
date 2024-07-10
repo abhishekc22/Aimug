@@ -1,9 +1,10 @@
 import "../../assets/css/bootstrap.min.css";
 import "../../assets/css/theme.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BiTrash, BiPlus, BiPencil } from "react-icons/bi";
+
 
 function Admin_careeelist() {
   const [jobApplications, setJobApplications] = useState([]);
@@ -49,640 +50,122 @@ function Admin_careeelist() {
       });
   }, [render]);
 
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
+    navigate("/login");
+  };
+
   return (
     <div>
-      <div nav className="nxl-navigation">
+      <nav className="nxl-navigation">
         <div className="navbar-wrapper">
           <div className="m-header">
             <a href="index.html" className="b-brand">
-              <img
-                src="assets/images/logo-full.png"
-                alt=""
-                className="logo logo-lg"
-              />
-              <img
-                src="assets/images/logo-abbr.png"
-                alt=""
-                className="logo logo-sm"
-              />
+              <h3>Innvoyx Tech</h3>
             </a>
           </div>
-
           <div className="navbar-content">
             <ul className="nxl-navbar">
               <li className="nxl-item nxl-caption">
                 <label>Navigation</label>
               </li>
               <li className="nxl-item nxl-hasmenu">
-                <a href="javascript:void(0);" className="nxl-link">
+                <Link to="/Dashboard  " className="nxl-link">
                   <span className="nxl-micon">
-                    <i className="feather-airplay"></i>
+                    <i className="fas fa-comments"></i>
                   </span>
-                  <Link to="/Dashboard"><span className="nxl-mtext">Dashboards</span></Link>
-                  
-                  <span className="nxl-arrow">
-                    <i className="feather-chevron-right"></i>
+
+                  <span className="nxl-mtext">Dashboard</span>
+                </Link>
+              </li>
+              <li className="nxl-item nxl-hasmenu">
+                <Link to="/carrirer_list" className="nxl-link">
+                  <span className="nxl-micon">
+                    <i className="fas fa-handshake"></i>
                   </span>
-                </a>
-                <ul className="nxl-submenu">
-                  <li className="nxl-item">
-                    <Link to="/carrirer_list" className="nxl-link">
-                      {" "}
-                      carrer list
-                    </Link>
-                  </li>
-                </ul>
+                  <span className="nxl-mtext"> carrer list</span>
+                </Link>
+              </li>
+              <li className="nxl-item nxl-hasmenu">
+                <Link to="/Service" className="nxl-link">
+                  <span className="nxl-micon">
+                    <i className="fas fa-graduation-cap"></i>
+                  </span>
+                  <span className="nxl-mtext">service</span>
+                </Link>
+              </li>
+              <li className="nxl-item nxl-hasmenu">
+                <Link to="/Login_userlist" className="nxl-link">
+                  <span className="nxl-micon">
+                    <i className="fas fa-clipboard-list"></i>
+                  </span>
+                  <span className="nxl-mtext">Login userlist</span>
+                </Link>
+              </li>
+              <li className="nxl-item nxl-hasmenu">
+                <Link to="/Enquiry_list" className="nxl-link">
+                  <span className="nxl-micon">
+                    <i className="fas fa-comments"></i>
+                  </span>
+                  <span className="nxl-mtext"> Enquired user list</span>
+                </Link>
+              </li>
+              <li className="nxl-item nxl-hasmenu">
+                <Link to="/blogs_admin" className="nxl-link">
+                  {" "}
+                  <span className="nxl-micon">
+                    <i className="fas fa-file-image"></i>
+                  </span>
+                  <span className="nxl-mtext">blog</span>
+                </Link>
               </li>
             </ul>
           </div>
         </div>
-      </div>
+      </nav>
+
       <header className="nxl-header">
-        <div className="header-wrapper"></div>
-      </header>
+          <div className="header-wrapper">
+            <div className="header-left d-flex align-items-center gap-4"></div>
+
+            <div className="header-right ms-auto">
+              <div className="d-flex align-items-center">
+                <div className="dropdown nxl-h-item nxl-header-search">
+                  <li className="nxl-item">
+                    <Link to="/" classNameNam="nxl-link" onClick={handleLogout}>
+                      {" "}
+                      Logout
+                    </Link>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
 
       <main className="nxl-container apps-container apps-notes">
         <div className="nxl-content without-header nxl-full-content">
           <div className="main-content d-flex">
             <div
-              className="content-sidebar content-sidebar-md h-full"
-              data-scrollbar-target="#psScrollbarInit"
-            >
-              <div className="content-sidebar-header bg-white sticky-top hstack justify-content-between">
-                <h4 className="fw-bolder mb-0">Notes</h4>
-                <a
-                  href="javascript:void(0);"
-                  className="app-sidebar-close-trigger d-flex"
-                >
-                  <i className="feather-x"></i>
-                </a>
-              </div>
-              <div className="content-sidebar-header">
-                <a
-                  href="javascript:void(0);"
-                  className="btn btn-primary w-100"
-                  id="add-notes"
-                >
-                  <i className="feather-plus me-2"></i>
-                  <span>
-                    <Link to="/Add_job">Add Carrer</Link>
-                  </span>
-                </a>
-              </div>
-            </div>
-
-            <div
               className="content-area"
               data-scrollbar-target="#psScrollbarInit"
             >
               <div className="content-area-header sticky-top">
-                <div className="page-header-left d-flex align-items-center gap-2">
-                  <a
-                    href="javascript:void(0);"
-                    className="app-sidebar-open-trigger me-2"
-                  >
-                    <i className="feather-align-left fs-20"></i>
-                  </a>
-                  <div className="dropdown">
-                    <a
-                      href="javascript:void(0)"
-                      className="btn btn-light-brand dropdown-toggle"
-                      data-bs-toggle="dropdown"
-                      data-bs-offset="0,18"
-                    >
-                      Project Notes
-                    </a>
-                    <ul className="dropdown-menu dropdown-menu-end">
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          All Notes
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          Lead Notes
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          Client Notes
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="dropdown-item active"
-                          href="javascript:void(0)"
-                        >
-                          Project Notes
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          Meeting Notes
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          Personal Notes
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          Customer Notes
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="dropdown">
-                    <a
-                      href="javascript:void(0)"
-                      className="avatar-text avatar-md"
-                      data-bs-toggle="dropdown"
-                      data-bs-offset="0,22"
-                    >
-                      <i className="feather-eye"></i>
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          <i className="feather-eye me-3"></i>
-                          <span>Read</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          <i className="feather-eye-off me-3"></i>
-                          <span>Unread</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          <i className="feather-star me-3"></i>
-                          <span>Starred</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          <i className="feather-shield-off me-3"></i>
-                          <span>Unstarred</span>
-                        </a>
-                      </li>
-                      <li className="dropdown-divider"></li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          <i className="feather-clock me-3"></i>
-                          <span>Snooze</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          <i className="feather-check-circle me-3"></i>
-                          <span>Add Tasks</span>
-                        </a>
-                      </li>
-                      <li className="dropdown-divider"></li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          <i className="feather-archive me-3"></i>
-                          <span>Archive</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          <i className="feather-alert-octagon me-3"></i>
-                          <span>Report Spam</span>
-                        </a>
-                      </li>
-                      <li className="dropdown-divider"></li>
-                      <li>
-                        <a className="dropdown-item" href="javascript:void(0)">
-                          <i className="feather-trash-2 me-3"></i>
-                          <span>Delete</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="dropdown">
-                    <a
-                      href="javascript:void(0)"
-                      className="d-flex"
-                      data-bs-toggle="dropdown"
-                      data-bs-offset="0,22"
-                      data-bs-auto-close="outside"
-                      aria-expanded="false"
-                    >
-                      <div
-                        className="avatar-text avatar-md"
-                        data-bs-toggle="tooltip"
-                        data-bs-trigger="hover"
-                        title="Tags"
-                      >
-                        <i className="feather-tag"></i>
-                      </div>
-                    </a>
-                    <div className="dropdown-menu">
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Office"
-                            checked="checked"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Office"
-                          >
-                            Office
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Family"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Family"
-                          >
-                            Family
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Friend"
-                            checked="checked"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Friend"
-                          >
-                            Friend
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Marketplace"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Marketplace"
-                          >
-                            {" "}
-                            Marketplace{" "}
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Development"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Development"
-                          >
-                            {" "}
-                            Development{" "}
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-divider"></div>
-                      <a href="javascript:void(0);" className="dropdown-item">
-                        <i className="feather-plus me-3"></i>
-                        <span>Create Tag</span>
-                      </a>
-                      <a href="javascript:void(0);" className="dropdown-item">
-                        <i className="feather-tag me-3"></i>
-                        <span>Manages Tag</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="dropdown">
-                    <a
-                      href="javascript:void(0)"
-                      className="d-flex"
-                      data-bs-toggle="dropdown"
-                      data-bs-offset="0,22"
-                      data-bs-auto-close="outside"
-                      aria-expanded="false"
-                    >
-                      <div
-                        className="avatar-text avatar-md"
-                        data-bs-toggle="tooltip"
-                        data-bs-trigger="hover"
-                        title="Labels"
-                      >
-                        <i className="feather-folder-plus"></i>
-                      </div>
-                    </a>
-                    <div className="dropdown-menu">
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Updates"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Updates"
-                          >
-                            Updates
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Socials"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Socials"
-                          >
-                            Socials
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Primary"
-                            checked="checked"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Primary"
-                          >
-                            Primary
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Forums"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Forums"
-                          >
-                            Forums
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-item">
-                        <div className="custom-control custom-checkbox">
-                          <input
-                            type="checkbox"
-                            className="custom-control-input"
-                            id="Promotions"
-                            checked="checked"
-                          />
-                          <label
-                            className="custom-control-label c-pointer"
-                            for="Promotions"
-                          >
-                            {" "}
-                            Promotions{" "}
-                          </label>
-                        </div>
-                      </div>
-                      <div className="dropdown-divider"></div>
-                      <a href="javascript:void(0);" className="dropdown-item">
-                        <i className="feather-plus me-3"></i>
-                        <span>Create Label</span>
-                      </a>
-                      <a href="javascript:void(0);" className="dropdown-item">
-                        <i className="feather-folder-plus me-3"></i>
-                        <span>Manages Label</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
                 <div className="page-header-right ms-auto">
                   <div className="hstack gap-2">
-                    <div className="hstack">
-                      <a
-                        href="javascript:void(0)"
-                        className="search-form-open-toggle"
-                      >
-                        <div
-                          className="avatar-text avatar-md"
-                          data-bs-toggle="tooltip"
-                          data-bs-trigger="hover"
-                          title="Search"
-                        >
-                          <i className="feather feather-search"></i>
-                        </div>
-                      </a>
-                      <form className="search-form" style={{ display: "none" }}>
-                        <div className="search-form-inner">
-                          <a
-                            href="javascript:void(0)"
-                            className="search-form-close-toggle"
-                          >
-                            <div
-                              className="avatar-text avatar-md"
-                              data-bs-toggle="tooltip"
-                              data-bs-trigger="hover"
-                              title="Search Close"
-                            >
-                              <i className="feather feather-arrow-left"></i>
-                            </div>
-                          </a>
-                          <input
-                            type="search"
-                            className="py-3 px-0 border-0 w-100"
-                            id="notesSearch"
-                            placeholder="Search..."
-                          />
-                        </div>
-                      </form>
-                    </div>
-                    <a href="javascript:void(0)" className="d-none d-sm-flex">
-                      <div
-                        className="avatar-text avatar-md"
-                        data-bs-toggle="tooltip"
-                        data-bs-trigger="hover"
-                        title="Newest"
-                      >
-                        <i className="feather feather-chevron-left"></i>
-                      </div>
-                    </a>
-                    <a href="javascript:void(0)" className="d-none d-sm-flex">
-                      <div
-                        className="avatar-text avatar-md"
-                        data-bs-toggle="tooltip"
-                        data-bs-trigger="hover"
-                        title="Oldest"
-                      >
-                        <i className="feather feather-chevron-right"></i>
-                      </div>
-                    </a>
                     <div className="dropdown d-none d-sm-flex">
-                      <a
-                        href="javascript:void(0)"
-                        className="btn btn-light-brand btn-sm rounded-pill dropdown-toggle"
-                        data-bs-toggle="dropdown"
-                        data-bs-offset="0,23"
+                    <Link to="/Add_job" className="nxl-link"> <button
+                        type="button"
+                        className="btn btn-light-brand btn-sm  bg-blue-500 "
+                        style={{ backgroundColor: '#663399', color: '#fff' }}
+
                       >
-                        Newest
-                      </a>
-                      <ul className="dropdown-menu dropdown-menu-end">
-                        <li>
-                          <a
-                            className="dropdown-item"
-                            href="javascript:void(0)"
-                          >
-                            Title
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            className="dropdown-item"
-                            href="javascript:void(0)"
-                          >
-                            Priority
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            className="dropdown-item"
-                            href="javascript:void(0)"
-                          >
-                            Category
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            className="dropdown-item"
-                            href="javascript:void(0)"
-                          >
-                            Time & Date
-                          </a>
-                        </li>
-                        <li className="dropdown-divider"></li>
-                        <li>
-                          <a
-                            className="dropdown-item active"
-                            href="javascript:void(0)"
-                          >
-                            Newest
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            className="dropdown-item"
-                            href="javascript:void(0)"
-                          >
-                            Oldest
-                          </a>
-                        </li>
-                        <li className="dropdown-divider"></li>
-                        <li>
-                          <a
-                            className="dropdown-item"
-                            href="javascript:void(0)"
-                          >
-                            Ascending
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            className="dropdown-item"
-                            href="javascript:void(0)"
-                          >
-                            Descending
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="dropdown d-none d-sm-flex">
-                      <a
-                        href="javascript:void(0)"
-                        className="d-flex"
-                        data-bs-toggle="dropdown"
-                        data-bs-offset="0,22"
-                        data-bs-auto-close="outside"
-                      >
-                        <div
-                          className="avatar-text avatar-md"
-                          data-bs-toggle="tooltip"
-                          data-bs-trigger="hover"
-                          title="More Options"
-                        >
-                          <i className="feather feather-more-vertical"></i>
-                        </div>
-                      </a>
-                      <div className="dropdown-menu dropdown-menu-end">
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-plus me-3"></i>
-                          <span>Add to Group</span>
-                        </a>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-user-plus me-3"></i>
-                          <span>Add to Contact</span>
-                        </a>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-eye-off me-3"></i>
-                          <span>Make as Unread</span>
-                        </a>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-sliders me-3"></i>
-                          <span>Filter Messages</span>
-                        </a>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-archive me-3"></i>
-                          <span>Make as Archive</span>
-                        </a>
-                        <div className="dropdown-divider"></div>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-slash me-3"></i>
-                          <span>Report Spam</span>
-                        </a>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-sliders me-3"></i>
-                          <span>Report phishing</span>
-                        </a>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-download me-3"></i>
-                          <span>Download Messages</span>
-                        </a>
-                        <div className="dropdown-divider"></div>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-bell-off me-3"></i>
-                          <span>Mute Conversion</span>
-                        </a>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-slash me-3"></i>
-                          <span>Block Conversion</span>
-                        </a>
-                        <a href="javascript:void(0);" className="dropdown-item">
-                          <i className="feather feather-trash-2 me-3"></i>
-                          <span>Delete Conversion</span>
-                        </a>
-                      </div>
+                        Add Career
+                      </button></Link>
                     </div>
                   </div>
                 </div>

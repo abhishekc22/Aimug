@@ -19,13 +19,14 @@ import "../css/01-global.css";
 import "../css/style.css";
 import "../css/04-animate.css";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
-function Login() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [errors, setErrors] = useState({});
-
+function Admin_signup() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     const loginStatus = localStorage.getItem("loginStatus");
@@ -38,62 +39,66 @@ function Login() {
     localStorage.removeItem("loginStatus");
     localStorage.removeItem("userId");
     setIsLoggedIn(false);
-    navigate("/login");
+    navigate("/Adminlogin");
   };
-  const basurl = "http://127.0.0.1:8000";
+  const baseurl = "http://127.0.0.1:8000/";
 
-  const axioinstamce = axios.create({
-    baseURL: basurl,
+  const axioinstance = axios.create({
+    baseURL: baseurl,
   });
 
-  const [formdata, setFormdata] = useState({
-    email: "",
-    password: "",
-  });
+  const validate = (values) => {
+    const errors = {};
 
-  const handlechange = (e) => {
-    const { name, value } = e.target;
-    setFormdata({
-      ...formdata,
-      [name]: value,
-    });
-    console.log(formdata);
-  };
-
-  const validateForm = () => {
-    let errors = {};
-    let isValid = true;
-
-    if (!formdata.email) {
-      errors.email = "Email is required";
-      isValid = false;
+    if (!values.username) {
+      errors.username = "Required";
     }
 
-    if (!formdata.password) {
-      errors.password = "Password is required";
-      isValid = false;
+    if (!values.email) {
+      errors.email = "Required";
+    } else if (!/\S+@\S+\.\S+/.test(values.email)) {
+      errors.email = "Invalid email address";
     }
 
-    setErrors(errors);
-    return isValid;
-  };
-  const handlesubmit = async (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      try {
-        const res = await axioinstamce.post("login/", formdata);
+    if (!values.password) {
+      errors.password = "Required";
+    } else if (values.password.length < 6) {
+      errors.password = "Password must be at least 6 characters long";
+    }
 
-        if (res.status === 200) {
-          console.log(res.data, "565566666666666666666666666666666");
-          localStorage.setItem("loginStatus", "loggedIn");
-          localStorage.setItem("userId", res.data.user_id);
-          navigate("/");
+    if (!values.confirmPassword) {
+      errors.confirmPassword = "Required";
+    } else if (values.confirmPassword !== values.password) {
+      errors.confirmPassword = "Passwords do not match";
+    }
+
+    return errors;
+  };
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      },
+      validate,
+      onSubmit: async (values) => {
+        console.log(values, "56666666666666666");
+        try {
+          const res = await axioinstance.post("signup_admin/", values);
+          console.log(values, ">>>>>>>>>>>>>>>");
+          if (res.status === 201) {
+            const userid = res?.data?.userid;
+            navigate("/Adminlogin");
+           
+          }
+        } catch (error) {
+          console.log("error");
         }
-      } catch (error) {
-        console.log("error");
-      }
-    }
-  };
+      },
+    });
   return (
     <>
       <div body class="body-bg-color">
@@ -108,13 +113,9 @@ function Login() {
               <div class="main-menu__wrapper">
                 <div class="inner-container d-flex align-items-center justify-content-between">
                   <div class="main-header-one__logo-box">
-                    <Link to="/">
-                      <img
-                        src="/images/resource/MicrosoftTeams-image.png"
-                        alt=""
-                        style={{ width: "110px", height: "90px" }}
-                      />
-                    </Link>
+                    <a href="index.html">
+                      <img src="images/resource/logo-1.png" alt="" />
+                    </a>
                   </div>
 
                   <div class="nav-outer">
@@ -183,36 +184,6 @@ function Login() {
                 </div>
               </div>
             </div>
-
-            <div class="mobile-menu">
-              <div class="menu-backdrop"></div>
-              <div class="close-btn">
-                <span class="icon far fa-times fa-fw"></span>
-              </div>
-              <nav class="menu-box">
-                <div class="nav-logo"></div>
-                <div class="search-box">
-                  <form
-                    method="post"
-                    action="https://marveltheme.com/tf/html/aimug/contact.html"
-                  >
-                    <div class="form-group">
-                      <input
-                        type="search"
-                        name="search-field"
-                        value=""
-                        placeholder="SEARCH HERE"
-                        required
-                      />
-                      <button type="submit">
-                        <span class="icon far fa-search fa-fw"></span>
-                      </button>
-                    </div>
-                  </form>
-                </div>
-                <div class="menu-outer"></div>
-              </nav>
-            </div>
           </header>
 
           <section class="login-page full-height">
@@ -243,47 +214,89 @@ function Login() {
                 </div>
                 <form
                   action="#"
-                  onSubmit={handlesubmit}
+                  onSubmit={handleSubmit}
                   class="register-one__form"
                 >
                   <div class="row">
-                    <div class="col-md-12">
-                      <div class="register-one__form__email">
+                    <div className="col-md-12">
+                      <div className="register-one__form__email">
                         <input
                           type="email"
                           name="email"
-                          value={formdata.email}
-                          onChange={handlechange}
-                          placeholder="Enter  the  email"
-                          required
+                          placeholder="Email"
+                          autoComplete="email"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.email}
+                          className="form-control"
                         />
-                        {errors.email && (
-                          <span style={{ color: "red" }}>{errors.email}</span>
+                        <i className="icon-envelope"></i>
+                        {errors.email && touched.email && (
+                          <div className="text-red-500">{errors.email}</div>
                         )}
-                        <i class="icon-envelope"></i>
                       </div>
                     </div>
-                    <div class="col-md-12">
-                      <div class="register-one__form__password">
+                    <div className="col-md-12">
+                      <div className="register-one__form__email relative">
+                        <input
+                          type="text"
+                          name="username"
+                          placeholder="Username"
+                          autoComplete="username"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.username}
+                          className="form-control pl-10"
+                        />
+                        <i className="fa fa-user absolute left-2  transform -translate-y-1/2"></i>
+                        {errors.username && touched.username && (
+                          <div className="text-red-500 mt-1">
+                            {errors.username}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="register-one__form__password">
                         <input
                           type="password"
                           name="password"
                           placeholder="Password"
-                          value={formdata.password}
-                          onChange={handlechange}
-                          required
+                          autoComplete="current-password"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.password}
+                          className="form-control"
                         />
-                        {errors.password && (
-                          <span style={{ color: "red" }}>
-                            {errors.password}
-                          </span>
+                        <i className="icon-lock"></i>
+                        {errors.password && touched.password && (
+                          <div className="text-red-500">{errors.password}</div>
                         )}
-                        <i class="icon-lock"></i>
+                      </div>
+                    </div>
+                    <div className="col-md-12">
+                      <div className="register-one__form__password">
+                        <i className="icon-lock"></i>
+                        <input
+                          type="password"
+                          name="confirmPassword"
+                          placeholder="Password"
+                          autoComplete="current-password"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.confirmPassword}
+                          className="form-control"
+                        />
+                        {errors.confirmPassword && touched.confirmPassword && (
+                          <div className="text-red-500">
+                            {errors.confirmPassword}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div class="col-md-12">
                       <div class="register-one__form__forgot">
-                        <Link to="/forgotpassword">Forgot Password?</Link>
+                        <a href="#">Forgot Password?</a>
                       </div>
                     </div>
                     <div class="col-md-12">
@@ -294,8 +307,7 @@ function Login() {
                   </div>
                 </form>
                 <p class="register-one__tagline">
-                  Don’t have an account?{" "}
-                  <Link to="/signup">Sign Up for Free</Link>
+                  <Link to="/login"> i have alredy Account</Link>
                 </p>
               </div>
             </div>
@@ -379,34 +391,10 @@ function Login() {
               </div>
             </div>
           </div>
-
-          <div class="search-popup">
-            <div class="color-layer"></div>
-            <button class="close-search">
-              <span class="far fa-times fa-fw"></span>
-            </button>
-            <form
-              method="post"
-              action="https://marveltheme.com/tf/html/aimug/blog.html"
-            >
-              <div class="form-group">
-                <input
-                  type="search"
-                  name="search-field"
-                  value=""
-                  placeholder="Search Here"
-                  required=""
-                />
-                <button type="submit">
-                  <i class="far fa-search fa-fw"></i>
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
       </div>
     </>
   );
 }
 
-export default Login;
+export default Admin_signup;

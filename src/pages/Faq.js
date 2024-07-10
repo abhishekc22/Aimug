@@ -95,6 +95,9 @@ function Faq() {
                           <li>
                             <Link to="/contact">Contact</Link>
                           </li>
+                          <li>
+                            <Link to="/Pricing">pricing</Link>
+                          </li>
                         </ul>
                       </div>
                     </nav>

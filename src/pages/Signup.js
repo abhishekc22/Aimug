@@ -158,6 +158,9 @@ function Signup() {
                             <li>
                               <Link to="/contact">Contact</Link>
                             </li>
+                            <li>
+                            <Link to="/Pricing">pricing</Link>
+                          </li>
                           </ul>
                         </div>
                       </nav>
@@ -183,40 +186,6 @@ function Signup() {
                   </div>
                 </div>
               </div>
-
-              <div class="mobile-menu">
-                <div class="menu-backdrop"></div>
-                <div class="close-btn">
-                  <span class="icon far fa-times fa-fw"></span>
-                </div>
-                <nav class="menu-box">
-                  <div class="nav-logo">
-                    <a href="index.html">
-                      <img src="images/logo-2.png" alt="" title="" />
-                    </a>
-                  </div>
-                  <div class="search-box">
-                    <form
-                      method="post"
-                      action="https://marveltheme.com/tf/html/aimug/contact.html"
-                    >
-                      <div class="form-group">
-                        <input
-                          type="search"
-                          name="search-field"
-                          value=""
-                          placeholder="SEARCH HERE"
-                          required
-                        />
-                        <button type="submit">
-                          <span class="icon far fa-search fa-fw"></span>
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="menu-outer"></div>
-                </nav>
-              </div>
             </header>
 
             <section class="login-page full-height">
@@ -236,9 +205,13 @@ function Signup() {
                   </div>
                   <div class="login-page__top">
                     <div class="login-page__logo">
-                      <a href="index.html">
-                        <img src="images/resource/login-page-logo.png" alt="" />
-                      </a>
+                    <Link to="/">
+                      <img
+                        src="/images/resource/MicrosoftTeams-image.png"
+                        alt=""
+                        style={{ width: "110px", height: "90px" }}
+                      />
+                      </Link>
                     </div>
                   </div>
                   <form

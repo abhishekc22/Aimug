@@ -38,7 +38,7 @@ function Adminlogin() {
     setIsLoggedIn(false);
     navigate("/login");
   };
-  const basurl = "http://127.0.0.1:8000";
+  const basurl = "http://127.0.0.1:8000/";
 
   const axioinstamce = axios.create({
     baseURL: basurl,
@@ -48,6 +48,25 @@ function Adminlogin() {
     email: "",
     password: "",
   });
+  const [adminExists, setAdminExists] = useState(false);
+
+  useEffect(() => {
+    const checkAdminExists = async () => {
+      try {
+        const response = await axioinstamce.get('admin-exists/');
+        if (response.status === 200) {
+        setAdminExists(response.data.admin_exists);
+        }else{
+          console.log('error')
+        }
+      } catch (error) {
+        console.error('Error checking admin existence:', error);
+      }
+    };
+
+    checkAdminExists();
+  }, []);
+
 
   const handlechange = (e) => {
     const { name, value } = e.target;
@@ -57,13 +76,15 @@ function Adminlogin() {
     });
     console.log(formdata);
   };
+
+
+
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axioinstamce.post("superuser/", formdata);
+      const res = await axioinstamce.post("login_admin/", formdata);
 
       if (res.status === 200) {
-
         localStorage.setItem("username", res.data.username);
         localStorage.setItem("email", res.data.email);
         navigate("/Dashboard");
@@ -131,6 +152,9 @@ function Adminlogin() {
                           <li>
                             <Link to="/contact">Contact</Link>
                           </li>
+                          <li>
+                            <Link to="/Pricing">pricing</Link>
+                          </li>
                         </ul>
                       </div>
                     </nav>
@@ -168,25 +192,6 @@ function Adminlogin() {
                     <img src="images/logo-2.png" alt="" title="" />
                   </a>
                 </div>
-                <div class="search-box">
-                  <form
-                    method="post"
-                    action="https://marveltheme.com/tf/html/aimug/contact.html"
-                  >
-                    <div class="form-group">
-                      <input
-                        type="search"
-                        name="search-field"
-                        value=""
-                        placeholder="SEARCH HERE"
-                        required
-                      />
-                      <button type="submit">
-                        <span class="icon far fa-search fa-fw"></span>
-                      </button>
-                    </div>
-                  </form>
-                </div>
                 <div class="menu-outer"></div>
               </nav>
             </div>
@@ -209,9 +214,13 @@ function Adminlogin() {
                 </div>
                 <div class="login-page__top">
                   <div class="login-page__logo">
-                    <a href="index.html">
-                      <img src="images/resource/login-page-logo.png" alt="" />
-                    </a>
+                    <Link to="/">
+                      <img
+                        src="/images/resource/MicrosoftTeams-image.png"
+                        alt=""
+                        style={{ width: "110px", height: "90px" }}
+                      />
+                    </Link>
                   </div>
                 </div>
                 <form
@@ -259,8 +268,12 @@ function Adminlogin() {
                   </div>
                 </form>
                 <p class="register-one__tagline">
-                  Don’t have an account?{" "}
-                  <Link to="/signup">Sign Up for Free</Link>
+                  {!adminExists && (
+                    <>
+                      Don’t have an account?{" "}
+                      <Link to="/admin_signup">Sign Up for Free</Link>
+                    </>
+                  )}
                 </p>
               </div>
             </div>

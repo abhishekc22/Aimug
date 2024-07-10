@@ -33,6 +33,9 @@ import Newpassword from "./pages/Newpassword";
 import Terms from "./pages/Terms";
 import Policy from "./pages/Policy";
 import Trial from "./pages/Trial";
+import Admin_signup from "./pages/Admin_signup";
+import Pricing from "./pages/Pricing";
+
 
 function App() {
   return (
@@ -77,8 +80,8 @@ function App() {
           <Route path="/terms_and_condition" element={<Terms/>} />
           <Route path="/Policy" element={<Policy/>} />
           <Route path="/trial" element={<Trial/>} />
-
-
+          <Route path="/admin_signup" element={<Admin_signup/>} />
+          <Route path="/Pricing" element={<Pricing/>} />
 
         </Routes>
       </Router>

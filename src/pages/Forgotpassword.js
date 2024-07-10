@@ -119,6 +119,9 @@ function Forgotpassword() {
                         <li>
                           <Link to="/contact">Contact</Link>
                         </li>
+                        <li>
+                            <Link to="/Pricing">pricing</Link>
+                          </li>
                       </ul>
                     </div>
                   </nav>
@@ -167,9 +170,13 @@ function Forgotpassword() {
               </div>
               <div class="login-page__top">
                 <div class="login-page__logo">
-                  <a href="index.html">
-                    <img src="images/resource/login-page-logo.png" alt="" />
-                  </a>
+                  <Link to="/">
+                    <img
+                      src="/images/resource/MicrosoftTeams-image.png"
+                      alt=""
+                      style={{ width: "110px", height: "90px" }}
+                    />
+                  </Link>
                 </div>
               </div>
               <form

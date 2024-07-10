@@ -1,6 +1,6 @@
 import "../../assets/css/bootstrap.min.css";
 import "../../assets/css/theme.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BiTrash, BiPlus, BiPencil } from "react-icons/bi";
@@ -14,6 +14,13 @@ function Service() {
   const axiosInstance = axios.create({
     baseURL: basurl,
   });
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
+    navigate("/login");
+  };
 
   const handleDelete = (id) => {
     axiosInstance
@@ -51,92 +58,112 @@ function Service() {
   return (
     <>
       <div>
-        <div nav className="nxl-navigation">
+        <nav className="nxl-navigation">
           <div className="navbar-wrapper">
             <div className="m-header">
               <a href="index.html" className="b-brand">
-                <img
-                  src="assets/images/logo-full.png"
-                  alt=""
-                  className="logo logo-lg"
-                />
-                <img
-                  src="assets/images/logo-abbr.png"
-                  alt=""
-                  className="logo logo-sm"
-                />
+                <h3>Innvoyx Tech</h3>
               </a>
             </div>
-
             <div className="navbar-content">
               <ul className="nxl-navbar">
                 <li className="nxl-item nxl-caption">
                   <label>Navigation</label>
                 </li>
                 <li className="nxl-item nxl-hasmenu">
-                  <a href="javascript:void(0);" className="nxl-link">
+                  <Link to="/Dashboard  " className="nxl-link">
                     <span className="nxl-micon">
-                      <i className="feather-airplay"></i>
+                      <i className="fas fa-comments"></i>
                     </span>
-                    <Link to="/Dashboard" className="nxl-link">
-                        {" "}
-                        <span className="nxl-mtext">Dashboards</span>
-                      </Link>
-                    
-                    <span className="nxl-arrow">
-                      <i className="feather-chevron-right"></i>
+
+                    <span className="nxl-mtext">Dashboard</span>
+                  </Link>
+                </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/carrirer_list" className="nxl-link">
+                    <span className="nxl-micon">
+                      <i className="fas fa-handshake"></i>
                     </span>
-                  </a>
-                  <ul className="nxl-submenu">
-                    <li className="nxl-item">
-                      <Link to="/Service" className="nxl-link">
-                        {" "}
-                        service
-                      </Link>
-                    </li>
-                  </ul>
+                    <span className="nxl-mtext"> carrer list</span>
+                  </Link>
+                </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/Service" className="nxl-link">
+                    <span className="nxl-micon">
+                      <i className="fas fa-graduation-cap"></i>
+                    </span>
+                    <span className="nxl-mtext">service</span>
+                  </Link>
+                </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/Login_userlist" className="nxl-link">
+                    <span className="nxl-micon">
+                      <i className="fas fa-clipboard-list"></i>
+                    </span>
+                    <span className="nxl-mtext">Login userlist</span>
+                  </Link>
+                </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/Enquiry_list" className="nxl-link">
+                    <span className="nxl-micon">
+                      <i className="fas fa-comments"></i>
+                    </span>
+                    <span className="nxl-mtext"> Enquired user list</span>
+                  </Link>
+                </li>
+                <li className="nxl-item nxl-hasmenu">
+                  <Link to="/blogs_admin" className="nxl-link">
+                    {" "}
+                    <span className="nxl-micon">
+                      <i className="fas fa-file-image"></i>
+                    </span>
+                    <span className="nxl-mtext">blog</span>
+                  </Link>
                 </li>
               </ul>
             </div>
           </div>
-        </div>
-         <header className="nxl-header">
-        <div className="header-wrapper"></div>
-      </header>
+        </nav>
+        <header className="nxl-header">
+          <div className="header-wrapper">
+            <div className="header-left d-flex align-items-center gap-4"></div>
+
+            <div className="header-right ms-auto">
+              <div className="d-flex align-items-center">
+                <div className="dropdown nxl-h-item nxl-header-search">
+                  <li className="nxl-item">
+                    <Link to="/" classNameNam="nxl-link" onClick={handleLogout}>
+                      {" "}
+                      Logout
+                    </Link>
+                  </li>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
         <main className="nxl-container apps-container apps-notes">
           <div className="nxl-content without-header nxl-full-content">
             <div className="main-content d-flex">
               <div
-                className="content-sidebar content-sidebar-md h-full"
-                data-scrollbar-target="#psScrollbarInit"
-              >
-                <div className="content-sidebar-header bg-white sticky-top hstack justify-content-between">
-                  <h4 className="fw-bolder mb-0">Notes</h4>
-                  <a
-                    href="javascript:void(0);"
-                    className="app-sidebar-close-trigger d-flex"
-                  >
-                    <i className="feather-x"></i>
-                  </a>
-                </div>
-                <div className="content-sidebar-header">
-                  <a
-                    href="javascript:void(0);"
-                    className="btn btn-primary w-100"
-                    id="add-notes"
-                  >
-                    <i className="feather-plus me-2"></i>
-                    <span>
-                      <Link to="/service_modal">service</Link>
-                    </span>
-                  </a>
-                </div>
-              </div>
-
-              <div
                 className="content-area"
                 data-scrollbar-target="#psScrollbarInit"
               >
+                <div className="content-area-header sticky-top">
+                  <div className="page-header-right ms-auto">
+                    <div className="hstack gap-2">
+                      <div className="dropdown d-none d-sm-flex">
+                      <Link to="/service_modal" className="nxl-link"><button
+                          type="button"
+                          className="btn btn-light-brand btn-sm  bg-blue-500 "
+                          style={{ backgroundColor: "#663399", color: "#fff" }}
+                        >
+                          Add service
+                        </button></Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="content-area-body pb-0">
                   <div className="row note-has-grid" id="note-full-container">
                     {service.map((i) => (
@@ -146,10 +173,6 @@ function Service() {
                       >
                         <div className="card card-body mb-4 stretch stretch-full">
                           <span className="side-stick"></span>
-                          <h5 className="note-title text-truncate w-75 mb-1">
-                            Title: {i.title}
-                            <i className="point bi bi-circle-fill ms-1 fs-7"></i>
-                          </h5>
                           {i.image && (
                             <img
                               src={i.image}
@@ -158,6 +181,10 @@ function Service() {
                             />
                           )}
                           <div className="note-content flex-grow-1">
+                            <h5 className="note-title text-truncate w-75 mb-1">
+                              Title: {i.title}
+                              <i className="point bi bi-circle-fill ms-1 fs-7"></i>
+                            </h5>
                             <p className="text-muted note-inner-content">
                               <strong>Description:</strong> {i.description}
                             </p>

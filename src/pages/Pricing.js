@@ -21,10 +21,7 @@ import "../css/04-animate.css";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
-import { useParams } from "react-router-dom";
-import axios from "axios";
-
-function Blogdetail() {
+function Pricing() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -40,42 +37,12 @@ function Blogdetail() {
     setIsLoggedIn(false);
     navigate("/login");
   };
-
-  const { id } = useParams();
-  const [blog, setBlog] = useState(null);
-  console.log(id, "566666666666666666666");
-
-  const baseurl = "http://127.0.0.1:8000/";
-
-  const axioinstance = axios.create({
-    baseURL: baseurl,
-  });
-
-  useEffect(() => {
-    axioinstance
-      .get(`blogs/${id}`)
-      .then((response) => {
-        setBlog(response.data);
-        console.log(
-          response.data,
-          ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-        );
-        console.log(blog, "?????????????????????????????????????");
-      })
-      .catch((error) => {
-        console.error("Error fetching job details:", error);
-      });
-  }, [id]);
-
-  if (!blog) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div>
-      <div body className="body-bg-color">
+      <body className="body-bg-color">
         <div className="page-wrapper">
           <div className="preloader"></div>
+
           <div className="cursor"></div>
           <div className="cursor-follower"></div>
           <header className="main-header main-header-one">
@@ -113,6 +80,16 @@ function Blogdetail() {
                         <ul className="navigation clearfix">
                           <li className="">
                             <Link to="/">Home</Link>
+                            <ul>
+                              <li>
+                                <Link to="/home1">Home 01 (AI Products)</Link>
+                              </li>
+                              <li>
+                                <Link to="/home2">
+                                  Home 02 (Content Writing)
+                                </Link>
+                              </li>
+                            </ul>
                           </li>
                           <li>
                             <Link to="/about">About</Link>
@@ -189,6 +166,7 @@ function Blogdetail() {
               </nav>
             </div>
           </header>
+
           <section className="page-title">
             <div className="container">
               <div className="page-title__inner">
@@ -199,11 +177,11 @@ function Blogdetail() {
                       "url(images/shapes/page-title-shape-1.png)",
                   }}
                 ></div>
-
                 <div className="page-title__title-box">
-                  <p className="page-title__sub-title">Blog Details</p>
+                  <p className="page-title__sub-title">About AIMug</p>
                   <h3 className="page-title__title">
-                    Blog Details/Single Post
+                    CHOOSE YOUR <br />
+                    PLANE{" "}
                   </h3>
                 </div>
                 <p className="page-title__text">
@@ -213,170 +191,162 @@ function Blogdetail() {
               </div>
             </div>
           </section>
-          <section className="blog-details">
-            <div className="container">
-              <div className="blog-details__top-title">
-                <h3>{blog.title}</h3>
-              </div>
-              <div className="blog-details__img">
-                <img src={blog.image} alt="" />
-              </div>
-              <div className="blog-details__bottom">
-                <p className="blog-details__person-name">
-                  content: {blog.content}
-                </p>
 
-                <div className="blog-details__person-and-date">
-                  <div className="blog-details__person">
-                    <div className="blog-details__person-img">
-                      <img
-                        src="images/blog/blog-details-person-img.jpg"
-                        alt=""
-                      />
+          <section className="testimonial-two testimonial-three">
+            <div className="container">
+              <div className="row">
+                <div
+                  className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp"
+                  data-wow-delay="100ms"
+                >
+                  <div className="testimonial-one__single">
+                    <div className="testimonial-one__client-info">
+                      <div className="testimonial-one__name-box">
+                        <h1 className="text-white">Started</h1>
+                        <h3 className="text-white">₹10000 / month</h3>
+                      </div>
                     </div>
-                    <p className="blog-details__person-name">
-                      {" "}
-                      Author:{blog.author}
+
+                    <p className="testimonial-one__title">2,5 GB web space</p>
+                    <p className="testimonial-one__title">
+                      Free site buiding tools
                     </p>
-                    <br />
+                    <h3 className="testimonial-one__title">
+                      Free domain registar
+                    </h3>
+                    <h3 className="testimonial-one__title">24/7 Support</h3>
+                    <h3 className="testimonial-one__title">
+                      Free marketing tool
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      99,9% Services uptime
+                    </h3>
+                    <h2 className="testimonial-one__title">
+                      30 day money back
+                    </h2>
+                    <div className="testimonial-one__icon">
+                      <div className="testimonial-one__icon">
+                        <h3>choose plane</h3>
+                      </div>
+                    </div>
                   </div>
-                  <ul className="blog-details__date">
-                    <li>
-                      <p>
-                        <span className="icon-date"></span>
-                        {blog.created_at}
-                      </p>
-                    </li>
-                    <li>
-                      <p>
-                        <span className="icon-three-o-clock-clock"></span>4
-                        Minute Read
-                      </p>
-                    </li>
-                  </ul>
                 </div>
-                <p className="blog-details__text-1">
-                  AI-enabled computers make zero errors if programmed correctly.
-                  Even the most seasoned and well-versed writers and content
-                  producers endure mental gaps. Nulla Lorem mollit cupidatat
-                  irure. Laborum magna nulla duis ullamco cillum dolor.
-                  Voluptate exercitation incididunt aliquip deserunt
-                  reprehenderit elit laborum. significant role in determining
-                  their overall well-being, including their physical and mental
-                  health, as well as their happiness and satisfaction with life.
-                  A healthy lifestyle, which includes a balanced diet, regular
-                  exercise, and a healthy sleep pattern,
-                </p>
-                <p className="blog-details__text-2">
-                  Aliqua id fugiat nostrud irure ex duis ea quis id quis ad et.
-                  Sunt qui esse pariatur duis deserunt mollit dolore cillum
-                  minim tempor enim. Elit aute irure tempor cupidatat
-                  incididunt.
-                </p>
-                <p className="blog-details__text-3">
-                  AI-enabled computers make zero errors if programmed correctly.
-                </p>
-                <p className="blog-details__text-4">
-                  AI models are based on predictive analysis thus leaving no
-                  scope for errors, including their behaviors, habits, and daily
-                  routines. It encompasses everything from their diet, exercise
-                  routines, and sleep habits to their recreational activities,
-                  social interactions, and work habits. A person's lifestyle
-                  plays a significant role in determining their overall
-                  well-being, including their physical and mental health, as
-                  well as their happiness and satisfaction with life. A healthy
-                  lifestyle, which includes a balanced diet, regular exercise,
-                  and a healthy sleep pattern, can improve an individual's
-                  quality of life and reduce the risk of chronic diseases.
-                </p>
-                <p className="blog-details__text-5">
-                  What is SEO Writing AI and how do I use it?
-                </p>
-                <ul className="blog-details__points list-unstyled">
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      Helps to save both time and resources and helps in
-                      achieving accurate and efficient results., and a healthy
-                      sleep pattern, can improve an individual's quality of life
-                      and reduce the risk of chronic diseases. On the other
-                      hand, unhealthy lifestyle habits, such as smoking,
-                      excessive alcohol consumption, and a sedentary lifestyle,
-                      can have negative impacts on one's health and well-being.
-                    </p>
-                  </li>
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      Lifestyle refers to an individual's habits, behaviors, and
-                      patterns of living.
-                    </p>
-                  </li>
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      encompasses all aspects of a person's daily life,
-                      including their diet, exercise routine
-                    </p>
-                  </li>
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      Lifestyle choices can also impact a person's financial,
-                      social, and environmental well-being.
-                    </p>
-                  </li>
-                  <li>
-                    <div className="blog-details__points-shape"></div>
-                    <p>
-                      A person's lifestyle plays a major role in determining
-                      their overall health, happiness, and well-being. healthy
-                      lifestyle, which includes a balanced diet, regular
-                      physical activity.
-                    </p>
-                  </li>
-                </ul>
-                <div className="blog-details__text-box">
-                  <p>
-                    There are many different forms of travel, including road
-                    trips, cruises, backpacking, and more, each offering its own
-                    unique set of experiences and adventures.
-                  </p>
-                  <span>Angela B. Harris</span>
-                </div>
-                <p className="blog-details__text-6">
-                  A healthy lifestyle, which includes a balanced diet, regular
-                  exercise, and a healthy sleep pattern, can improve an
-                  individual's quality of life and reduce the risk of chronic
-                  diseases. On the other hand, unhealthy lifestyle habits, such
-                  as smoking, excessive alcohol consumption, and a sedentary
-                  lifestyle, can have negative impacts on one's health and
-                  well-being. Thus, making intentional choices about one's
-                </p>
-                <div className="blog-details__tag-and-social">
-                  <div className="blog-details__tag">
-                    <a href="#">Open AI</a>
-                    <a href="#">Copywriting</a>
-                    <a href="#">AI Assistant</a>
+
+                <div
+                  className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp"
+                  data-wow-delay="200ms"
+                >
+                  <div className="testimonial-one__single">
+                    <div className="testimonial-one__client-info">
+                      <div className="testimonial-one__name-box">
+                        <h1 className="text-white">Business</h1>
+                        <h3 className="text-white">₹15000 / month</h3>
+                      </div>
+                    </div>
+                    <h3 className="testimonial-one__title">90 GB web space</h3>
+                    <h3 className="testimonial-one__title">
+                      Free site buiding tools
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      Free domain registar
+                    </h3>
+                    <h3 className="testimonial-one__title">24/7 Support</h3>
+                    <h3 className="testimonial-one__title">
+                      Free marketing tool
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      99,9% Services uptime
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      30 day money back
+                    </h3>
+                    <div className="testimonial-one__icon">
+                      <div className="testimonial-one__icon">
+                        <h3>choose plane</h3>
+                      </div>
+                    </div>
                   </div>
-                  <div className="blog-details__social">
-                    <a href="#">
-                      <span className="icon-social-1"></span>
-                    </a>
-                    <a href="#">
-                      <span className="icon-social-3"></span>
-                    </a>
-                    <a href="#">
-                      <span className="icon-social-4"></span>
-                    </a>
-                    <a href="#">
-                      <span className="icon-social-5"></span>
-                    </a>
+                </div>
+
+                <div
+                  className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp"
+                  data-wow-delay="300ms"
+                >
+                  <div className="testimonial-one__single">
+                    <div className="testimonial-one__client-info">
+                      <div className="testimonial-one__name-box">
+                        <h1 className="text-white">Premium</h1>
+                        <h3 className="text-white">₹20000 / month</h3>
+                      </div>
+                    </div>
+
+                    <h3 className="testimonial-one__title">150 GB web space</h3>
+                    <h3 className="testimonial-one__title">
+                      Free site buiding tools
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      Free domain registar
+                    </h3>
+                    <h3 className="testimonial-one__title">24/7 Support</h3>
+                    <h3 className="testimonial-one__title">
+                      Free marketing tool
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      99,9% Services uptime
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      30 day money back
+                    </h3>
+
+                    <div className="testimonial-one__icon">
+                      <div className="testimonial-one__icon">
+                        <h3>choose plane</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  className="col-xl-3 col-lg-6 col-md-6 wow fadeInUp"
+                  data-wow-delay="400ms"
+                >
+                  <div className="testimonial-one__single">
+                    <div className="testimonial-one__client-info">
+                      <div className="testimonial-one__name-box">
+                        <h1 className="text-white">Dedicated</h1>
+                        <h3 className="text-white">₹25000 / month</h3>
+                      </div>
+                    </div>
+                    <h3 className="testimonial-one__title">
+                      Unlimited web space
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      Free site buiding tools
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      Free domain registar
+                    </h3>
+                    <h3 className="testimonial-one__title">24/7 Support</h3>
+                    <h3 className="testimonial-one__title">
+                      Free marketing tool
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      99,9% Services uptime
+                    </h3>
+                    <h3 className="testimonial-one__title">
+                      30 day money back
+                    </h3>
+                    <div className="testimonial-one__icon">
+                      <div className="testimonial-one__icon">
+                        <h3>choose plane</h3>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
+
           <section className="free-trail">
             <div className="container">
               <div className="free-trail__wrap">
@@ -387,7 +357,6 @@ function Blogdetail() {
                       "url(images/shapes/free-trail-shape-3.png)",
                   }}
                 ></div>
-
                 <div className="free-trail__shape-1 float-bob-x"></div>
                 <div className="free-trail__start-1 zoominout">
                   <img src="images/shapes/free-trail-start-1.png" alt="" />
@@ -430,7 +399,9 @@ function Blogdetail() {
               </div>
             </div>
           </section>
-          <Footer />/
+
+          <Footer />
+
           <div className="color-palate">
             <div className="color-trigger">
               <i className="fas fa-cog fa-fw"></i>
@@ -509,6 +480,7 @@ function Blogdetail() {
               </div>
             </div>
           </div>
+
           <div className="search-popup">
             <div className="color-layer"></div>
             <button className="close-search">
@@ -537,9 +509,9 @@ function Blogdetail() {
         <div className="scroll-to-top scroll-to-target" data-target="html">
           <span className="fas fa-arrow-up fa-fw"></span>
         </div>
-      </div>
+      </body>
     </div>
   );
 }
 
-export default Blogdetail;
+export default Pricing;
